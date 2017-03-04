@@ -1,0 +1,25 @@
+{
+  "name": "reportswebapp",
+  "version": "1.0.0",
+  "description": "Allows users to report a problem with Adguard filters",
+  "main": "actions.js",
+  "scripts": {
+    "test": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdguardTeam/ReportsWebApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdguardTeam/ReportsWebApp/issues"
+  },
+  "homepage": "https://github.com/AdguardTeam/ReportsWebApp#readme",
+  "dependencies": {
+    "object-assign": "^4.1.1",
+    "redux": "^3.6.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  }
+}

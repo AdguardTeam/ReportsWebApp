@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ReportsWebApp</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/form-elements.css">
+        
+        <link rel="stylesheet" href="style.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <div class="row">
+                <div class = "col-md-10 col-md-offset-1 form-box">
+                
+                    <form role="form" action="" method="post" id = "f">
+
+                        <!-- Page 1 -->
+                        <fieldset>
+                            <h1>What product type do you use?</h1>
+                            <div class = "row">
+                                <div class = "col-md-6 col-md-offset-3 form-group">
+                                    <select class = "form-control input-lg" id = "prod-type">
+                                        <option value="" disabled selected>Adguard product type</option>
+                                        <option value = "Win">Adguard for Windows</option>
+                                        <option value = "Mac">Adguard for Mac</option>
+                                        <option value = "And">Adguard for Android</option>
+                                        <option value = "iOS">Adguard/Adguard Pro for iOS</option>
+                                        <option value = "Ext">Adguard Browser extension</option>
+                                        <option value = "Con">Adguard Content blocker</option>
+                                    </select>
+                                </div>
+                                
+                            </div>
+
+                            <div class = "row">
+                                <div class = "col-md-6 col-md-offset-3 form-group">
+                                    <input class = "form-control input-lg" id = "focusedInput" type = "text" placeholder = "Enter the product version...">
+                                </div>
+                            </div>
+
+
+                        </fieldset>
+
+                        <!-- Page 2 -->
+                        <fieldset>
+                            <h1>What type of problem have you encountered?</h1>
+                            <div class = "row">
+                                <div class = "col-md-6 col-md-offset-3 form-group">
+                                    <select id = "prob-type" class = "form-control input-lg">
+                                        <option value="" disabled selected>Problem type</option>
+                                        <optgroup label = "Options: ">
+                                            <option value = "Missed_ad">Missed ad</option>
+                                            <option value = "Popup_ad">Popup ads</option>
+                                            <option value = "Excessive_blocking">Excessive blocking</option>
+                                            <option value = "Anti-adblock_script">Anti-adblock script</option>
+                                            <option value = "Annoyance">Annoyances</option>
+                                        </optgroup> 
+                                    </select>
+                                </div>
+                            </div>
+
+                            <p class = "help-block">If the problem does not fall under any category that is listed here, please contact our tech support: support@adguard.com</p>
+
+                            <div class = 'row checklist'>
+                                <p class = "help-block pull-left">Please check Adguard for filter updates. Is the problem still present?</p>
+                                <div class="btn-group pull-right" data-toggle="buttons">
+                                    <label class="btn btn-xs">
+                                        <input type = "radio" name = "0" value = "Y" autocomplete = "off">Yes
+                                    </label>
+                                    <label class="btn btn-xs">
+                                        <input type = "radio" name = "0" value = "N" autocomplete = "off">No
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class = 'row checklist' data-skip = '{"on_prod":["Con"]}'>
+                                <p class = "help-block pull-left">Please disable User filter. Is the problem still present?</p>
+                                <div class="btn-group pull-right" data-toggle="buttons">
+                                    <label class="btn btn-xs">
+                                        <input type = "radio" name = "1" value = "Y" autocomplete = "off">Yes
+                                    </label>
+                                    <label class="btn btn-xs">
+                                        <input type = "radio" name = "1" value = "N" autocomplete = "off">No
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class = 'row checklist' data-skip = '{"except_on_prob":["Missed_ad","Popup_ad","Annoyance"]}'>
+                                <p class = "help-block pull-left">If you have 'Show useful ads' option enabled, please disable it. Is the problem still present?</p>
+                                <div class="btn-group pull-right" data-toggle="buttons">
+                                    <label class="btn btn-xs">
+                                        <input type = "radio" name = "2" value = "Y" autocomplete = "off">Yes
+                                    </label>
+                                    <label class="btn btn-xs">
+                                        <input type = "radio" name = "2" value = "N" autocomplete = "off">No
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class = 'row checklist' data-skip = '{"on_prod":["iOS","Ext","Con"],"except_on_prob":["Missed_ad","Popup_ad","Annoyance"]}'>
+                                <p class = "help-block pull-left">If you don't have HTTPs filtering enabled, please enable it. Is the problem still present?</p>
+                                <div class="btn-group pull-right" data-toggle="buttons">
+                                    <label class="btn btn-xs">
+                                        <input type = "radio" name = "3" value = "Y" autocomplete = "off">Yes
+                                    </label>
+                                    <label class="btn btn-xs">
+                                        <input type = "radio" name = "3" value = "N" autocomplete = "off">No
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class = 'row resolved'>
+                                <p class = "help-block pull-left">Great! Thank you for using Adguard!</p>
+                            </div>
+
+                        </fieldset>
+                        
+                        <!-- Page 3 -->
+                        <fieldset>
+                            <h1>Where did you encounter the problem?</h1>
+
+                            <div id = "web-or-app" class = "on-And">
+
+                                <div class = "row">
+                                    <p class = "col-md-6 col-md-offset-3" data-toggle = "buttons">
+                                        <label class = "btn btn-primary pull-left btn-lg" style = "width: 150px; padding: 10px 10px;">
+                                            <input type = "radio" class = "btn" value = "web">Browser
+                                        </label>                          
+                                        <label class = "btn btn-primary pull-right btn-lg" style = "width: 150px; padding: 10px 10px;">
+                                            <input type = "radio" class = "btn" value = "app">Google Play app</label>
+                                    </p>
+                                </div>
+
+                                <div class = "row">
+                                    <p class = "col-md-6 col-md-offset-3 help-block" style = "border: solid #aaaaaa 1px;">If you encountered the problem anywhere else, please contact our tech support: support@adguard.com</p>
+                                </div>
+
+                            </div>
+
+                            <div class = "web">
+                                <div class = "row">
+                                    <div class = "col-md-6 col-md-offset-3 form-group">
+                                        <select class = "form-control input-lg" id = "browser-select">
+                                            <option value="" disabled selected>Browser</option>
+                                            <option value = "Chrome">Chrome</option>
+                                            <option value = "FireFox">FireFox</option>
+                                            <option value = "Opera">Opera 12</option>
+                                            <option value = "Opera 40+">Opera 40+</option>
+                                            <option value = "Safari">Safari</option>
+                                            <option value = "IE">IE</option>
+                                            <option value = "Edge">Edge</option>
+                                            <option value = "Other">Other...</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class = "row form-group" id = "browser-name">
+                                    <div class = "col-md-6 col-md-offset-3">
+                                        <input class = "form-control" type = "text" placeholder = "Enter the browser name...">
+                                    </div>
+                                </div>
+
+                                <div class = "row form-group on-And">
+                                    <div class = "col-md-8 col-md-offset-2">
+                                        <div class = "checkbox">
+                                            <label><input type = "checkbox">Is the data compression in your browser enabled?</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class = "row">
+                                    <p class = "col-md-6 col-md-offset-3 help-block not-on-And" style = "display:none;"> If you encountered the problem anywhere else, please contact our tech support: support@adguard.com</p>
+                                </div>
+
+                                <div class = "row after-browser-selection">
+                                    <div class = "col-md-8 col-md-offset-2">
+                                        <p class = "help-block">Please enter the full URL of the web page you had encountered the problem on:</p>
+                                    </div>
+                                    <div class = "col-md-6 col-md-offset-3">
+                                        <input class = "form-control" type = "text" placeholder = "Enter page URL here...">
+                                    </div>
+                                    <div class = "col-md-8 col-md-offset-2">
+                                        <p class = "help-block"> Is any additional information required to reproduce the problem? (e.g. login/password etc.) Please include it here, <strong>it will remain secure and will not be shown publicly</strong>.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class = "form-group app">
+                                <div class = "row">
+                                    <div class = "col-md-8 col-md-offset-2">
+                                        <p class = "help-block">Please enter the full link to the Google Play app you had encountered the problem in. To do so, open the app in Google Play, scroll down, tap on 'Share' button and choose 'Copy to clipboard'. Then paste to the text field below.</p>
+                                    </div>
+                                </div>
+                                <div class = "row">
+                                    <div class = "col-md-6 col-md-offset-3">
+                                        <input class = "form-control" type = "text" value = "Enter Google Play app URL here...">
+                                    </div>
+                                </div>
+                                <div class = "row">
+                                    <div class = "col-md-8 col-md-offset-2">
+                                        <p class = "help-block">Is any additional information required to reproduce the problem? (e.g. login/password etc.) Please include it here, <strong>it will remain secure and will not be shown publicly</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </fieldset>
+
+                        <!-- Page 4 -->
+                        <fieldset>
+                            <h1>What filters do you have enabled?</h1>
+                            <div class = "row" style = "margin-bottom: 10px;">
+                                <div class = "col-md-6 col-md-offset-3 form-group">
+                                    <input type="text" list="cars" class = "form-control input-lg" placeholder = "Start typing filters name here..."/>
+                                    <datalist id="cars"> <!-- Should implement a polyfill -->
+                                        <option>English filter</option>
+                                        <option>Spyware filter</option>
+                                        <option>Social meida filter</option>
+                                        <option>Annoyance filter</option>
+                                        <option>Experimental filter</option>
+                                        <option>Mobile ads filter</option>
+                                        <option>Russian filter</option>
+                                        <option>German filter</option>
+                                        <option>EasyList, etc... to be added</option>
+                                    </datalist>
+                                </div>
+                            </div>
+
+                            <div class = "row" style = "margin-bottom: 10px;">
+                                <div class = "col-md-6 col-md-offset-3">
+                                    <button type = "button" class = "btn">Add another</button>
+                                    <button type = "button" class = "btn">Delete</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        
+                        <!-- Page 5 -->
+                        <fieldset>
+                            <h1>Submit a screenshot</h1>
+                            <div class = "row">
+                                <div class = "col-md-8 col-md-offset-2">
+                                    <p class = "help-block text-left">Please take a screenshot (or screenshots, if needed) of the problem and upload it to any cloud service.</p>
+                                    <p class = "help-block text-left">If you are unsure of how to do it, read our [URL]manual[/URL].</p>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class = "col-md-8 col-md-offset-2">
+                                    <p class = "help-block text-left">When taking the screenshot(s), please keep in mind following requirements:</p>
+                                    <ol>
+                                        <li><p class = "text-left">If it is unclear from the screenshot what the problem is, highlight it with an arrow/frame/etc;</p></li>
+                                        <li><p class = "text-left">The full browser window should be visible;</p></li>
+                                        <li><p class = "text-left">Please take a 'long' screenshot ([URL]what is 'long' screenshot?[/URL])</p></url>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class = "col-md-6 col-md-offset-3 form-group">
+                                    <input type = "text" class = "form-control input-lg" placeholder = "Enter screenshot URL...">
+                                </div>
+                            </div>
+                            <div class = "row" style = "margin-bottom: 10px;">
+                                <div class = "col-md-6 col-md-offset-3">
+                                    <button type = "button" class = "btn">Add another</button>
+                                    <button type = "button" class = "btn">Delete</button>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Page 6 -->
+                        <fieldset>
+                            <h1>Add your comment</h1>
+                            <div class = "row">
+                                <div class = "col-md-6 col-md-offset-3">
+                                    <p class = "text-left">This step is optional. Type in the text box below any information that you think is necessary for the developers to know.</p>
+                                </div>
+                            </div>
+
+                            <div class = "row">
+                                <div class = "col-md-10 col-md-offset-1 form-group">
+                                    <textarea class = "form-control" rows = "5" placeholder = "Enter any additional information here"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Page 7 -->
+                        <fieldset>
+                            <h1>Check the information</h1>
+
+                        </fieldset>
+
+
+                        <!-- Page 8 -->
+                        <fieldset>
+                            <h1>Result</h1>
+
+                        </fieldset>
+
+                    </form>
+                </div>
+            </div>
+
+
+            <div class = "row">
+                <div class = "col-md-6 col-md-offset-3">
+                    <button type = "button" class = "btn btn-prev">Back</button>
+                    <button type = "button" class = "btn btn-next">Next</button>
+                    <button type = "button" class = "btn btn-submit">Submit?</button>
+                </div>
+            </div>
+
+            <div class = "row" style = "padding-top: 10px;">
+                <div class = "col-md-6 col-md-offset-3">
+                    <div class = "progress">
+                        <div class = "progress-bar" role = "progressbar" style = "width: 12.5%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "row">
+                <div class = "col-md-4 col-md-offset-4">
+                    <p id = "s" class = "text-center" style = "font-size: 20px;">Step 1/8</p>
+                </div>
+            </div>
+
+
+        </div>
+
+        <script src = "assets/js/jquery-1.11.1.min.js"></script>
+        <script src = "assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src = "assets/bootstrap/js/bootstrap-checkbox.min.js"></script>
+
+        <script src = "bundle.js"></script>
+
+    </body>
+</html>
