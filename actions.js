@@ -1,15 +1,12 @@
 var store = require('./store.js');
-var types = require('./constants.js');
+var types = require('./constants/action-types.js');
 
 function nextPage() {
-
-    // DO SOME VALIDATION HERE
-
     var state = store.getState();
-    if(!state.duringPageFadeIn){
+    if(!state.duringPageFadeIn && state.completedPages[state.currentPage - 1]){
         store.dispatch({
             type: types['MOVE_PAGE'],
-            data: state.duringPageFadeOut ? Math.min(state.nextPage + 1, 7) : state.currentPage + 1
+            data: Math.min(state.duringPageFadeOut ? state.nextPage + 1: state.currentPage + 1, 7)
         });
     }
 }
@@ -19,14 +16,21 @@ function prevPage() {
     if(!state.duringPageFadeIn) {
         store.dispatch({
             type: types['MOVE_PAGE'],
-            data: state.duringPageFadeOut ? Math.max(state.nextPage - 1, 0) : state.currentPage - 1
+            data: Math.max(state.duringPageFadeOut ? state.nextPage - 1 : state.currentPage - 1, 0)
         });
     }
 }
 
 function productTypeChange() {
     store.dispatch({
-        type: types['UPDATE_PRODUCT_TYPE'],
+            type: "UPDATE_PRODUCT_TYPE",
+            data: $(this).val()
+    });
+}
+
+function productVersionChange() {
+    store.dispatch({
+        type: "UPDATE_PRODUCT_VERSION",
         data: $(this).val()
     });
 }
@@ -67,12 +71,45 @@ function browserTypeChange() {
     });
 }
 
+function browserNameChange() {
+    store.dispatch({
+        type: types['BROWSER_NAME_CHANGED'],
+        data: $(this).val()
+    });
+}
+
+function problemURLChange() {
+    store.dispatch({
+        type: types['UPDATE_PROBLEM_URL'],
+        data: $(this).val()
+    });
+}
+
+function filtersChange() {
+    store.dispatch({
+        type: types["PAGE_FORM_VALIDATE"],
+        data: $(this).val().length != 0
+    });
+}
+
+function screenshotURLChange() {
+    store.dispatch({
+        type: types["UPDATE_SCREENSHOT_URL"],
+        data: $(this).val()
+    });
+}
+
 module.exports = {
     nextPage: nextPage,
     prevPage: prevPage,
     productTypeChange: productTypeChange,
+    productVersionChange: productVersionChange,
     problemTypeChange: problemTypeChange,
     checklistAnswer: checklistAnswer,
     isWebOrApp: isWebOrApp,
-    browserTypeChange: browserTypeChange
+    browserTypeChange: browserTypeChange,
+    browserNameChange: browserNameChange,
+    problemURLChange: problemURLChange,
+    filtersChange: filtersChange,
+    screenshotURLChange: screenshotURLChange
 };

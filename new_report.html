@@ -11,6 +11,8 @@
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/select2.min.css">
+        <link rel="stylesheet" href="assets/bootstrap/css/select2-bootstrap.min.css">
         <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="assets/css/form-elements.css">
         
@@ -54,7 +56,7 @@
 
                             <div class = "row">
                                 <div class = "col-md-6 col-md-offset-3 form-group">
-                                    <input class = "form-control input-lg" id = "focusedInput" type = "text" placeholder = "Enter the product version...">
+                                    <input class = "form-control input-lg" id = "prod-ver" type = "text" placeholder = "Enter the product version...">
                                 </div>
                             </div>
 
@@ -139,7 +141,7 @@
                         <fieldset>
                             <h1>Where did you encounter the problem?</h1>
 
-                            <div id = "web-or-app" class = "on-And">
+                            <div id = "web-or-app" class = "prod-dep" data-display = '["And"]'>
 
                                 <div class = "row">
                                     <p class = "col-md-6 col-md-offset-3" data-toggle = "buttons">
@@ -180,7 +182,7 @@
                                     </div>
                                 </div>
 
-                                <div class = "row form-group on-And">
+                                <div class = "row form-group prod-dep" data-display = '["And"]'>
                                     <div class = "col-md-8 col-md-offset-2">
                                         <div class = "checkbox">
                                             <label><input type = "checkbox">Is the data compression in your browser enabled?</label>
@@ -189,7 +191,7 @@
                                 </div>
 
                                 <div class = "row">
-                                    <p class = "col-md-6 col-md-offset-3 help-block not-on-And" style = "display:none;"> If you encountered the problem anywhere else, please contact our tech support: support@adguard.com</p>
+                                    <p class = "col-md-6 col-md-offset-3 help-block prod-dep" data-display = '["Win","Mac","iOS","Ext","Con"]' style = "display:none;"> If you encountered the problem anywhere else, please contact our tech support: support@adguard.com</p>
                                 </div>
 
                                 <div class = "row after-browser-selection">
@@ -197,7 +199,7 @@
                                         <p class = "help-block">Please enter the full URL of the web page you had encountered the problem on:</p>
                                     </div>
                                     <div class = "col-md-6 col-md-offset-3">
-                                        <input class = "form-control" type = "text" placeholder = "Enter page URL here...">
+                                        <input id = "web-url" class = "form-control" type = "text" placeholder = "Enter page URL here...">
                                     </div>
                                     <div class = "col-md-8 col-md-offset-2">
                                         <p class = "help-block"> Is any additional information required to reproduce the problem? (e.g. login/password etc.) Please include it here, <strong>it will remain secure and will not be shown publicly</strong>.</p>
@@ -215,7 +217,7 @@
                                 </div>
                                 <div class = "row">
                                     <div class = "col-md-6 col-md-offset-3">
-                                        <input class = "form-control" type = "text" value = "Enter Google Play app URL here...">
+                                        <input id = "app-url" class = "form-control" type = "text" placeholder = "Enter Google Play app URL here...">
                                     </div>
                                 </div>
                                 <div class = "row">
@@ -234,27 +236,19 @@
                             <h1>What filters do you have enabled?</h1>
                             <div class = "row" style = "margin-bottom: 10px;">
                                 <div class = "col-md-6 col-md-offset-3 form-group">
-                                    <input type="text" list="cars" class = "form-control input-lg" placeholder = "Start typing filters name here..."/>
-                                    <datalist id="cars"> <!-- Should implement a polyfill -->
-                                        <option>English filter</option>
-                                        <option>Spyware filter</option>
-                                        <option>Social meida filter</option>
-                                        <option>Annoyance filter</option>
-                                        <option>Experimental filter</option>
-                                        <option>Mobile ads filter</option>
-                                        <option>Russian filter</option>
-                                        <option>German filter</option>
-                                        <option>EasyList, etc... to be added</option>
-                                    </datalist>
+                                    <select id = "filters" multiple = "multiple" style = "width: 100%"></select>
+
                                 </div>
                             </div>
 
+                            <!--
                             <div class = "row" style = "margin-bottom: 10px;">
                                 <div class = "col-md-6 col-md-offset-3">
                                     <button type = "button" class = "btn">Add another</button>
                                     <button type = "button" class = "btn">Delete</button>
                                 </div>
                             </div>
+                            -->
                         </fieldset>
                         
                         <!-- Page 5 -->
@@ -272,21 +266,28 @@
                                     <ol>
                                         <li><p class = "text-left">If it is unclear from the screenshot what the problem is, highlight it with an arrow/frame/etc;</p></li>
                                         <li><p class = "text-left">The full browser window should be visible;</p></li>
-                                        <li><p class = "text-left">Please take a 'long' screenshot ([URL]what is 'long' screenshot?[/URL])</p></url>
+                                        <li class = "prod-dep" data-display = '["And","iOS"]'><p class = "text-left" >Please take a 'long' screenshot ([URL]what is 'long' screenshot?[/URL])</p></url>
                                     </ol>
                                 </div>
                             </div>
                             <div class = "row">
                                 <div class = "col-md-6 col-md-offset-3 form-group">
-                                    <input type = "text" class = "form-control input-lg" placeholder = "Enter screenshot URL...">
+                                    <input type = "text" id = "ss-url" class = "form-control input-lg" placeholder = "Enter screenshot URL...">
                                 </div>
                             </div>
+
+                            <div class = "row">
+                                <div id = "ss-list" class = "col-md-6 col-md-offset-3">
+                                </div>
+                            </div>    
+                            
                             <div class = "row" style = "margin-bottom: 10px;">
                                 <div class = "col-md-6 col-md-offset-3">
-                                    <button type = "button" class = "btn">Add another</button>
-                                    <button type = "button" class = "btn">Delete</button>
+                                    <button type = "button" id = "ss-add" class = "btn">Add another</button>
+                                    <button type = "button" id = "ss-del" class = "btn">Delete</button>
                                 </div>
                             </div>
+                            
                         </fieldset>
 
                         <!-- Page 6 -->
@@ -326,7 +327,7 @@
             <div class = "row">
                 <div class = "col-md-6 col-md-offset-3">
                     <button type = "button" class = "btn btn-prev">Back</button>
-                    <button type = "button" class = "btn btn-next">Next</button>
+                    <button type = "button" class = "btn btn-next disabled">Next</button>
                     <button type = "button" class = "btn btn-submit">Submit?</button>
                 </div>
             </div>
@@ -352,6 +353,7 @@
         <script src = "assets/js/jquery-1.11.1.min.js"></script>
         <script src = "assets/bootstrap/js/bootstrap.min.js"></script>
         <script src = "assets/bootstrap/js/bootstrap-checkbox.min.js"></script>
+        <script src = "assets/js/select2.min.js"></script>
 
         <script src = "bundle.js"></script>
 

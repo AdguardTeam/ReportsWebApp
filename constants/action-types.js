@@ -15,8 +15,22 @@ Object.defineProperties(module.exports, {
         value: 'MOVE_PAGE_COMPLETED',
         enumerable: true
     },
+    PAGE_FORM_VALIDATE: {
+        value: 'PAGE_FORM_VALIDATE',
+        enumerable: true
+    },
+    TOGGLE_NEXT_BUTTON_COMPLETED: {
+        value: 'TOGGLE_NEXT_BUTTON_COMPLETED',
+        enumerable: true
+    },
+
     UPDATE_PRODUCT_TYPE: {
         value: 'UPDATE_PRODUCT_TYPE',
+        enumerable: true
+    },
+
+    UPDATE_PRODUCT_VERSION: {
+        value: 'UPDATE_PRODUCT_VERSION',
         enumerable: true
     },
     UPDATE_ANDROID_ONLY_UI_COMPLETED: {
@@ -59,12 +73,24 @@ Object.defineProperties(module.exports, {
         value: 'BROWSER_CHANGED',
         enumerable: true
     },
+    BROWSER_NAME_CHANGED: {
+        value: 'BROWSER_NAME_CHANGED',
+        enumerable: true
+    },
     UPDATE_BROWSER_FIRST_SELECTION_COMPLETED: {
         value: 'UPDATE_BROWSER_FIRST_SELECTION_COMPLETED',
         enumerable: true
     },
     UPDATE_OTHER_BROWSER_UI_COMPLETED: {
         value: 'UPDATE_OTHER_BROWSER_UI_COMPLETED',
+        enumerable: true
+    },
+    UPDATE_PROBLEM_URL: {
+        value: 'UPDATE_PROBLEM_URL',
+        enumerable: true
+    },
+    UPDATE_SCREENSHOT_URL: {
+        value: 'UPDATE_SCREENSHOT_URL',
         enumerable: true
     }
 });
