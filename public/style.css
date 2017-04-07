@@ -1,0 +1,18 @@
+
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+html {
+  background: #FFF;
+}
+body {
+    font-size: 16px;
+    font-weight: 300;
+    color: #888;
+    line-height: 30px;
+    text-align: center;
+
+    margin: 30px 30px 30px 30px;
+    background-color: #f5f5f5;
+}
+
+
