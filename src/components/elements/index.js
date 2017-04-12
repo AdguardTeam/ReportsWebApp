@@ -16,7 +16,7 @@ export class TextInput extends React.Component {
         });
     }
     render() {
-        var classStr = "form-group"; // To be used on something else..
+        let classStr = "form-group"; // To be used on something else..
         if(this.state.value === undefined) {
             classStr += " is-empty"; 
         }
@@ -61,7 +61,7 @@ export class RadioInput extends React.Component {
 
 /**
  * Displays a list of user input. Gets 3 props:
- * dataArray, mapDataToInputProps, mapDataToListPropsArray.
+ * dataArray, mapDataToInputProps, mapDataToListPropsArray
  */
 export class ListSelection extends React.Component {
     constructor(props) {
@@ -74,7 +74,7 @@ export class ListSelection extends React.Component {
         return React.cloneElement(element, {...this.props.mapDataToInputProps(this.props.dataArray)});
     }
     renderList(element) {
-        var propsArray = this.props.mapDataToListPropsArray(this.props.dataArray);
+        let propsArray = this.props.mapDataToListPropsArray(this.props.dataArray);
         return (
             <div>
                 { propsArray.map((prop, index) => React.cloneElement(element, {...prop})) }
@@ -86,13 +86,11 @@ export class ListSelection extends React.Component {
         return React.Children.map(this.props.children, (child, i) => {
             switch(i) {
                 case 0:
-                    console.log("Rendering 0th child..");
                     return this.renderInput(child);
-                case React.Children.count-1:
-                    console.log("Rendering 1th child...");
+                case 1:
                     return this.renderList(child);
                 default:
-                    return element;
+                    return null;
             }
         });
     }
@@ -104,4 +102,3 @@ export class ListSelection extends React.Component {
         )
     }
 }
-

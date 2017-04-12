@@ -5,26 +5,25 @@ import ProbType from './ProbType.js';
 import ProbURL from './ProbURL.js';
 import Filters from './Filters.js';
 import Screenshots from './Screenshots.js';
+import Comments from './Comments.js';
 
-class Pages extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        switch(this.props.currentPage) {
-            case 0:
-                return (<ProdType/>);
-            case 1:
-                return (<ProbType/>);
-            case 2:
-                return (<ProbURL/>);
-            case 3:
-                return (<Filters/>);
-            case 4:
-                return (<Screenshots/>);
-            default:
-                return null;
-        }
+
+function Pages(props) {
+    switch(props.currentPage) {
+        case 0:
+            return (<ProdType/>);
+        case 1:
+            return (<ProbType/>);
+        case 2:
+            return (<ProbURL/>);
+        case 3:
+            return (<Filters/>);
+        case 4:
+            return (<Screenshots/>);
+        case 5:
+            return (<Comments/>);
+        default:
+            return null;
     }
 }
 

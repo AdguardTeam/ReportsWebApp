@@ -63,9 +63,9 @@ export const filterOptions = [
     {value: 15, label: "Simplified domain names filter"}
 ];
 
-// value == filterOptions[filterOptionsMap[i]]
+// value == filterOptions[filterOptionsMap[value]]
 export const filterOptionsMap = (function() {
-    var map = Object.create(null);
+    let map = Object.create(null);
     filterOptions.forEach((el, index) => {
         map[el.value] = index;
     });

@@ -84,3 +84,10 @@ export function screenshotsUpdate(val) {
         data: val
     });
 }
+
+export function commentUpdate(val) {
+    store.dispatch({
+        type: "UPDATE_COMMENTS",
+        data: val
+    });
+}

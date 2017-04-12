@@ -22,8 +22,8 @@ class Filters extends React.Component {
         this.mapDataToListPropsArray = this.mapDataToListPropsArray.bind(this);
     }
     mapDataToInputProps(selected) {
-        var unselected = complement(selected, filterOptions.length);
-        var options = unselected.map((i) => {
+        let unselected = complement(selected, filterOptions.length);
+        let options = unselected.map((i) => {
             let option = filterOptions[filterOptionsMap[i]];
             return {
                 label: option.label,
@@ -32,15 +32,18 @@ class Filters extends React.Component {
         });
         return { options };
     }
-    onSelectChange(event){
-        var newSelection = immutableInsert(this.props.selectedFilters, event.value);
+    onSelectChange(event) {
+        let newSelection = immutableInsert(this.props.selectedFilters, event.value);
         filtersUpdate(newSelection);
         this.setState({
             current: event.value
         });
     }
+    onAddClick(event) {
+
+    }
     mapDataToListPropsArray(selected) {
-        var self = this;
+        let self = this;
         return selected.map( (val, index) => {
             return {
                 label: filterOptions[filterOptionsMap[val]].label,
@@ -50,7 +53,7 @@ class Filters extends React.Component {
         });
     }
     onDelete(val) {
-        var newSelection = immutableDelete(this.props.selectedFilters, val);
+        let newSelection = immutableDelete(this.props.selectedFilters, val);
         filtersUpdate(newSelection);
     }
     render() {
@@ -60,7 +63,8 @@ class Filters extends React.Component {
                 <ListSelection 
                     dataArray={this.props.selectedFilters}
                     mapDataToInputProps={this.mapDataToInputProps}
-                    mapDataToListPropsArray={this.mapDataToListPropsArray}    
+                    mapDataToListPropsArray={this.mapDataToListPropsArray}
+                    onAddClick={this.onAddClick}
                 >
                     <Select
                         placeholder="Start typing filters name here..."
@@ -85,6 +89,7 @@ function FilterEntry(props) {
 }
 
 export default Filters = connect((state) => ({
+    selectedFilterCurrent: state.selectedFilterCurrent,
     selectedFilters: state.selectedFilters
 }))(Filters);
 

@@ -10,14 +10,21 @@ function sortedIndex(array, value) {
     return low;
 }
 
+export function immutablePush(array, value) {
+    return [...array, value];
+}
+
 export function immutableInsert(array, value) {
     var i = sortedIndex(array,value);
     return [...array.slice(0, i), value, ...array.slice(i)];
 }
 
+export function immutableDeleteByIndex(array, index) {
+    return [...array.slice(0, index), ...array.slice(index + 1)];
+}
+
 export function immutableDelete(array, value) {
-    var i = sortedIndex(array,value);
-    return [...array.slice(0,i), ...array.slice(i+1)];
+    return immutableDeleteByIndex(array, sortedIndex(array, value));
 }
 
 // first argument is a sorted array of natural numbers, all less than length.
@@ -26,7 +33,7 @@ export function complement(array, length) {
     var j = 0, result = new Array(0);
     for(var i = 1; i < length; i++) {
         if(i == array[j]) {
-            j++
+            j++;
         }
         else {
             Array.prototype.push.call(result, i);
