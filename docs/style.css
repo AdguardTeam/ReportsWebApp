@@ -1,0 +1,36 @@
+@import url('fonts/fonts.css');
+
+.gotham_proregular {
+  font-family: 'gotham_proregular',Arial,Tahoma,sans-serif;
+}
+
+/*  ---------------  */
+
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
+html {
+  background: #FFF;
+}
+
+body {
+    font-size: 16px;
+    font-weight: 300;
+    color: #444444;
+    line-height: 30px;
+    text-align: center;
+
+    border: 1px solid #E3E3E3;
+
+    margin: 30px 30px 30px 30px;
+    /*background-color: #f5f5f5;*/
+}
+
+body h1 {
+  color: #444452;
+}
+
+.form-group {
+  text-align: left;
+}
+
