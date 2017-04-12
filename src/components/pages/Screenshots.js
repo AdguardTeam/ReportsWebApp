@@ -4,7 +4,7 @@ import { TextInput, ListSelection } from '../elements';
 
 import { screenshotURLCurrentUpdate, screenshotsUpdate } from '../../dispatchers';
 
-import { immutablePush, immutableDeleteByIndex } from '../../utils.js';
+import { pushVal, delInd } from '../../utils.js';
 
 
 function Screenshots(props) {
@@ -18,13 +18,12 @@ function Screenshots(props) {
         }));
     };
     const onDelete = (index) => {
-        let newScreenshotURLs = immutableDeleteByIndex(props.screenshotURLs, index);
+        let newScreenshotURLs = delInd(props.screenshotURLs, index);
         screenshotsUpdate(newScreenshotURLs);
     };
     const onAdd = (event) => {
         if(props.screenshotURLCurrent.validity) {
-            console.log("url is valid, adding...");
-            let newScreenshotURLs = immutablePush(props.screenshotURLs, props.screenshotURLCurrent.value);
+            let newScreenshotURLs = pushVal(props.screenshotURLs, props.screenshotURLCurrent.value);
             screenshotsUpdate(newScreenshotURLs);
         }
         else {
@@ -81,10 +80,8 @@ function ImageBox(props) {
         </div>
     );
 }
-
-
 /**
- * Required props: inputProps, onAdd
+ * props: inputProps, onAdd
  */
 function InputBoxWithAddButton(props) {
     return (

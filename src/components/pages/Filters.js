@@ -9,7 +9,7 @@ import { ListSelection } from '../elements';
 import { filtersUpdate } from '../../dispatchers';
 import { filterOptions, filterOptionsMap } from '../../constants/input-options.js';
 
-import { immutableInsert, immutableDelete, complement } from '../../utils.js';
+import { insVal, delVal, complement } from '../../utils.js';
 
 
 class Filters extends React.Component {
@@ -33,7 +33,7 @@ class Filters extends React.Component {
         return { options };
     }
     onSelectChange(event) {
-        let newSelection = immutableInsert(this.props.selectedFilters, event.value);
+        let newSelection = insVal(this.props.selectedFilters, event.value);
         filtersUpdate(newSelection);
         this.setState({
             current: event.value
@@ -53,13 +53,13 @@ class Filters extends React.Component {
         });
     }
     onDelete(val) {
-        let newSelection = immutableDelete(this.props.selectedFilters, val);
+        let newSelection = delVal(this.props.selectedFilters, val);
         filtersUpdate(newSelection);
     }
     render() {
         return (
             <div>
-                <h1>Here goes a title</h1>
+                <h1>What filters do you have enabled?</h1>
                 <ListSelection 
                     dataArray={this.props.selectedFilters}
                     mapDataToInputProps={this.mapDataToInputProps}
@@ -92,5 +92,3 @@ export default Filters = connect((state) => ({
     selectedFilterCurrent: state.selectedFilterCurrent,
     selectedFilters: state.selectedFilters
 }))(Filters);
-
-
