@@ -19,12 +19,20 @@ body {
     color: #444444;
     line-height: 30px;
     text-align: center;
-
-    border: 1px solid #E3E3E3;
-
-    margin: 30px 30px 30px 30px;
-    /*background-color: #f5f5f5;*/
 }
+
+.container {
+    border: 1px solid #E3E3E3;
+    width: 900px;
+    margin: 30px auto 30px auto;
+}
+
+@media screen and (max-width: 1000px) {
+    .container {
+      width: 80%;
+    }
+}
+
 
 body h1 {
   color: #444452;
@@ -34,3 +42,28 @@ body h1 {
   text-align: left;
 }
 
+.progress-bar {
+  background-color: #36BA53;
+}
+
+.summary {
+  margin: auto;
+}
+
+
+button[type="button"]{
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
+    margin: 0px 3px 0px 3px;
+
+    cursor: pointer;
+    background-color: #58595B;
+}
+button[disabled] {
+    cursor: default;
+    background-color: #A9A9A9;
+}

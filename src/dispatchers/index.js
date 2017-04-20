@@ -15,7 +15,6 @@ export function productTypeChange(val) {
 }
 
 export function productVersionChange(val) {
-    console.log(val);
     store.dispatch({
         type: "UPDATE_PRODUCT_VERSION",
         data: val

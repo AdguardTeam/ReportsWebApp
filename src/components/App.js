@@ -7,7 +7,7 @@ import Pages from './pages';
 
 export default function App(props) {
     return (
-        <div>
+        <div className="container">
             <Pages/>
             <NavButtons />
             <ProgressBar />
