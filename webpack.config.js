@@ -2,15 +2,10 @@ const webpack = require('webpack');
 
 const config = {
     entry: './src/index.js',
- 
     output: {
         path: __dirname + '/docs/',
+        publicPath: '/',
         filename: 'bundle.js'
-    },
-    devServer: {
-        inline: true,
-        port: 7777,
-        contentBase: __dirname + '/docs/'
     },
     module: {
         loaders: [
@@ -33,7 +28,8 @@ const config = {
     plugins: []
 };
 
-if (process.env.NODE_ENV === 'production') {
+
+if(process.env.NODE_ENV === 'production') {
     config.plugins.push(
         new webpack.optimize.UglifyJsPlugin({
             compress: {}

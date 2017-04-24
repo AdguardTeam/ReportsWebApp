@@ -80,7 +80,6 @@ export class ListSelection extends React.Component {
                 { propsArray.map((prop, index) => React.cloneElement(element, {...prop})) }
             </div>
         )
-
     }
     renderChildren() {
         return React.Children.map(this.props.children, (child, i) => {

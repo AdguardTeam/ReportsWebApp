@@ -25,7 +25,12 @@ function SubmitAndCaptcha(props) {
                                 Browser:
                             </th>
                             <td>
-                                {props.browserSelection == 'Other' ? props.browserDetail.value : props.browserSelection.value}
+                                {
+                                    props.browserSelection == 'Other' ? props.browserDetail.value : props.browserSelection.value
+                                }
+                                {
+                                    props.isDataCompressionEnabled === true && ' with data compression enabled'
+                                }
                             </td>
                         </tr>
                     ) }
@@ -54,6 +59,21 @@ function SubmitAndCaptcha(props) {
                             {props.selectedFilters.toString()}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            Screenshots:
+                        </th>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Comments:
+                        </th>
+                        <td>
+                            {props.comments.value}
+                        </td>
+                    </tr>                    
                 </tbody>
             </table>
         </div>
