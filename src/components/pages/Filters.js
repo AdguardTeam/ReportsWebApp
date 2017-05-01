@@ -9,7 +9,7 @@ import { ListSelection } from '../elements';
 import { filtersUpdate } from '../../dispatchers';
 import { filterOptions, filterOptionsMap } from '../../constants/input-options.js';
 
-import { insVal, delVal, complement } from '../../utils.js';
+import { insVal, delVal, complement } from '../../utils/immutable.js';
 
 
 class Filters extends React.Component {

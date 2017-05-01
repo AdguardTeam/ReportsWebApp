@@ -4,7 +4,7 @@ import { TextInput, ListSelection } from '../elements';
 
 import { screenshotURLCurrentUpdate, screenshotsUpdate } from '../../dispatchers';
 
-import { pushVal, delInd } from '../../utils.js';
+import { pushVal, delInd } from '../../utils/immutable.js';
 
 
 function Screenshots(props) {

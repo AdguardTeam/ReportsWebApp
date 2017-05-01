@@ -49,6 +49,7 @@ const githubApi = {
             github.authenticate( Object.assign({}, {
                 type: "basic"
             }, require('./credentials.js')));
+            console.log('\x1b[33m', 'using GitHub api with authentication', '\x1b[0m');
         }
         catch(e) {
             console.log('\x1b[33m', 'no credentials provided, using GitHub api without authentication...', '\x1b[0m');
@@ -69,12 +70,12 @@ const githubApi = {
                         page: page,
                         per_page: 100
                     }).catch((err) => {
-                        console.warn("Error in connecting to the github api server. Check for rate limits.");
+                        console.warn("\x1b[31m", "Error in connecting to the github api server. Check for rate limits.", '\x1b[0m');
                         console.warn(err);
                     }).then((res) => Promise.mapSeries(res.data, (issue, index) => (
                         issue.number >= minNum ? Promise.resolve() : insertIssue(issue).then(() => {minNum = issue.number;})
                     ))).catch((err) => {
-                        console.warn("Uncaught error in inserting a new row");
+                        console.warn("\x1b[31m", "Uncaught error in inserting a new row", '\x1b[0m');
                         console.warn(err);
                     }).then(fetchOnce);
                 };
@@ -111,6 +112,9 @@ const githubApi = {
      */
     searchIssues: (domain, type) => {
         // Should match type as well
+        if(domain.indexOf('www.') == 0) { // www.example.com should find issues of domain example.com or sub.www.example.com but not sub.example.com
+            return all("SELECT * FROM issues WHERE domain LIKE ? OR domain = ? OR domain = ? ORDER BY date(last_update) DESC LIMIT 10 ;", ["%." + domain, domain, domain.slice(4)]);
+        }
         return all("SELECT * FROM issues WHERE domain LIKE ? OR domain = ? ORDER BY date(last_update) DESC LIMIT 10 ;", ["%." + domain, domain]);
     },
     
