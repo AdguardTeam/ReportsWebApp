@@ -62,7 +62,7 @@ function parseDesc(issue) {
     body = body.trim();
     let i = body.indexOf("***Description***");
     if(i != -1) {
-        body = body.slice(i + 17);
+        body = body.slice(i + 37);
         body = body.slice(0, body.indexOf("**"));
     }
     else {
@@ -71,7 +71,7 @@ function parseDesc(issue) {
             body = body.slice(0, i);
         }
     }
-    return body.slice(0, 20);
+    return body.slice(0, 40);
 }
 
 function makeBody(desc) {
