@@ -45,10 +45,11 @@ class Filters extends React.Component {
     mapDataToListPropsArray(selected) {
         let self = this;
         return selected.map( (val, index) => {
+            let label = filterOptions[filterOptionsMap[val]].label;
             return {
-                label: filterOptions[filterOptionsMap[val]].label,
+                label: label,
                 onClose: self.onDelete.bind(self, val),
-                key: index
+                key: label
             };
         });
     }

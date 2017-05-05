@@ -144,7 +144,7 @@ class RelatedIssues extends React.Component {
         return (
             <div className="issues">
                 { this.state.data.map((el) => (
-                    <div onClick={this.onClick.bind(this, el.url)}>
+                    <div onClick={this.onClick.bind(this, el.url)} key={el.url}>
                         <div className={el.status}/>
                         <div>
                             <p><span>{el.title}</span><span>{el.date}</span></p>

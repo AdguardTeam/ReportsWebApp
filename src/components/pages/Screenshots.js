@@ -14,7 +14,8 @@ function Screenshots(props) {
     const mapDataToListPropsArray = (screenshotURLs) => {
         return screenshotURLs.map((el, index) => ({
                 src: el,
-                onDelete: onDelete.bind(this, index)
+                onDelete: onDelete.bind(this, index),
+                key: el
         }));
     };
     const onDelete = (index) => {
@@ -22,7 +23,7 @@ function Screenshots(props) {
         screenshotsUpdate(newScreenshotURLs);
     };
     const onAdd = (event) => {
-        if(props.screenshotURLCurrent.validity) {
+        if(props.screenshotURLCurrent.validity && props.screenshotURLs.indexOf(props.screenshotURLCurrent.value) == -1) {
             let newScreenshotURLs = pushVal(props.screenshotURLs, props.screenshotURLCurrent.value);
             screenshotsUpdate(newScreenshotURLs);
         }
