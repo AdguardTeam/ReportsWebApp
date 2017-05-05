@@ -100,8 +100,6 @@ AppDetails = connect((state) => ({
 class RelatedIssues extends React.Component {
     constructor(props) {
         super(props);
-        this.componentDidMount = this.componentDidMount.bind(this);
-        this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
         this.getRelatedIssues = this.getRelatedIssues.bind(this);
         this.state = {
             data: []
