@@ -8,6 +8,9 @@ function ProgressBar(props) {
             <div className="progress">
                 <div className="progress-bar" role="progressbar" style={{'width': String(props.currentPage / 7 * 100) + '%'}}/>
             </div>
+            <div>
+                <span>{"Step " + (props.currentPage + 1) + "/8"}</span>
+            </div>
         </div>
 
     )
@@ -16,4 +19,3 @@ function ProgressBar(props) {
 export default connect((state) => ({
     currentPage: state.currentPage
 }))(ProgressBar);
-

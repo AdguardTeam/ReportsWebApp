@@ -1,11 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import ReCAPTCHA from 'react-google-recaptcha';
+
+
 import { productTypeOptions } from '../../constants/input-options.js';
+
+import { receivedCaptchaResponse } from '../../dispatchers';
+
+import { R_URL_DOMAIN_MATCH } from '../../constants/regexes.js';
 
 
 function SubmitAndCaptcha(props) {
     let prodName = productTypeOptions.filter((el) => (el.value == props.productType.value))[0].label;
+
+    let recaptchaInstance;
+    const sitekey = 'xxxxxxx';
+
+    const onChange = (response) => {
+        receivedCaptchaResponse(response);
+    };
+
     return (
         <div>
             <h1>Check the information</h1>
@@ -76,6 +91,11 @@ function SubmitAndCaptcha(props) {
                     </tr>                    
                 </tbody>
             </table>
+            <ReCAPTCHA
+                ref={e => recaptchaInstance = e}
+                sitekey={sitekey}
+                onChange={onChange}
+            />
         </div>
     )
 }
