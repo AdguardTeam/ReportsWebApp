@@ -6,6 +6,9 @@ import store from '../reducers';
 import { extractDomain } from '../utils/parse-url.js';
 
 
+const PAGE_START = 0;
+const PAGE_SUBMIT = 7;
+
 function NavButtons(props) {
     let completed = props.completedPages[props.currentPage];
     const onNavBtnClick = (event) => {
@@ -29,9 +32,9 @@ function NavButtons(props) {
     }
     return (
         <div>
-            { props.currentPage > 0 && <button type="button" name="prev" onClick={onNavBtnClick}>Prev</button> }
-            { props.currentPage < 7 && <button type="button" name="next" disabled={!completed} onClick={onNavBtnClick}>Next</button> }
-            { props.currentPage == 7 && <button type="button" name="submit" disabled={props.captchaResponse.validity} onClick={onSubmitBtnClick}>Submit</button> }
+            { props.currentPage > PAGE_START && <button type="button" name="prev" onClick={onNavBtnClick}>Prev</button> }
+            { props.currentPage < PAGE_SUBMIT && <button type="button" name="next" disabled={!completed} onClick={onNavBtnClick}>Next</button> }
+            { props.currentPage == PAGE_SUBMIT && <button type="button" name="submit" disabled={props.captchaResponse.validity} onClick={onSubmitBtnClick}>Submit</button> }
         </div>
     );
 }
@@ -50,31 +53,33 @@ const getIssueTitle = (state) => {
 };
 
 const getIssueBody = (state) => {
-    let body = "";
-    const NEW_LINE = '\r\n';
 
-    body += '[//]: # (***You can leave the strings with "[//]:" They will not be added to the issue text)' + NEW_LINE;
+    const NEW_LINE = '\n';
+    const buf = [];
 
-    body += '[//]: # (***Строки, которые начинаются с "[//]:" можно не удалять. Они не будут видны)' + NEW_LINE + NEW_LINE;
-
+    buf.push('[//]: # (***You can leave the strings with "[//]:" They will not be added to the issue text)');
+    buf.push('[//]: # (***Строки, которые начинаются с "[//]:" можно не удалять. Они не будут видны)');
+    buf.push('');
 
     if(state.comments.validity) {
-        body += "***Comment***: " + state.comments.value + NEW_LINE;
+        buf.push("***Comment***: " + state.comments.value)
     }
 
-    body += "Screenshot: " + NEW_LINE;
+    buf.push("Screenshot: ");
 
-    body += "${SCREENSHOTS}";
+    state.screenshotURLs.forEach((el, index) => {
+        buf.push(`[${index}](${el})`);
+    })
+    buf.push('');
 
-    body += "***System configuration***" + NEW_LINE;
+    buf.push("***System configuration***");
+    buf.push("Information | value");
+    buf.push("--- | ---");
+    buf.push("Adguard version: | " + state.productVersion.value);
+    buf.push("Browser: | " + ( state.browserSelection.value == "Other" ? state.browserDetail.value : state.browserSelection.value ));
+    buf.push("Filters: | " + state.selectedFilters.toString());
 
-    body += "Information | value";
-    body += "--- | ---";
-    body += "Adguard version: | " + state.productVersion.value;
-    body += "Browser: | " + ( state.browserSelection.value == "Other" ? state.browserDetail.value : state.browserSelection.value );
-    body += "Filters: | " + state.selectedFilters.toString();
-
-    return body;
+    return buf.join(NEW_LINE);
 };
 
 const getLabels = (state) => {

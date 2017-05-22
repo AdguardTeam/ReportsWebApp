@@ -41,6 +41,3 @@ credentials
 
 #issues database
 issues.db
-
-#yarn
-yarn.lock

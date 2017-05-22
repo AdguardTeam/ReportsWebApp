@@ -113,7 +113,7 @@ const updateValidatedPages = function(state) { // further arguemnts are page num
     });
 
     return Object.assign({}, state, {
-        completedPages: Object.assign([], state.completedPages, {...newCompletedPages})
+        completedPages: Object.assign([], state.completedPages, newCompletedPages)
     });
 }
 
