@@ -33,8 +33,8 @@ function Checklist(props) {
                     }
                     return (
                         <div key={index} className="row">
-                            <p className="help-block" style={{ float: 'left' }}>{el.label}</p>
-                            <div style={{ float: 'right' }}>
+                            <p className="text">{el.label}</p>
+                            <div>
                                 <RadioInput value="Y" name={index} labelText="Yes" checked={props.checklistAnswers[index] === true} onChangeHandler={onChecklistAnswer}/>
                                 <RadioInput value="N" name={index} labelText="No" checked={props.checklistAnswers[index] === false} onChangeHandler={onChecklistAnswer}/>
                             </div>
@@ -42,7 +42,7 @@ function Checklist(props) {
                     )
                 }
             ) }
-            { props.isResolvedTextVisible && <p className = "help-block">Great! Thank you for using Adguard!</p> }
+            { props.isResolvedTextVisible && <p className = "text text--bold">Great! Thank you for using Adguard!</p> }
         </div>
     )
 }
@@ -61,15 +61,18 @@ function ProbType(props) {
     };
     return (
         <div>
-            <h1>What type of problem have you encountered?</h1>
+            <h1 className="title">What type of problem have you encountered?</h1>
             <Select
                 name="ProbType"
-                className="form-group"
+                className="select"
                 value={props.problemType.value}
                 options={problemTypeOptions}
                 onChange={onProbTypeChange}
             />
-            <p className="help-block">If the problem does not fall under any category that is listed here, please contact our tech support: support@adguard.com</p>
+            <p className="text">
+                If the problem does not fall under any category that is listed here, please contact our tech support:
+                 <a className="link" href="mailto:support@adguard.com">support@adguard.com</a>
+            </p>
             <Checklist />
         </div>
     );

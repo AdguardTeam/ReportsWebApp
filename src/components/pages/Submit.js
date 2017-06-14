@@ -8,7 +8,7 @@ class SubmitAndRecaptcha extends React.Component {
     render() {
         return (
             <div>
-                <h1>Check the information</h1>
+                <h1 className="title">Check the information</h1>
                 {/*generate summary of user input here..*/}
             </div>
         )

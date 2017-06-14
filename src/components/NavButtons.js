@@ -16,9 +16,9 @@ function NavButtons(props) {
         }
     };
     return (
-        <div>
-            { props.currentPage > 0 && <button type="button" name="prev" onClick={onNavBtnClick}>Prev</button> }
-            { props.currentPage < 8 && <button type="button" name="next" disabled={!completed} onClick={onNavBtnClick}>Next</button> }
+        <div className="buttons">
+            { props.currentPage > 0 && <button type="button" className="button button--green" name="prev" onClick={onNavBtnClick}>Prev</button> }
+            { props.currentPage < 8 && <button type="button" className="button button--green" name="next" disabled={!completed} onClick={onNavBtnClick}>Next</button> }
         </div>
     );
 }

@@ -59,7 +59,7 @@ class Filters extends React.Component {
     render() {
         return (
             <div>
-                <h1>What filters do you have enabled?</h1>
+                <h1 className="title">What filters do you have enabled?</h1>
                 <ListSelection 
                     dataArray={this.props.selectedFilters}
                     mapDataToInputProps={this.mapDataToInputProps}
@@ -81,9 +81,9 @@ class Filters extends React.Component {
 // to be elaborated...
 function FilterEntry(props) { 
     return (
-        <div>
-            <span>{props.label}</span>
-            <span onClick={props.onClose}>x</span>
+        <div className="filter">
+            <span className="filter__title">{props.label}</span>
+            <span className="filter__remove" onClick={props.onClose}>x</span>
         </div>
     )
 }

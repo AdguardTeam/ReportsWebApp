@@ -33,17 +33,17 @@ function Screenshots(props) {
 
     return (
         <div>
-            <h1>Submit a screenshot</h1>
-            <p className = "help-block">Please take a screenshot (or screenshots, if needed) of the problem and upload it to any cloud service.</p>
-            <p className = "help-block">If you are unsure of how to do it, read our [URL]manual[/URL].</p>
-            <p className = "help-block text-left">When taking the screenshot(s), please keep in mind following requirements:</p>
+            <h1 className="title">Submit a screenshot</h1>
+            <p className = "text">Please take a screenshot (or screenshots, if needed) of the problem and upload it to any cloud service.</p>
+            <p className = "text">If you are unsure of how to do it, read our [URL]manual[/URL].</p>
+            <p className = "text">When taking the screenshot(s), please keep in mind following requirements:</p>
             <ol>
                 <li><p>If it is unclear from the screenshot what the problem is, highlight it with an arrow/frame/etc;</p></li>
                 <li><p>The full browser window should be visible;</p></li>
                 { 
                     (props.productType == "And" || props.productType=="iOS") && 
                     <li>
-                        <p class = "text-left" >Please take a 'long' screenshot ([URL]what is 'long' screenshot?[/URL])</p>
+                        <p class = "text" >Please take a 'long' screenshot ([URL]what is 'long' screenshot?[/URL])</p>
                     </li>
                 }
             </ol>
@@ -58,7 +58,7 @@ function Screenshots(props) {
                             ...props.screenshotURLCurrent
                     }}
                     onAdd={onAdd} />
-                <ImageBox width="100px" height="100px"/> {/* say 100 px for now...*/}
+                <ImageBox/> {/* say 100 px for now...*/}
             </ListSelection>
         </div>
     )
@@ -74,9 +74,9 @@ export default Screenshots = connect((state) => ({
 // To be elaborated...
 function ImageBox(props) {
     return (
-        <div style={{display: 'inline'}}>
-            <img src={props.src} width={props.width} height={props.height}/>
-            <div className="close-btn" onClick={props.onDelete}>X</div>
+        <div className="screenshot">
+            <img className="screenshot__image" src={props.src}/>
+            <div className="screenshot__remove" onClick={props.onDelete}>X</div>
         </div>
     );
 }
@@ -85,9 +85,9 @@ function ImageBox(props) {
  */
 function InputBoxWithAddButton(props) {
     return (
-        <div>
-            <TextInput placeholder="Enter screenshot URL..." {...props.inputProps}/>
-            <button type="button" onClick={props.onAdd}>Add</button>
+        <div className="form form--file">
+            <TextInput placeholder="Enter screenshot URL" {...props.inputProps}/>
+            <button className="button button--green button--file" type="button" onClick={props.onAdd}>Add</button>
         </div>
     );
 }
