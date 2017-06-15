@@ -59,6 +59,7 @@ class Filters extends React.Component {
                     mapDataToListPropsArray={this.mapDataToListPropsArray}
                 >
                     <Select
+                        className="select"
                         placeholder="Start typing filters name here..."
                         value={this.state.current}
                         onChange={this.onSelectChange}

@@ -43,7 +43,7 @@ function ProbType(props) {
                 options={problemTypeOptions}
                 onChange={onProbTypeChange}
             />
-            <p className="text">If the problem does not fall under any category that is listed here, please contact our tech support: support@adguard.com</p>
+            <p className="text">If the problem does not fall under any category that is listed here, please contact our tech support: <a className="link" href="mailto:support@adguard.com">support@adguard.com</a></p>
             <Checklist />
             { props.isPlatformSpecificQuestionsVisible && (
                 props.productType.value == "Win" ? <WinSpecific/> : props.productType.value == "And" ? <AndSpecific/> : props.productType.value == "iOS" ? <IOSSpecific/> : null )}
@@ -117,14 +117,14 @@ function WinSpecific(props) {
         <div>
             <RadioInputGroup text="Do you have WFP driver enabled in Adguard network settings?" name="WFP" options={YN} checkedValue={props.winWFPEnabled.value} onChangeHandler={onWFPInputChange} />
             <RadioInputGroup text="Do you have Stealth Mode enabled?" name="Stealth" options={YN} checkedValue={props.winStealthEnabled.value} onChangeHandler={onStealthInputChange} />
-            <p className="text">Please mark any of these options if you have them enabled in Stealth Mode</p>
+            <p className="text text--subtitle">Please mark any of these options if you have them enabled in Stealth Mode</p>
             { STEALTH_OPTIONS.map((option, index) => {
                 return (
-                    <div key={index}>
-                        <p>{option.label}</p>
-                        <div>
-                            <input type="checkbox" checked={props.winStealthOptions[index].enabled} onChange={onStealthOptionInputChange.bind(null, index)}/>
-                        </div>
+                    <div key={index} className="row row--checkbox">
+                        <label className="checkbox">
+                            <input className="checkbox__input" type="checkbox" checked={props.winStealthOptions[index].enabled} onChange={onStealthOptionInputChange.bind(null, index)}/>
+                            <span className="checkbox__text">{option.label}</span>
+                        </label>
                         {
                             option.type !== "Bool" &&
 

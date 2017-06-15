@@ -14,9 +14,6 @@ import { R_URL_DOMAIN_MATCH } from '../../constants/regexes.js';
 
 import { extractDomain } from '../../utils/parse-url.js';
 
-import Promise from 'bluebird';
-
-
 function ProbURL(props) {
     let webOrApp = props.probOnWebOrApp;
     return (
