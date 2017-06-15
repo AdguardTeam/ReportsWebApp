@@ -9,7 +9,7 @@ import { ListSelection } from '../elements';
 import { filtersUpdate } from '../../dispatchers';
 import { filterOptions, filterOptionsMap } from '../../constants/input-options.js';
 
-import { insVal, delVal, complement } from '../../utils.js';
+import { insVal, delVal } from '../../utils/immutable.js';
 
 
 class Filters extends React.Component {
@@ -21,14 +21,9 @@ class Filters extends React.Component {
         this.onSelectChange = this.onSelectChange.bind(this);
         this.mapDataToListPropsArray = this.mapDataToListPropsArray.bind(this);
     }
-    mapDataToInputProps(selected) {
-        let unselected = complement(selected, filterOptions.length);
-        let options = unselected.map((i) => {
-            let option = filterOptions[filterOptionsMap[i]];
-            return {
-                label: option.label,
-                value: option.value
-            };
+    mapDataToInputProps(selected) { // selected is props.selectedFilters
+        let options = filterOptions.filter((el) => {
+            return selected.indexOf(el.value) > -1 ? false : true;
         });
         return { options };
     }
@@ -39,16 +34,14 @@ class Filters extends React.Component {
             current: event.value
         });
     }
-    onAddClick(event) {
-
-    }
     mapDataToListPropsArray(selected) {
         let self = this;
         return selected.map( (val, index) => {
+            let label = filterOptions[filterOptionsMap[val]].label;
             return {
-                label: filterOptions[filterOptionsMap[val]].label,
+                label: label,
                 onClose: self.onDelete.bind(self, val),
-                key: index
+                key: label
             };
         });
     }
@@ -64,7 +57,6 @@ class Filters extends React.Component {
                     dataArray={this.props.selectedFilters}
                     mapDataToInputProps={this.mapDataToInputProps}
                     mapDataToListPropsArray={this.mapDataToListPropsArray}
-                    onAddClick={this.onAddClick}
                 >
                     <Select
                         placeholder="Start typing filters name here..."

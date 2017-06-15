@@ -8,7 +8,7 @@ import Pages from './pages';
 
 export default function App(props) {
     return (
-        <div className="wrapper">
+        <div className="container">
             <Pages/>
             <NavButtons />
             <ProgressBar />

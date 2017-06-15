@@ -22,7 +22,7 @@ body {
 
 /*Common blocks*/
 
-.wrapper {
+.container {
     max-width: 900px;
     margin: 30px auto;
     padding: 30px 20px;
@@ -387,4 +387,12 @@ body {
     .screenshot__image {
         max-width: 220px;
     }
+}
+
+.progress-bar {
+    background-color: #36BA53;
+}
+
+.summary {
+    margin: auto;
 }

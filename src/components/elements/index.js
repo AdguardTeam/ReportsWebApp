@@ -30,7 +30,7 @@ export class TextInput extends React.Component {
         }
         return (
             <div className="input-wrapper">
-                <input type="text" className={classStr} id={this.props.id} placeholder={this.props.placeholder} onChange={this._onChange} value={this.state.value} />
+                <input type="text" className={classStr} id={this.props.id} placeholder={this.props.placeholder} onChange={this._onChange} value={this.state.value} disabled={this.props.disabled} />
             </div>
         );
     }
@@ -39,14 +39,8 @@ export class TextInput extends React.Component {
 export class RadioInput extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            checked: props.checked // Should I maintain this state here? I heard that React only updates when its state is updated. However, maybe storing it here won't be needed, because its parent component will be updated anyway and maybe it will cause its child components to re-render?
-        };
     }
     _onChange(name, event) {
-        this.setState({
-            checked: event.currentTarget.checked
-        });
         this.props.onChangeHandler.call(this, event.currentTarget.value, name);
     }
     render() {
@@ -56,6 +50,32 @@ export class RadioInput extends React.Component {
                 <span className="radio__text">{this.props.labelText}</span>
             </label>
         )
+    }
+}
+
+/**
+ * props:
+ * text,
+ * name,
+ * options: array of Names.
+ * onChangeHandler : called with (event.currentTarget.value, name)
+ * checkedValue 
+ */
+export class RadioInputGroup extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+            return (
+            <div className="row">
+                <p className="text" style={{'float': 'left'}}>{this.props.text}</p>
+                <div>
+                    {
+                        this.props.options.map((option, index) => <RadioInput key={index} value={option.value} labelText={option.label} name={this.props.name} checked={this.props.checkedValue==option.value} onChangeHandler={this.props.onChangeHandler} />)
+                    }
+                </div>
+            </div>
+        );
     }
 }
 
@@ -80,7 +100,6 @@ export class ListSelection extends React.Component {
                 { propsArray.map((prop, index) => React.cloneElement(element, {...prop})) }
             </div>
         )
-
     }
     renderChildren() {
         return React.Children.map(this.props.children, (child, i) => {

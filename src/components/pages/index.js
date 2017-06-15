@@ -6,6 +6,7 @@ import ProbURL from './ProbURL.js';
 import Filters from './Filters.js';
 import Screenshots from './Screenshots.js';
 import Comments from './Comments.js';
+import SubmitAndCaptcha from './Submit.js';
 
 
 function Pages(props) {
@@ -22,6 +23,8 @@ function Pages(props) {
             return (<Screenshots/>);
         case 5:
             return (<Comments/>);
+        case 6:
+            return (<SubmitAndCaptcha />);
         default:
             return null;
     }

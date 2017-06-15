@@ -1,6 +1,7 @@
 Object.assign = require('object-assign');
 import { createStore } from 'redux';
-import { checklists } from '../constants/input-options.js';
+import { checklists, STEALTH_OPTIONS } from '../constants/input-options.js';
+import { R_URL } from '../constants/regexes.js';
 
 function InputData(value, validity) {
     this.value = value;
@@ -12,7 +13,7 @@ function validateVersion(ver) {
 }
 
 function validateURL(url) {
-    return /^(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/.test(url);
+    return R_URL.test(url);
 }
 
 function validatePlayStoreURL(url) {
@@ -38,21 +39,45 @@ function shouldSkip(skip, productType, problemType) {
     }
 }
 
+
 const INITIAL_STATE = (function() {
     var _state = Object.create(null);
 
     _state.currentPage = 0;
     _state.completedPages = [false/*ProdType*/, false/*ProbType*/, false/*ProbURL*/, true/*Filters*/, false/*Screenshots*/, true/*Comments*/, true/*Submit&Captcha*/, false];
 
+
+    /* Page 1 */
     _state.productType = new InputData('', false);
     _state.productVersion = new InputData('', false);
 
+    /* Page 2 */
     _state.problemType = new InputData('', false);
 
     _state.checklistAnswers = [null, undefined, undefined, undefined];
-
     _state.isResolvedTextVisible = false;
 
+    _state.isPlatformSpecificQuestionsVisible = false;
+
+    _state.winWFPEnabled = new InputData(null, false);
+    _state.winStealthEnabled = new InputData(null, false);
+    _state.winStealthOptions = STEALTH_OPTIONS.map((el) => (
+        el.type == "Bool" ? {
+            enabled: false
+        } : {
+            enabled: false,
+            detail: new InputData('', true)
+        }
+    ));
+
+    _state.androidFilteringMode = new InputData(null, false);
+    _state.androidFilteringMethod = new InputData(null, false);
+
+    _state.iosSystemWideFilteringEnabled = new InputData(null, false);
+    _state.iosSimplifiedFiltersEnabled = new InputData(null, false);
+    _state.iosDNS = new InputData(null, false);
+
+    /* Page 3 */
     _state.probOnWebOrApp = null;
 
     _state.browserSelection = new InputData('', false);
@@ -62,28 +87,69 @@ const INITIAL_STATE = (function() {
 
     _state.isDataCompressionEnabled = undefined;
 
+    /* Page 4 */
     _state.selectedFilters = [];
 
+    /* Page 5 */
     _state.screenshotURLCurrent = new InputData('', false);
     _state.screenshotURLs = [];
 
+    /* Page 6 */
     _state.comments = new InputData('', true);
+
+    /* Page 7 */
+    _state.captchaResponse = new InputData('', false);
 
     return _state;
 })();
 
-function validatePage0(productType, productVersion) {
-    return productType.validity && productVersion.validity;
+
+const updateValidatedPages = function(state) { // further arguemnts are page numbers to update validity.
+    let pages = Array.prototype.slice.call(arguments, 1);
+    let newCompletedPages = {};
+
+    pages.forEach((page) => {
+        newCompletedPages[page] = updateValidatedPages[page](state);
+    });
+
+    return Object.assign({}, state, {
+        completedPages: Object.assign([], state.completedPages, newCompletedPages)
+    });
 }
 
-function validatePage2(probURL, probOnWebOrApp, browserSelection, browserDetail) {
-    return probURL.validity && (
+updateValidatedPages['0'] = function(state) {
+    return state.productType.validity && state.productVersion.validity;
+};
+
+updateValidatedPages['1'] = function(state) {
+    if(!state.isPlatformSpecificQuestionsVisible) {
+        return false;
+    }
+    switch(state.productType.value) {
+        case 'Win':
+            return state.winWFPEnabled.validity && state.winStealthEnabled.validity;
+        case 'And':
+            return state.androidFilteringMethod.validity && state.androidFilteringMode.validity;
+        case 'iOS':
+            return state.iosSystemWideFilteringEnabled.validity && state.iosSimplifiedFiltersEnabled.validity && state.iosDNS.validity;
+        default:
+            return true;
+    }
+};
+
+updateValidatedPages['2'] = function(state) {
+    return state.problemURL.validity && (
         (
-            probOnWebOrApp == 'web' && browserSelection.validity && (browserSelection.value != "Other" || browserDetail.validity)
+            state.probOnWebOrApp == 'web' && state.browserSelection.validity && (state.browserSelection.value != "Other" || state.browserDetail.validity)
         )
-        || probOnWebOrApp == 'app'
+        || state.probOnWebOrApp == 'app'
     );
-}
+};
+
+updateValidatedPages['4'] = function(state) {
+    return state.screenshotURLs.length > 0;
+};
+
 
 const reducer = function(state, action) {
     if(typeof state === 'undefined') {
@@ -99,43 +165,35 @@ const reducer = function(state, action) {
             if(state.productType.value !== action.data) {
                 let newProbOnWebOrApp = action.data == "And" ? null : "web";
                 let newProductType = new InputData(action.data, true);
-                return Object.assign({}, state, {
+                return updateValidatedPages(Object.assign({}, state, {
                     productType: newProductType,
                     checklistAnswers: INITIAL_STATE.checklistAnswers,
-                    probOnWebOrApp: newProbOnWebOrApp,
-                    completedPages: Object.assign([], state.completedPages, {
-                        '0': validatePage0(newProductType, state.productVersion),
-                        '1': false,
-                        '2': state.prodOnWebOrApp == newProbOnWebOrApp ? state.completedPages[2] : false // reset page validity only when it is updated
-                    })
-                });
+                    isPlatformSpecificQuestionsVisible: false,
+                    probOnWebOrApp: newProbOnWebOrApp
+                }), 0, 1, 2);
             }
             return state;
         }
         case "UPDATE_PRODUCT_VERSION": {
             let newProductVersion = new InputData(action.data, validateVersion(action.data));
-            return Object.assign({}, state, {
-                productVersion: newProductVersion,
-                completedPages: Object.assign([], state.completedPages, {
-                    '0': validatePage0(state.productType, newProductVersion)
-                })
-            });
+
+            return updateValidatedPages(Object.assign({}, state, {
+                productVersion: newProductVersion
+            }), 0);
         }
         case "UPDATE_PROBLEM_TYPE": {
             if(state.problemType.value !== action.data) {
-                return Object.assign({}, state, {
+                return updateValidatedPages(Object.assign({}, state, {
                     problemType: new InputData(action.data, true),
                     checklistAnswers: INITIAL_STATE.checklistAnswers,
-                    completedPages: Object.assign([], state.completedPages, {
-                        '2': false
-                    })
-                });
+                    isPlatformSpecificQuestionsVisible: false
+                }), 1, 2);
             }
             return state;
         }
         case "UPDATE_CHECKLIST_ANSWER": {
             let answerTF = action.data.value, answerIndex = action.data.index;
-            let isPage1Validated;
+            let isPlatformSpecificQuestionsVisible;
             let tmp = Object.assign([], state.checklistAnswers, {
                 [answerIndex]: answerTF
             });
@@ -145,61 +203,97 @@ const reducer = function(state, action) {
                     tmp = Object.assign([], tmp, {
                         [nextIndex]: null
                     }); // make it visible
-                    isPage1Validated = false;
+                    isPlatformSpecificQuestionsVisible = false;
                 }
                 else {
-                    isPage1Validated = true; // page 1 is validated
+                    isPlatformSpecificQuestionsVisible = true; // page 1 is validated
                 }
             }
             else {
                 tmp = tmp.map((el, index) => ( index > answerIndex ? undefined : el )); // hide subsequent checklists
-                isPage1Validated = false; // problem is resolved, no need to proceed with the wizard
+                isPlatformSpecificQuestionsVisible = false; // problem is resolved, no need to proceed with the wizard
             }
-            return Object.assign({}, state, {
+
+
+            return updateValidatedPages(Object.assign({}, state, {
                 checklistAnswers: tmp,
                 isResolvedTextVisible: !answerTF,
-                completedPages: Object.assign([], state.completedPages, {
-                    '1': isPage1Validated
+                isPlatformSpecificQuestionsVisible: isPlatformSpecificQuestionsVisible
+            }), 1);
+        }
+        case "UPDATE_WFP_ANSWER": {
+            return updateValidatedPages(Object.assign({}, state, {
+                winWFPEnabled: new InputData(action.data, true)
+            }), 1);
+        }
+        case "UPDATE_STEALTH_ANSWER": {
+            return updateValidatedPages(Object.assign({}, state, {
+                winStealthEnabled: new InputData(action.data, true)
+            }), 1);
+        }
+        case "UPDATE_STEALTH_OPTION_ANSWER": { // specifying enabled stealth mode options is optional
+            return Object.assign({}, state, {
+                winStealthOptions: Object.assign([], state.winStealthOptions, {
+                    [action.data.index]: Object.assign({}, state.winStealthOptions[action.data.index], {
+                        enabled: action.data.value
+                    })
                 })
             });
+        }
+        case "UPDATE_STEALTH_OPTION_ANSWER_DETAIL": {
+            return Object.assign({}, state, {
+                winStealthOptions: Object.assign([], state.winStealthOptions, {
+                    [action.data.index]: Object.assign({}, state.winStealthOptions[action.data.index], {
+                        detail: new InputData(action.data.value, true) // or add validation too
+                    })
+                })
+            });
+        }
+        case "UPDATE_ANDROID_FILTERING_MODE": {
+            return updateValidatedPages(Object.assign({}, state, {
+                androidFilteringMode: new InputData(action.data, true)
+            }), 1);
+        }
+        case "UPDATE_ANDROID_FILTERING_METHOD": {
+            return updateValidatedPages(Object.assign({}, state, {
+                androidFilteringMethod: new InputData(action.data, false)
+            }), 1);
+        }
+        case "UPDATE_IOS_SYSTEM_WIDE_FILTERING": {
+            return updateValidatedPages(Object.assign({}, state, {
+                iosSystemWideFilteringEnabled: new InputData(action.data, true)
+            }), 1);
+        }
+        case "UPDATE_IOS_SIMPLIFIED_FILTERS_MODE": {
+            return updateValidatedPages(Object.assign({}, state, {
+                iosSimplifiedFiltersEnabled: new InputData(action.data, true)
+            }), 1);
+        }
+        case "UPDATE_IOS_DNS": {
+            return updateValidatedPages(Object.assign({}, state, {
+                iosDNS: new InputData(action.data, true)
+            }), 1);
         }
         case "UPDATE_WEB_OR_APP": {
-            let newProbOnWebOrApp = action.data;
-            return Object.assign({}, state, {
-                probOnWebOrApp: newProbOnWebOrApp,
-                completedPages: Object.assign([], state.completedPages, {
-                    '2': validatePage2(state.problemURL, newProbOnWebOrApp, state.browserSelection, state.browserDetail)
-                })
-            });
+            return updateValidatedPages(Object.assign({}, state, {
+                probOnWebOrApp: action.data
+            }), 2)
         }
         case "UPDATE_BROWSER_SELECTION": {
-            let newBrowserSelection = new InputData(action.data, true);
-            let newBrowserDetail = action.data == "Other" ? state.browserDetail : new InputData(undefined, false); // Or maybe it can be cleared not immediately, only after a page navigation.
-            return Object.assign({}, state, {
-                browserSelection: newBrowserSelection,
-                browserDetail: newBrowserDetail,
-                completedPages: Object.assign([], state.completedPages, {
-                    '2': validatePage2(state.problemURL, state.probOnWebOrApp, newBrowserSelection, newBrowserDetail)
-                })
-            });
+            return updateValidatedPages(Object.assign({}, state, {
+                browserSelection: new InputData(action.data, true),
+                browserDetail: action.data == "Other" ? state.browserDetail : new InputData(undefined, false) // Or maybe it can be cleared not immediately, only after a page navigation.
+            }))
         }
         case "UPDATE_BROWSER_DETAIL": {
-            let newBrowserDetail = new InputData(action.data, action.data.length > 0);
-            return Object.assign({}, state, {
-                browserDetail: newBrowserDetail,
-                completedPages: Object.assign([], state.completedPages, {
-                    '2': validatePage2(state.problemURL, state.probOnWebOrApp, state.browserSelection, newBrowserDetail)
-                })
-            });
+            return updateValidatedPages(Object.assign({}, state, {
+                browserDetail: new InputData(action.data, action.data.length > 0)
+            }), 2)
         }
         case "UPDATE_PROBLEM_URL": {
-            let newProblemURL = new InputData(action.data, state.probOnWebOrApp=="web" ? validateURL(action.data) : validatePlayStoreURL(action.data));
-            return Object.assign({}, state, {
-                problemURL: newProblemURL,
-                completedPages: Object.assign([], state.completedPages, {
-                    '2': validatePage2(newProblemURL, state.probOnWebOrApp, state.browserSelection, state.browserDetail)
-                })
-            });
+            return updateValidatedPages(Object.assign({}, state, {
+                problemURL: new InputData(action.data, state.probOnWebOrApp=="web" ? validateURL(action.data) : validatePlayStoreURL(action.data)),
+            }), 2)
         }
         case "UPDATE_ENABLED_FILTERS": {
             return Object.assign({}, state, {
@@ -212,16 +306,18 @@ const reducer = function(state, action) {
             });
         }
         case "UPDATE_SCREENSHOT_URLS": {
-            return Object.assign({}, state, {
-                screenshotURLs: action.data,
-                completedPages: Object.assign([], state.completedPages, {
-                    '4': action.data.length > 0
-                })
-            });
+            return updateValidatedPages(Object.assign({}, state, {
+                screenshotURLs: action.data
+            }), 4)
         }
         case "UPDATE_COMMENTS": {
             return Object.assign({}, state, {
                 comments: new InputData(action.data, true)
+            });
+        }
+        case "UPDATE_CAPTCHA_RESPONSE": {
+            return Object.assign({}, state, {
+                captchaResponse: new InputData(action.data, true)
             });
         }
         default:
@@ -229,4 +325,4 @@ const reducer = function(state, action) {
     }
 };
 
-export default createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+export default createStore(reducer, process.env.NODE_ENV === 'production' ? undefined : window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
