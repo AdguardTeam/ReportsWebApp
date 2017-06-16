@@ -24,7 +24,7 @@ function ProbURL(props) {
                 <div>
                     <RadioInput value="web" labelText="Browser" checked={webOrApp == "web"} onChangeHandler={webOrAppChange}/>
                     <RadioInput value="app" labelText="Google Play app" checked={webOrApp == "app"} onChangeHandler={webOrAppChange}/>
-                    <p className="text">If you encountered the problem anywhere else, please contact our tech support: <a className="link" href="mailto:support@adguard.com">support@adguard.com</a></p>
+                    <div className="text">If you encountered the problem anywhere else, please contact our tech support: <a className="link" href="mailto:support@adguard.com">support@adguard.com</a></div>
                 </div>
             }
             { webOrApp == "web" && <WebDetails /> }
@@ -66,9 +66,9 @@ function WebDetails(props) {
             {
                 props.browserSelection.value && (props.browserSelection.value != "Other" || props.browserDetail.validity) &&
                 <div>
-                    <p className="text">Please enter the full URL of the web page you had encountered the problem on:</p>
+                    <div className="text">Please enter the full URL of the web page you had encountered the problem on:</div>
                     <TextInput {...props.problemURL} placeholder="Enter page URL here..." onChangeHandler={problemURLChange}/>
-                    <p className="text">Is any additional information required to reproduce the problem? (e.g. login/password etc.) Please include it here, <strong>it will remain secure and will not be shown publicly</strong>.</p>
+                    <div className="text">Is any additional information required to reproduce the problem? (e.g. login/password etc.) Please include it here, <span className="text text--strong">it will remain secure and will not be shown publicly</span>.</div>
                     <RelatedIssues />
                 </div>
             }
@@ -86,9 +86,9 @@ WebDetails = connect((state) => ({
 function AppDetails(props) {
     return (
         <div>
-            <p className="text">Please enter the full link to the Google Play app you had encountered the problem in. To do so, open the app in Google Play, scroll down, tap on 'Share' button and choose 'Copy to clipboard'. Then paste to the text field below.</p>
+            <div className="text">Please enter the full link to the Google Play app you had encountered the problem in. To do so, open the app in Google Play, scroll down, tap on 'Share' button and choose 'Copy to clipboard'. Then paste to the text field below.</div>
             <TextInput {...props.problemURL} placeholder="Enter Google Play app URL here..." onChangeHandler={problemURLChange}/>
-            <p className = "text">Is any additional information required to reproduce the problem? (e.g. login/password etc.) Please include it here, <strong>it will remain secure and will not be shown publicly</strong></p>
+            <div className = "text">Is any additional information required to reproduce the problem? (e.g. login/password etc.) Please include it here, <span className="text text--strong">it will remain secure and will not be shown publicly</span></div>
         </div>
     )
 }
@@ -145,8 +145,8 @@ class RelatedIssues extends React.Component {
                     <div onClick={this.onClick.bind(this, el.url)} key={el.url}>
                         <div className={el.status}/>
                         <div>
-                            <p><span>{el.title}</span><span>{el.date}</span></p>
-                            <p>{el.desc}</p>
+                            <div><span>{el.title}</span><span>{el.date}</span></div>
+                            <div>{el.desc}</div>
                         </div>
                     </div>
                 )) }

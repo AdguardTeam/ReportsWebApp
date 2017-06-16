@@ -68,7 +68,7 @@ export class RadioInputGroup extends React.Component {
     render() {
             return (
             <div className="row row--radio">
-                <p className="text">{this.props.text}</p>
+                <div className="text">{this.props.text}</div>
                 <div>
                     {
                         this.props.options.map((option, index) => <RadioInput key={index} value={option.value} labelText={option.label} name={this.props.name} checked={this.props.checkedValue==option.value} onChangeHandler={this.props.onChangeHandler} />)

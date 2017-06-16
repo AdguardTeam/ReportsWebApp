@@ -92,6 +92,12 @@ body {
     font-weight: 600;
 }
 
+.text--strong {
+    display: inline;
+    margin: 0;
+    font-weight: 700;
+}
+
 .link {
     padding: 0 2px;
     color: #66b574;
@@ -101,6 +107,26 @@ body {
 .link:hover,
 .link:focus {
     text-decoration: none;
+}
+
+.list {
+    margin: 10px 0;
+    padding-left: 40px;
+    counter-reset: list;
+}
+
+.list__item {
+    position: relative;
+}
+
+.list__item:before {
+    counter-increment: list;
+    content: counter(list);
+    position: absolute;
+    top: 3px;
+    left: -15px;
+    margin-right: 10px;
+    font-size: 1.4rem;
 }
 
 /* Buttons */
@@ -172,6 +198,15 @@ body {
 .input:focus {
     outline: none;
     border-color: #66b574;
+}
+
+.input:disabled {
+    border-color: #ccc;
+    background-color: #eee;
+}
+
+.input--empty {
+    border-color: #ccc;
 }
 
 .input--valid {
@@ -428,6 +463,7 @@ body {
 }
 
 /*Progress bar*/
+
 .progress {
     margin-top: 25px;
     text-align: center;
@@ -482,6 +518,6 @@ body {
 }
 
 .captcha {
-    margin: 25px auto 0;
     max-width: 305px;
+    margin: 25px auto 0;
 }

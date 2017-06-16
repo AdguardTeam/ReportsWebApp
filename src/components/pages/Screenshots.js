@@ -35,19 +35,23 @@ function Screenshots(props) {
     return (
         <div>
             <h1 className="title">Submit a screenshot</h1>
-            <p className = "text">Please take a screenshot (or screenshots, if needed) of the problem and upload it to any cloud service.</p>
-            <p className = "text">If you are unsure of how to do it, read our [URL]manual[/URL].</p>
-            <p className = "text">When taking the screenshot(s), please keep in mind following requirements:</p>
-            <ol>
-                <li><p>If it is unclear from the screenshot what the problem is, highlight it with an arrow/frame/etc;</p></li>
-                <li><p>The full browser window should be visible;</p></li>
+            <div className="text">Please take a screenshot (or screenshots, if needed) of the problem and upload it to any cloud service.</div>
+            <div className="text">If you are unsure of how to do it, read our <a href="https://www.take-a-screenshot.org/" className="link">manual</a>.</div>
+            <div className="text">When taking the screenshot(s), please keep in mind following requirements:</div>
+            <div className="list list--ordered">
+                <div className="list__item">
+                    <div className="text">If it is unclear from the screenshot what the problem is, highlight it with an arrow/frame/etc;</div>
+                </div>
+                <div className="list__item">
+                    <div className="text">The full browser window should be visible;</div>
+                </div>
                 { 
                     (props.productType == "And" || props.productType=="iOS") && 
-                    <li>
-                        <p class = "text" >Please take a 'long' screenshot ([URL]what is 'long' screenshot?[/URL])</p>
-                    </li>
+                    <div className="list__item">
+                        <div className="text">Please take a "long" screenshot (<a href="http://phandroid.com/2016/07/13/scrolling-screenshots-android/" className="link">what is "long" screenshot?</a>)</div>
+                    </div>
                 }
-            </ol>
+            </div>
             <ListSelection
                 dataArray={props.screenshotURLs}
                 mapDataToInputProps={() =>{} }

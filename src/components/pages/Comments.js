@@ -11,7 +11,7 @@ function Comments(props) {
     return (
         <div>
             <h1 className="title">Add your comment</h1>
-            <p className="text">This step is optional. Type in the text box below any information that you think is necessary for the developers to know.</p>
+            <div className="text">This step is optional. Type in the text box below any information that you think is necessary for the developers to know.</div>
             <textarea className="input input--textarea" value={props.comments.value} onChange={onTextareaChange} placeholder = "Enter any additional information here" rows={5}/>
         </div>
     )
