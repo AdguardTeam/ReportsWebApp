@@ -73,7 +73,7 @@ export const DNS_OPTIONS = [
 
 export const browserOptions = [
     { value: "Chrome", label: "Chrome" },
-    { value: "FireFox", label: "FireFox" },
+    { value: "Firefox", label: "Firefox" },
     { value: "Opera", label: "Opera" },
     { value: "Opera 40+", label: "Opera 40+" },
     { value: "Safari", label: "Safari" },
