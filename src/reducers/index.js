@@ -256,7 +256,7 @@ const reducer = function(state, action) {
         }
         case "UPDATE_ANDROID_FILTERING_METHOD": {
             return updateValidatedPages(Object.assign({}, state, {
-                androidFilteringMethod: new InputData(action.data, false)
+                androidFilteringMethod: new InputData(action.data, true)
             }), 1);
         }
         case "UPDATE_IOS_SYSTEM_WIDE_FILTERING": {
