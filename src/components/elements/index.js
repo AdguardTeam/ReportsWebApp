@@ -16,20 +16,20 @@ export class TextInput extends React.Component {
         });
     }
     render() {
-        let classStr = "form-group"; // To be used on something else..
+        let classStr = "input"; // To be used on something else..
         if(this.state.value === '') {
-            classStr += " is-empty"; 
+            classStr += " input--empty";
         }
         else {
             if(this.props.validity) {
-                classStr += " is-valid";
+                classStr += " input--valid";
             }
             else {
-                classStr += " is-invalid";
+                classStr += " input--invalid";
             }
         }
         return (
-            <div>
+            <div className="input-wrapper">
                 <input type="text" className={classStr} id={this.props.id} placeholder={this.props.placeholder} onChange={this._onChange} value={this.state.value} disabled={this.props.disabled} />
             </div>
         );
@@ -45,9 +45,9 @@ export class RadioInput extends React.Component {
     }
     render() {
         return (
-            <label>
-                <input type="radio" value={this.props.value} autoComplete="off" checked={this.props.checked} onChange={this._onChange.bind(this, this.props.name)}/>
-                {this.props.labelText}
+            <label className="radio">
+                <input className="radio__input" type="radio" value={this.props.value} autoComplete="off" checked={this.props.checked} onChange={this._onChange.bind(this, this.props.name)}/>
+                <span className="radio__text">{this.props.labelText}</span>
             </label>
         )
     }
@@ -67,9 +67,9 @@ export class RadioInputGroup extends React.Component {
     }
     render() {
             return (
-            <div className="row">
-                <p className="help-block" style={{'float': 'left'}}>{this.props.text}</p>
-                <div style={{ float: 'right' }}>
+            <div className="row row--radio">
+                <div className="text">{this.props.text}</div>
+                <div>
                     {
                         this.props.options.map((option, index) => <RadioInput key={index} value={option.value} labelText={option.label} name={this.props.name} checked={this.props.checkedValue==option.value} onChangeHandler={this.props.onChangeHandler} />)
                     }

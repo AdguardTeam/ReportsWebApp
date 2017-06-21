@@ -22,10 +22,10 @@ function ProdType(props) {
     };
     return (
         <div>
-            <h1>What product type do you use?</h1>
+            <h1 className="title">What product type do you use?</h1>
             <Select
                 name="ProdType"
-                className="form-group"
+                className="select"
                 placeholder="Adguard product type"
                 value={props.productType.value}
                 options={productTypeOptions}

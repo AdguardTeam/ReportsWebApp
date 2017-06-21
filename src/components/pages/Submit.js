@@ -23,79 +23,78 @@ function SubmitAndCaptcha(props) {
 
     return (
         <div>
-            <h1>Check the information</h1>
-            <table className="summary">
-                <tbody>
-                    <tr>
-                        <th>
-                            Adguard Product:
-                        </th>
-                        <td>
-                            { prodName + " " + props.productVersion.value + " version" }
-                        </td>
-                    </tr>
-                    { props.isProbOnWebOrApp == 'web' && (
-                        <tr>
-                            <th>
-                                Browser:
-                            </th>
-                            <td>
-                                {
-                                    props.browserSelection == 'Other' ? props.browserDetail.value : props.browserSelection.value
-                                }
-                                {
-                                    props.isDataCompressionEnabled === true && ' with data compression enabled'
-                                }
-                            </td>
-                        </tr>
-                    ) }
-                    <tr>
-                        <th>
-                            { props.isProbOnWebOrApp == 'web' ? "Problem URL" : "Problem App" }
-                        </th>
-                        <td>
-                            { props.problemURL.value }
-                        </td>
+            <h1 className="title">Check the information</h1>
 
-                    </tr>
-                    <tr>
-                        <th>
-                            Problem type:
-                        </th>
-                        <td>
-                            { props.problemType.value }
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Filters:
-                        </th>
-                        <td>
-                            {props.selectedFilters.toString()}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Screenshots:
-                        </th>
-                        <td>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Comments:
-                        </th>
-                        <td>
-                            {props.comments.value}
-                        </td>
-                    </tr>                    
-                </tbody>
-            </table>
-            <ReCAPTCHA
-                ref={e => recaptchaInstance = e}
-                sitekey={sitekey}
-                onChange={onChange}
-            />
+            <div className="summary">
+                <div className="summary__row">
+                    <div className="summary__cell">
+                        Adguard Product:
+                    </div>
+                    <div className="summary__cell">
+                        { prodName + " " + props.productVersion.value + " version" }
+                    </div>
+                </div>
+                <div className="summary__row">
+                    <div className="summary__cell">
+                        Browser:
+                    </div>
+                    <div className="summary__cell">
+                        {
+                            props.browserSelection == 'Other' ? props.browserDetail.value : props.browserSelection.value
+                        }
+                        {
+                            props.isDataCompressionEnabled === true && ' with data compression enabled'
+                        }
+                    </div>
+                </div>
+                <div className="summary__row">
+                    <div className="summary__cell">
+                        { props.isProbOnWebOrApp == 'web' ? "Problem URL" : "Problem App" }
+                    </div>
+                    <div className="summary__cell">
+                        { props.problemURL.value }
+                    </div>
+                </div>
+                <div className="summary__row">
+                    <div className="summary__cell">
+                        Problem type:
+                    </div>
+                    <div className="summary__cell">
+                        { props.problemType.value }
+                    </div>
+                </div>
+                <div className="summary__row">
+                    <div className="summary__cell">
+                        Filters:
+                    </div>
+                    <div className="summary__cell">
+                        {props.selectedFilters.toString()}
+                    </div>
+                </div>
+                <div className="summary__row">
+                    <div className="summary__cell">
+                        Screenshots:
+                    </div>
+                    <div className="summary__cell">
+                    </div>
+                </div>
+                <div className="summary__row">
+                    <div className="summary__cell">
+                        Comments:
+                    </div>
+                    <div className="summary__cell">
+                        {props.comments.value}
+                    </div>
+                </div>
+            </div>
+
+            <div className="captcha">
+                <ReCAPTCHA
+                    ref={e => recaptchaInstance = e}
+                    sitekey={sitekey}
+                    onChange={onChange}
+                />
+            </div>
         </div>
     )
 }

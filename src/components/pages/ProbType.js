@@ -18,7 +18,7 @@ function ProbType(props) {
         let data = event && typeof event.value == 'string' ? event.value : null;
         problemTypeChange(data);
     };
-    
+
     let SpecificQuestions;
     switch(props.productType.value) {
         case "Win":
@@ -36,15 +36,15 @@ function ProbType(props) {
 
     return (
         <div>
-            <h1>What type of problem have you encountered?</h1>
+            <h1 className="title">What type of problem have you encountered?</h1>
             <Select
                 name="ProbType"
-                className="form-group"
+                className="select"
                 value={props.problemType.value}
                 options={problemTypeOptions}
                 onChange={onProbTypeChange}
             />
-            <p className="help-block">If the problem does not fall under any category that is listed here, please contact our tech support: support@adguard.com</p>
+            <div className="text">If the problem does not fall under any category that is listed here, please contact our tech support: <a className="link" href="mailto:support@adguard.com">support@adguard.com</a></div>
             <Checklist />
             { props.isPlatformSpecificQuestionsVisible && (
                 props.productType.value == "Win" ? <WinSpecific/> : props.productType.value == "And" ? <AndSpecific/> : props.productType.value == "iOS" ? <IOSSpecific/> : null )}
@@ -85,7 +85,7 @@ function Checklist(props) {
                     )
                 }
             ) }
-            { props.isResolvedTextVisible && <p className = "help-block">Great! Thank you for using Adguard!</p> }
+            { props.isResolvedTextVisible && <div className = "text text--bold">Great! Thank you for using Adguard!</div> }
         </div>
     )
 }
@@ -118,21 +118,21 @@ function WinSpecific(props) {
         <div>
             <RadioInputGroup text="Do you have WFP driver enabled in Adguard network settings?" name="WFP" options={YN} checkedValue={props.winWFPEnabled.value} onChangeHandler={onWFPInputChange} />
             <RadioInputGroup text="Do you have Stealth Mode enabled?" name="Stealth" options={YN} checkedValue={props.winStealthEnabled.value} onChangeHandler={onStealthInputChange} />
-            <p className="help-block">Please mark any of these options if you have them enabled in Stealth Mode</p>
+            <div className="text text--subtitle">Please mark any of these options if you have them enabled in Stealth Mode</div>
             { STEALTH_OPTIONS.map((option, index) => {
                 return (
-                    <div key={index}>
-                        <p>{option.label}</p>
-                        <div>
-                            <input type="checkbox" checked={props.winStealthOptions[index].enabled} onChange={onStealthOptionInputChange.bind(null, index)}/>
-                        </div>
+                    <div key={index} className="row row--checkbox">
+                        <label className="checkbox">
+                            <input className="checkbox__input" type="checkbox" checked={props.winStealthOptions[index].enabled} onChange={onStealthOptionInputChange.bind(null, index)}/>
+                            <span className="checkbox__text">{option.label}</span>
+                        </label>
                         {
-                            option.type !== "Bool" && 
-                            
+                            option.type !== "Bool" &&
+
                             <TextInput {...props.winStealthOptions[index].detail}
-                                placeholder=""
-                                onChangeHandler={onStealthOptionDetailInputChange.bind(null, index)}
-                                disabled={!props.winStealthOptions[index].enabled}
+                                       placeholder=""
+                                       onChangeHandler={onStealthOptionDetailInputChange.bind(null, index)}
+                                       disabled={!props.winStealthOptions[index].enabled}
                             />
                         }
                     </div>

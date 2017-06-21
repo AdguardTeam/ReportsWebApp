@@ -31,10 +31,10 @@ function NavButtons(props) {
         submit();
     }
     return (
-        <div>
-            { props.currentPage > PAGE_START && <button type="button" name="prev" onClick={onNavBtnClick}>Prev</button> }
-            { props.currentPage < PAGE_SUBMIT && <button type="button" name="next" disabled={!completed} onClick={onNavBtnClick}>Next</button> }
-            { props.currentPage == PAGE_SUBMIT && <button type="button" name="submit" disabled={props.captchaResponse.validity} onClick={onSubmitBtnClick}>Submit</button> }
+        <div className="buttons">
+            { props.currentPage > PAGE_START && <button type="button" className="button button--green" name="prev" onClick={onNavBtnClick}>Prev</button> }
+            { props.currentPage < PAGE_SUBMIT && <button type="button" className="button button--green" name="next" disabled={!completed} onClick={onNavBtnClick}>Next</button> }
+            { props.currentPage == PAGE_SUBMIT && <button type="button" className="button button--green" name="submit" disabled={props.captchaResponse.validity} onClick={onSubmitBtnClick}>Submit</button> }
         </div>
     );
 }

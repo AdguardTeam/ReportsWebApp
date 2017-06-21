@@ -1,4 +1,20 @@
 @font-face {
-        font-family:'gotham_proregular';
-        src: url(gothaproreg-webfont.woff) format("woff");
+    font-family: "Gotham Pro";
+    src: url("gothaproreg-webfont.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Gotham Pro";
+    src: url("gothapromed-webfont.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Gotham Pro";
+    src: url("gothaprobol-webfont.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
 }

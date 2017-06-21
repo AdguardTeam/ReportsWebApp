@@ -34,20 +34,24 @@ function Screenshots(props) {
 
     return (
         <div>
-            <h1>Submit a screenshot</h1>
-            <p className = "help-block">Please take a screenshot (or screenshots, if needed) of the problem and upload it to any cloud service.</p>
-            <p className = "help-block">If you are unsure of how to do it, read our [URL]manual[/URL].</p>
-            <p className = "help-block text-left">When taking the screenshot(s), please keep in mind following requirements:</p>
-            <ol>
-                <li><p>If it is unclear from the screenshot what the problem is, highlight it with an arrow/frame/etc;</p></li>
-                <li><p>The full browser window should be visible;</p></li>
+            <h1 className="title">Submit a screenshot</h1>
+            <div className="text">Please take a screenshot (or screenshots, if needed) of the problem and upload it to any cloud service.</div>
+            <div className="text">If you are unsure of how to do it, read our <a href="https://www.take-a-screenshot.org/" className="link">manual</a>.</div>
+            <div className="text">When taking the screenshot(s), please keep in mind following requirements:</div>
+            <div className="list list--ordered">
+                <div className="list__item">
+                    <div className="text">If it is unclear from the screenshot what the problem is, highlight it with an arrow/frame/etc;</div>
+                </div>
+                <div className="list__item">
+                    <div className="text">The full browser window should be visible;</div>
+                </div>
                 { 
                     (props.productType == "And" || props.productType=="iOS") && 
-                    <li>
-                        <p class = "text-left" >Please take a 'long' screenshot ([URL]what is 'long' screenshot?[/URL])</p>
-                    </li>
+                    <div className="list__item">
+                        <div className="text">Please take a "long" screenshot (<a href="http://phandroid.com/2016/07/13/scrolling-screenshots-android/" className="link">what is "long" screenshot?</a>)</div>
+                    </div>
                 }
-            </ol>
+            </div>
             <ListSelection
                 dataArray={props.screenshotURLs}
                 mapDataToInputProps={() =>{} }
@@ -59,7 +63,7 @@ function Screenshots(props) {
                             ...props.screenshotURLCurrent
                     }}
                     onAdd={onAdd} />
-                <ImageBox width="100px" height="100px"/> {/* say 100 px for now...*/}
+                <ImageBox/> {/* say 100 px for now...*/}
             </ListSelection>
         </div>
     )
@@ -75,9 +79,9 @@ export default Screenshots = connect((state) => ({
 // To be elaborated...
 function ImageBox(props) {
     return (
-        <div style={{display: 'inline'}}>
-            <img src={props.src} width={props.width} height={props.height}/>
-            <div className="close-btn" onClick={props.onDelete}>X</div>
+        <div className="screenshot">
+            <img className="screenshot__image" src={props.src}/>
+            <div className="screenshot__remove" onClick={props.onDelete}>X</div>
         </div>
     );
 }
@@ -86,9 +90,9 @@ function ImageBox(props) {
  */
 function InputBoxWithAddButton(props) {
     return (
-        <div>
+        <div className="form form--file">
             <TextInput placeholder="Enter screenshot URL..." {...props.inputProps}/>
-            <button type="button" onClick={props.onAdd} disabled={!props.inputProps.validity}>Add</button>
+            <button className="button button--green button--file" type="button" onClick={props.onAdd} disabled={!props.inputProps.validity}>Add</button>
         </div>
     );
 }

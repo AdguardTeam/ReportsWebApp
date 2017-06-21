@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 
 function ProgressBar(props) {
     return (
-        <div>
-            <div className="progress">
-                <div className="progress-bar" role="progressbar" style={{'width': String(props.currentPage / 7 * 100) + '%'}}/>
+        <div className="progress">
+            <div className="progress__step">
+                {"Step " + (props.currentPage + 1) + "/8"}
             </div>
-            <div>
-                <span>{"Step " + (props.currentPage + 1) + "/8"}</span>
+            <div className="progress__wrapper">
+                <div className="progress__inner" role="progressbar" style={{'width': String(props.currentPage / 7 * 100) + '%'}}/>
             </div>
         </div>
 
