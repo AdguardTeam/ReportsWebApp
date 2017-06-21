@@ -17,7 +17,7 @@ export class TextInput extends React.Component {
     }
     render() {
         let classStr = "input"; // To be used on something else..
-        if(this.state.value === undefined) {
+        if(this.state.value === '') {
             classStr += " input--empty";
         }
         else {

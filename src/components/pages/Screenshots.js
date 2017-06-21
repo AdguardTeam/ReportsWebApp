@@ -91,8 +91,8 @@ function ImageBox(props) {
 function InputBoxWithAddButton(props) {
     return (
         <div className="form form--file">
-            <TextInput placeholder="Enter screenshot URL" {...props.inputProps}/>
-            <button className="button button--green button--file" type="button" onClick={props.onAdd}>Add</button>
+            <TextInput placeholder="Enter screenshot URL..." {...props.inputProps}/>
+            <button className="button button--green button--file" type="button" onClick={props.onAdd} disabled={!props.inputProps.validity}>Add</button>
         </div>
     );
 }

@@ -35,7 +35,8 @@ function ProbURL(props) {
 
 function WebDetails(props) {
     const onBrowserSelectionChange = (event) => {
-        browserSelectionChange(event.value);
+        let data = event && typeof event.value == 'string' ? event.value : null;
+        browserSelectionChange(data);
     };
 
     return (

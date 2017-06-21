@@ -13,7 +13,9 @@ import { productTypeOptions } from '../../constants/input-options.js';
 
 function ProdType(props) {
     const onProdTypeChange = (event) => {
-        productTypeChange(event.value);
+        // react-select passes `null` to onChange props when the close button at the input field is clicked.
+        let data = event && typeof event.value == 'string' ? event.value : null;
+        productTypeChange(data);
     };
     const onProdVerChange = (value) => {
         productVersionChange(value);
