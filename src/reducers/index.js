@@ -164,7 +164,7 @@ const reducer = function(state, action) {
         case "UPDATE_PRODUCT_TYPE": {
             if(state.productType.value !== action.data) {
                 let newProbOnWebOrApp = action.data == "And" ? null : "web";
-                let newProductType = new InputData(action.data, true);
+                let newProductType = new InputData(action.data, action.data !== null ? true : false);
                 return updateValidatedPages(Object.assign({}, state, {
                     productType: newProductType,
                     checklistAnswers: INITIAL_STATE.checklistAnswers,
@@ -184,7 +184,7 @@ const reducer = function(state, action) {
         case "UPDATE_PROBLEM_TYPE": {
             if(state.problemType.value !== action.data) {
                 return updateValidatedPages(Object.assign({}, state, {
-                    problemType: new InputData(action.data, true),
+                    problemType: new InputData(action.data, action.data !== null ? true : false),
                     checklistAnswers: INITIAL_STATE.checklistAnswers,
                     isPlatformSpecificQuestionsVisible: false
                 }), 1, 2);
@@ -281,7 +281,7 @@ const reducer = function(state, action) {
         }
         case "UPDATE_BROWSER_SELECTION": {
             return updateValidatedPages(Object.assign({}, state, {
-                browserSelection: new InputData(action.data, true),
+                browserSelection: new InputData(action.data, action.data !== null ? true : false),
                 browserDetail: action.data == "Other" ? state.browserDetail : new InputData(undefined, false) // Or maybe it can be cleared not immediately, only after a page navigation.
             }))
         }

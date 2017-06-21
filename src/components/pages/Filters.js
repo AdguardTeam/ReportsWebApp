@@ -28,11 +28,13 @@ class Filters extends React.Component {
         return { options };
     }
     onSelectChange(event) {
-        let newSelection = insVal(this.props.selectedFilters, event.value);
-        filtersUpdate(newSelection);
-        this.setState({
-            current: event.value
-        });
+        if(event) {
+            let newSelection = insVal(this.props.selectedFilters, event.value);
+            filtersUpdate(newSelection);
+            this.setState({
+                current: event.value
+            });
+        }
     }
     mapDataToListPropsArray(selected) {
         let self = this;

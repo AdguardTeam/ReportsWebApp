@@ -15,7 +15,8 @@ Array.prototype.findIndex||Object.defineProperty(Array.prototype,"findIndex",{va
 
 function ProbType(props) {
     const onProbTypeChange = (event) => {
-        problemTypeChange(event.value);
+        let data = event && typeof event.value == 'string' ? event.value : null;
+        problemTypeChange(data);
     };
     
     let SpecificQuestions;

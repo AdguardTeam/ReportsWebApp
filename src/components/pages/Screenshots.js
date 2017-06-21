@@ -88,7 +88,7 @@ function InputBoxWithAddButton(props) {
     return (
         <div>
             <TextInput placeholder="Enter screenshot URL..." {...props.inputProps}/>
-            <button type="button" onClick={props.onAdd}>Add</button>
+            <button type="button" onClick={props.onAdd} disabled={!props.inputProps.validity}>Add</button>
         </div>
     );
 }
