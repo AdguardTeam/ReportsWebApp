@@ -54,8 +54,10 @@ body {
 
 .logo {
     display: block;
-    margin: 30px auto 20px;
+    margin: 0 auto;
+    padding-top: 30px;
     max-width: 120px;
+    height: 57px;
 }
 
 /*Text block*/
@@ -387,12 +389,20 @@ body {
 /*Screenshots*/
 
 .form--file {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
 }
 
 @media (min-width: 768px) {
     .form--file {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
         flex-direction: row;
     }
 }
@@ -403,7 +413,9 @@ body {
 }
 
 .form--file .input-wrapper {
-    width: 100%;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
     margin: 0 0 10px 0;
 }
 
@@ -415,6 +427,7 @@ body {
 
 .form--file .button--file {
     margin: 0;
+    min-width: 100px;
 }
 
 .screenshot {
@@ -511,10 +524,13 @@ body {
 .summary__cell {
     display: table-cell;
     padding: 12px 10px;
+    word-break: break-all;
 }
 
 .summary__cell:first-child {
+    min-width: 140px;
     font-weight: 600;
+    word-break: normal;
 }
 
 .captcha {
