@@ -120,7 +120,7 @@ class RelatedIssues extends React.Component {
         let domain = extractDomain(url);
 
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', '/search.json');
+        xhr.open('POST', window.search_url || '/search.json');
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.onload = () => {
             if (xhr.status >= 200 && xhr.status < 300) {
