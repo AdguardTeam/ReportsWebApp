@@ -94,7 +94,7 @@ function submit() {
     let state = store.getState();
 
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', '/submit.json');
+    xhr.open('POST', window.report_url || '/submit.json');
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
