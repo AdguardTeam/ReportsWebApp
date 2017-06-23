@@ -95,21 +95,18 @@ function submit() {
 
     let xhr = new XMLHttpRequest();
     xhr.open('POST', window.report_url || '/submit.json');
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
 
         } else { /* some err handling */ }
     };
 
-    let issueData = JSON.stringify({
-        'title': getIssueTitle(state),
-        'body': getIssueBody(state),
-        'label': getLabels(state),
-        'g-recaptcha-response': state.captchaResponse // http://emumba.com/blog/2016-12-07-setting-up-google-recaptcha-in-a-reactjs-app/
-    });
 
-    console.log(JSON.stringify(issueData));
+    let issueData = new FormData();
+
+    issueData.append("url", state.problemURL.value);
+    issueData.append("text", getIssueBody(state));
+    issueData.append("recaptcha", state.captchaResponse);
 
     xhr.onerror = () => { /* some err handling */ };
     xhr.send(issueData);
