@@ -125,6 +125,13 @@ export function browserDetailChange(val) {
     });
 }
 
+export function dataCompEnabledChange(val) {
+    store.dispatch({
+        type: "UPDATE_DATA_COMPRESSION_ENABLED",
+        data: val
+    });
+}
+
 export function problemURLChange(val) {
     store.dispatch({
         type: "UPDATE_PROBLEM_URL",

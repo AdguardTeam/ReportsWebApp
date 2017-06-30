@@ -6,7 +6,7 @@ import 'react-select/dist/react-select.css';
 
 import { TextInput, RadioInput } from '../elements';
 
-import { webOrAppChange, browserSelectionChange, browserDetailChange, problemURLChange } from '../../dispatchers';
+import { webOrAppChange, browserSelectionChange, browserDetailChange, dataCompEnabledChange, problemURLChange } from '../../dispatchers';
 
 import { browserOptions } from '../../constants/input-options.js';
 
@@ -39,6 +39,10 @@ function WebDetails(props) {
         browserSelectionChange(data);
     };
 
+    const onDataCompEnabledChnge = (event) => {
+        dataCompEnabledChange(event.currentTarget.checked);
+    }
+
     return (
         <div>
             <Select
@@ -56,7 +60,11 @@ function WebDetails(props) {
             {
                 props.productType.value == "And" && 
                 <label className="checkbox">
-                    <input type="checkbox" className="checkbox__input"/>
+                    <input type="checkbox"
+                        className="checkbox__input"
+                        checked={props.isDataCompressionEnabled}
+                        onChange={onDataCompEnabledChnge}
+                    />
                     <span className="checkbox__text">
                         Is the data compression in your browser enabled?
                     </span>

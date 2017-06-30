@@ -4,6 +4,7 @@ import { movePage } from '../dispatchers';
 
 import store from '../reducers';
 import { extractDomain } from '../utils/parse-url.js';
+import { STEALTH_OPTIONS } from '../constants/input-options.js';
 
 
 const PAGE_START = 0;
@@ -70,13 +71,53 @@ const getIssueBody = (state) => {
     state.screenshotURLs.forEach((el, index) => {
         buf.push(`[${index}](${el})`);
     })
-    buf.push('');
+    buf.push("");
 
     buf.push("***System configuration***");
+    buf.push("");
     buf.push("Information | value");
     buf.push("--- | ---");
+    buf.push("Platform: | " + state.productType.value);
     buf.push("Adguard version: | " + state.productVersion.value);
-    buf.push("Browser: | " + ( state.browserSelection.value == "Other" ? state.browserDetail.value : state.browserSelection.value ));
+
+    if(state.probOnWebOrApp == 'web') {
+        let browserDetail = state.browserSelection.value == "Other" ? state.browserDetail.value : state.browserSelection.value;
+        if(state.productType.value == "And" && state.isDataCompressionEnabled) {
+            browserDetail += " (with data compression enabled)";
+        }
+        buf.push("Browser: | " + browserDetail);
+    }
+
+    if(state.productType.value == 'Win') {
+        buf.push("Adguard driver: | " + ( state.winWFPEnabled.value ? 'WFP' : 'TDI' ));
+        if(state.winStealthEnabled.value) {
+            let stealthOptions = [];
+            STEALTH_OPTIONS.forEach((el, index) => {
+                let option = state.winStealthOptions[index];
+                let str = '';
+                if(option.enabled) {
+                    str += el.label;
+                    if(el.type != "Bool") {
+                        str += `(${option.detail.value})`;
+                    }
+                    stealthOptions.push(str);
+                }
+            });
+            buf.push("Stealth mode options: | " + stealthOptions.join(','));
+        }
+    }
+
+    if(state.productType.value == 'And') {
+        buf.push("Adguard mode: | " + state.androidFilteringMode.value);
+        buf.push("Filtering quality: | " + state.androidFilteringMethod.value);
+    }
+
+    if(state.productType.value == 'iOS') {
+        buf.push("System wide filtering: | " + ( state.iosSystemWideFilteringEnabled.value ? 'enabled' : 'disabled' ));
+        buf.push("Simplified filters: | " + ( state.iosSimplifiedFiltersEnabled.value ? 'enabled' : 'disabled' ));
+        buf.push("Adguard DNS: | " + state.iosDNS.value);
+    }
+
     buf.push("Filters: | " + state.selectedFilters.toString());
 
     return buf.join(NEW_LINE);
@@ -106,7 +147,8 @@ function submit() {
 
     issueData.append("url", state.problemURL.value);
     issueData.append("text", getIssueBody(state));
-    issueData.append("recaptcha", state.captchaResponse);
+    issueData.append("label", state.problemType.value);
+    issueData.append("recaptcha", state.captchaResponse.value);
 
     xhr.onerror = () => { /* some err handling */ };
     xhr.send(issueData);

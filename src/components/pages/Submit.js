@@ -15,7 +15,7 @@ function SubmitAndCaptcha(props) {
     let prodName = productTypeOptions.filter((el) => (el.value == props.productType.value))[0].label;
 
     let recaptchaInstance;
-    const sitekey = 'xxxxxxx';
+    const sitekey = window.recaptcha_key || '';
 
     const onChange = (response) => {
         receivedCaptchaResponse(response);
