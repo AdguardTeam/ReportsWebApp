@@ -85,7 +85,7 @@ const INITIAL_STATE = (function() {
 
     _state.problemURL = new InputData('', false);
 
-    _state.isDataCompressionEnabled = undefined;
+    _state.isDataCompressionEnabled = false;
 
     /* Page 4 */
     _state.selectedFilters = [];
@@ -289,6 +289,11 @@ const reducer = function(state, action) {
             return updateValidatedPages(Object.assign({}, state, {
                 browserDetail: new InputData(action.data, action.data.length > 0)
             }), 2)
+        }
+        case "UPDATE_DATA_COMPRESSION_ENABLED": {
+            return Object.assign({}, state, {
+                isDataCompressionEnabled: action.data
+            });
         }
         case "UPDATE_PROBLEM_URL": {
             return updateValidatedPages(Object.assign({}, state, {
