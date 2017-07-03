@@ -22,19 +22,13 @@ function NavButtons(props) {
         }
     };
     const onSubmitBtnClick = () => {
-        /*
-        TEMPORARILY DISABLED FOR TESTING
-        if (props.captchaResponse.validity) {
             submit();
-        }
-*/
-        submit();
     };
     return (
         <div className="buttons">
             { props.currentPage > PAGE_START && <button type="button" className="button button--green" name="prev" onClick={onNavBtnClick}>Prev</button> }
             { props.currentPage < PAGE_SUBMIT && <button type="button" className="button button--green" name="next" disabled={!completed} onClick={onNavBtnClick}>Next</button> }
-            { props.currentPage == PAGE_SUBMIT && <button type="button" className="button button--green" name="submit" disabled={props.captchaResponse.validity} onClick={onSubmitBtnClick}>Submit</button> }
+            { props.currentPage == PAGE_SUBMIT && <button type="button" className="button button--green" name="submit" disabled={process.env.NODE_ENV === 'production' ? !props.captchaResponse.validity : false} onClick={onSubmitBtnClick}>Submit</button> }
         </div>
     );
 }
