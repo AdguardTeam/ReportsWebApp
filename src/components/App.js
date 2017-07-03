@@ -1,3 +1,4 @@
+import React from 'react';
 import NavButtons from './NavButtons.js';
 import ProgressBar from './ProgressBar.js';
 
