@@ -10,7 +10,7 @@ import { problemTypeChange, checklistAnswerChange } from '../../dispatchers';
 
 import { YN, problemTypeOptions, checklists, STEALTH_OPTIONS } from '../../constants/input-options.js';
 
-Array.prototype.findIndex||Object.defineProperty(Array.prototype,"findIndex",{value:function(c,d){if(null==this)throw new TypeError('"this" is null or not defined');var b=Object(this),e=b.length>>>0;if("function"!==typeof c)throw new TypeError("predicate must be a function");for(var a=0;a<e;){if(c.call(d,b[a],a,b))return a;a++}return-1}});
+Array.prototype.findIndex||Object.defineProperty(Array.prototype,'findIndex',{value:function(c,d){if (null==this)throw new TypeError('"this" is null or not defined');var b=Object(this),e=b.length>>>0;if ('function'!==typeof c)throw new TypeError('predicate must be a function');for(var a=0;a<e;){if (c.call(d,b[a],a,b))return a;a++;}return-1;}});
 
 
 function ProbType(props) {
@@ -21,13 +21,13 @@ function ProbType(props) {
 
     let SpecificQuestions;
     switch(props.productType.value) {
-        case "Win":
+        case 'Win':
             SpecificQuestions = WinSpecific;
             break;
-        case "And":
+        case 'And':
             SpecificQuestions = AndSpecific;
             break;
-        case "iOS":
+        case 'iOS':
             SpecificQuestions = IOSSpecific;
             break;
         default:
@@ -47,7 +47,7 @@ function ProbType(props) {
             <div className="text">If the problem does not fall under any category that is listed here, please contact our tech support: <a className="link" href="mailto:support@adguard.com">support@adguard.com</a></div>
             <Checklist />
             { props.isPlatformSpecificQuestionsVisible && (
-                props.productType.value == "Win" ? <WinSpecific/> : props.productType.value == "And" ? <AndSpecific/> : props.productType.value == "iOS" ? <IOSSpecific/> : null )}
+                props.productType.value == 'Win' ? <WinSpecific/> : props.productType.value == 'And' ? <AndSpecific/> : props.productType.value == 'iOS' ? <IOSSpecific/> : null )}
         </div>
     );
 
@@ -70,24 +70,24 @@ function Checklist(props) {
         });
     };
 
-    if(!props.productType.validity || !props.problemType.validity) {
+    if (!props.productType.validity || !props.problemType.validity) {
         return null;
     }
     return (
         <div>
             { checklists.map(
                 (el, index) => {
-                    if(props.checklistAnswers[index] === undefined) {
+                    if (props.checklistAnswers[index] === undefined) {
                         return null;
                     }
                     return (
                         <RadioInputGroup key={index} text={el.label} name={index} options={YN} checkedValue={props.checklistAnswers[index]} onChangeHandler={onChecklistAnswer} />
-                    )
+                    );
                 }
             ) }
             { props.isResolvedTextVisible && <div className = "text text--bold">Great! Thank you for using Adguard!</div> }
         </div>
-    )
+    );
 }
 
 Checklist = connect((state) => ({
@@ -127,19 +127,19 @@ function WinSpecific(props) {
                             <span className="checkbox__text">{option.label}</span>
                         </label>
                         {
-                            option.type !== "Bool" &&
+                            option.type !== 'Bool' &&
 
                             <TextInput {...props.winStealthOptions[index].detail}
-                                       placeholder=""
-                                       onChangeHandler={onStealthOptionDetailInputChange.bind(null, index)}
-                                       disabled={!props.winStealthOptions[index].enabled}
+                                placeholder=""
+                                onChangeHandler={onStealthOptionDetailInputChange.bind(null, index)}
+                                disabled={!props.winStealthOptions[index].enabled}
                             />
                         }
                     </div>
-                )
+                );
             }) }
         </div>
-    )
+    );
 }
 
 WinSpecific = connect((state) => ({
@@ -158,7 +158,7 @@ function AndSpecific(props) {
             <RadioInputGroup text="Do you use VPN or HTTP proxy mode?" name="VPN/proxy" options={VPN_PROXY} checkedValue={props.androidFilteringMode.value} onChangeHandler={androidFilteringModeChange} />
             <RadioInputGroup text="What filtering method do you use?" name="method" options={FILTERING_METHODS} checkedValue={props.androidFilteringMethod.value} onChangeHandler={androidFilteringMethodChange} />
         </div>
-    )
+    );
 }
 
 AndSpecific = connect((state) => ({

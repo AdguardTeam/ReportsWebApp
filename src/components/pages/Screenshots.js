@@ -13,9 +13,9 @@ function Screenshots(props) {
     };
     const mapDataToListPropsArray = (screenshotURLs) => {
         return screenshotURLs.map((el, index) => ({
-                src: el,
-                onDelete: onDelete.bind(this, index),
-                key: el
+            src: el,
+            onDelete: onDelete.bind(this, index),
+            key: el
         }));
     };
     const onDelete = (index) => {
@@ -23,7 +23,7 @@ function Screenshots(props) {
         screenshotsUpdate(newScreenshotURLs);
     };
     const onAdd = (event) => {
-        if(props.screenshotURLCurrent.validity && props.screenshotURLs.indexOf(props.screenshotURLCurrent.value) == -1) {
+        if (props.screenshotURLCurrent.validity && props.screenshotURLs.indexOf(props.screenshotURLCurrent.value) == -1) {
             let newScreenshotURLs = pushVal(props.screenshotURLs, props.screenshotURLCurrent.value);
             screenshotsUpdate(newScreenshotURLs);
         }
@@ -45,8 +45,8 @@ function Screenshots(props) {
                 <div className="list__item">
                     <div className="text">The full browser window should be visible;</div>
                 </div>
-                { 
-                    (props.productType == "And" || props.productType=="iOS") && 
+                {
+                    (props.productType == 'And' || props.productType=='iOS') &&
                     <div className="list__item">
                         <div className="text">Please take a "long" screenshot (<a href="http://phandroid.com/2016/07/13/scrolling-screenshots-android/" className="link">what is "long" screenshot?</a>)</div>
                     </div>
@@ -60,14 +60,14 @@ function Screenshots(props) {
                 <InputBoxWithAddButton
                     inputProps={{
                         onChangeHandler: onInputChange,
-                            ...props.screenshotURLCurrent
+                        ...props.screenshotURLCurrent
                     }}
                     onAdd={onAdd} />
                 <ImageBox/> {/* say 100 px for now...*/}
             </ListSelection>
         </div>
-    )
-    
+    );
+
 }
 
 export default Screenshots = connect((state) => ({

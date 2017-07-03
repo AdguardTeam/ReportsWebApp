@@ -1,6 +1,6 @@
 export const YN = [
-    { value: true, label: "Yes" },
-    { value: false, label: "No" }
+    { value: true, label: 'Yes' },
+    { value: false, label: 'No' }
 ];
 
 export const productTypeOptions = [
@@ -13,73 +13,73 @@ export const productTypeOptions = [
 ];
 
 export const problemTypeOptions = [ // label is how it will be shown in UI, value is the "name" of the corresponding GitHub label names.
-    { value: "Ads", label: "Missed ad" },
-    { value: "Incorrect Blocking", label: "Excessive blocking" },
-    { value: "Social Widget", label: "Social media elements"},
-    { value: "Anti Adblock Script", label: "Anti-adblock script" },
-    { value: "Annoyance", label: "Annoyance" }
+    { value: 'Ads', label: 'Missed ad' },
+    { value: 'Incorrect Blocking', label: 'Excessive blocking' },
+    { value: 'Social Widget', label: 'Social media elements'},
+    { value: 'Anti Adblock Script', label: 'Anti-adblock script' },
+    { value: 'Annoyance', label: 'Annoyance' }
 ];
 
 export const checklists = [
     {
-        label: "Please check Adguard for filter updates. Is the problem still present?",
-        skip: {} 
+        label: 'Please check Adguard for filter updates. Is the problem still present?',
+        skip: {}
     },
     {
-        label: "Please disable User filter. Is the problem still present?",
-        skip: { on_prod: ["Con"] } 
+        label: 'Please disable User filter. Is the problem still present?',
+        skip: { on_prod: ['Con'] }
     },
     {
-        label: "If you have 'Show useful ads' option enabled, please disable it. Is the problem still present?",
-        skip: { except_on_prob: ["Ads","Social Widget","Annoyance"] }
+        label: 'If you have \'Show useful ads\' option enabled, please disable it. Is the problem still present?',
+        skip: { except_on_prob: ['Ads','Social Widget','Annoyance'] }
     },
     {
-        label: "If you don't have HTTPs filtering enabled, please enable it. Is the problem still present?",
-        skip: { on_prod:["iOS","Ext","Con"], except_on_prob: ["Ads","Social Widget","Annoyance"] }
+        label: 'If you don\'t have HTTPs filtering enabled, please enable it. Is the problem still present?',
+        skip: { on_prod:['iOS','Ext','Con'], except_on_prob: ['Ads','Social Widget','Annoyance'] }
     }
 ];
 
 export const STEALTH_OPTIONS = [
-    { label: "Hide your search queries", type: "Bool" },
-    { label: "Send Do-Not-Track header", type: "Bool" },
-    { label: "Remove X-Client-Data header from HTTP requests", type: "Bool" },
-    { label: "Self-destructing first-party cookies", type: "Number" },
-    { label: "Self-destructing third-party cookies", type: "Number" },
-    { label: "Disable cache for third-party requests", type: "Bool" },
-    { label: "Block WebRTC", type: "Bool" },
-    { label: "Block Push API", type: "Bool" },
-    { label: "Block Location API", type: "Bool" },
-    { label: "Hide your Referrer from third-parties", type: "String" },
-    { label: "Hide your User-Agent", type: "String" },
-    { label: "Hide your IP address", type: "String" }
+    { label: 'Hide your search queries', type: 'Bool' },
+    { label: 'Send Do-Not-Track header', type: 'Bool' },
+    { label: 'Remove X-Client-Data header from HTTP requests', type: 'Bool' },
+    { label: 'Self-destructing first-party cookies', type: 'Number' },
+    { label: 'Self-destructing third-party cookies', type: 'Number' },
+    { label: 'Disable cache for third-party requests', type: 'Bool' },
+    { label: 'Block WebRTC', type: 'Bool' },
+    { label: 'Block Push API', type: 'Bool' },
+    { label: 'Block Location API', type: 'Bool' },
+    { label: 'Hide your Referrer from third-parties', type: 'String' },
+    { label: 'Hide your User-Agent', type: 'String' },
+    { label: 'Hide your IP address', type: 'String' }
 ];
 
 export const VPN_PROXY = [
-    { value: "VPN", label: "VPN" },
-    { value: "proxy", label:"proxy" }
+    { value: 'VPN', label: 'VPN' },
+    { value: 'proxy', label:'proxy' }
 ];
 
 export const FILTERING_METHODS = [
-    { value: "High-quality", label: "High-quality" },
-    { value: "High-speed", label: "High-speed" },
-    { value: "Simplified", label: "Simplified" }
+    { value: 'High-quality', label: 'High-quality' },
+    { value: 'High-speed', label: 'High-speed' },
+    { value: 'Simplified', label: 'Simplified' }
 ];
 
 export const DNS_OPTIONS = [
-    { value: "Default", label: "Default" },
-    { value: "Family", label: "Family Protection" },
-    { value: "None", label: "None" }
+    { value: 'Default', label: 'Default' },
+    { value: 'Family', label: 'Family Protection' },
+    { value: 'None', label: 'None' }
 ];
 
 export const browserOptions = [
-    { value: "Chrome", label: "Chrome" },
-    { value: "Firefox", label: "Firefox" },
-    { value: "Opera", label: "Opera" },
-    { value: "Opera 40+", label: "Opera 40+" },
-    { value: "Safari", label: "Safari" },
-    { value: "IE", label: "IE" },
-    { value: "Edge", label: "Edge" },
-    { value: "Other", label: "Other..." }
+    { value: 'Chrome', label: 'Chrome' },
+    { value: 'Firefox', label: 'Firefox' },
+    { value: 'Opera', label: 'Opera' },
+    { value: 'Opera 40+', label: 'Opera 40+' },
+    { value: 'Safari', label: 'Safari' },
+    { value: 'IE', label: 'IE' },
+    { value: 'Edge', label: 'Edge' },
+    { value: 'Other', label: 'Other...' }
 ];
 
 export const filterOptions = [

@@ -5,8 +5,8 @@ import App from './components/App.js';
 import store from './reducers';
 
 ReactDOM.render(
-  <Provider store = {store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+    <Provider store = {store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
 );

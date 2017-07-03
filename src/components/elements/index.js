@@ -16,16 +16,15 @@ export class TextInput extends React.Component {
         });
     }
     render() {
-        let classStr = "input"; // To be used on something else..
-        if(this.state.value === '') {
-            classStr += " input--empty";
-        }
-        else {
-            if(this.props.validity) {
-                classStr += " input--valid";
-            }
-            else {
-                classStr += " input--invalid";
+        let classStr = 'input'; // To be used on something else..
+
+        if (this.state.value === '') {
+            classStr += ' input--empty';
+        } else {
+            if (this.props.validity) {
+                classStr += ' input--valid';
+            } else {
+                classStr += ' input--invalid';
             }
         }
         return (
@@ -49,7 +48,7 @@ export class RadioInput extends React.Component {
                 <input className="radio__input" type="radio" value={this.props.value} autoComplete="off" checked={this.props.checked} onChange={this._onChange.bind(this, this.props.name)}/>
                 <span className="radio__text">{this.props.labelText}</span>
             </label>
-        )
+        );
     }
 }
 
@@ -59,14 +58,14 @@ export class RadioInput extends React.Component {
  * name,
  * options: array of Names.
  * onChangeHandler : called with (event.currentTarget.value, name)
- * checkedValue 
+ * checkedValue
  */
 export class RadioInputGroup extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
     render() {
-            return (
+        return (
             <div className="row row--radio">
                 <div className="text">{this.props.text}</div>
                 <div>
@@ -99,17 +98,17 @@ export class ListSelection extends React.Component {
             <div>
                 { propsArray.map((prop, index) => React.cloneElement(element, {...prop})) }
             </div>
-        )
+        );
     }
     renderChildren() {
         return React.Children.map(this.props.children, (child, i) => {
             switch(i) {
-                case 0:
-                    return this.renderInput(child);
-                case 1:
-                    return this.renderList(child);
-                default:
-                    return null;
+            case 0:
+                return this.renderInput(child);
+            case 1:
+                return this.renderList(child);
+            default:
+                return null;
             }
         });
     }
@@ -118,6 +117,6 @@ export class ListSelection extends React.Component {
             <div>
                 { this.renderChildren() }
             </div>
-        )
+        );
     }
 }

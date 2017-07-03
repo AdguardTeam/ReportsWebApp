@@ -41,3 +41,4 @@ credentials
 
 #issues database
 issues.db
+.DS_Store

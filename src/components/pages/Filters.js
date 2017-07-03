@@ -28,7 +28,7 @@ class Filters extends React.Component {
         return { options };
     }
     onSelectChange(event) {
-        if(event) {
+        if (event) {
             let newSelection = insVal(this.props.selectedFilters, event.value);
             filtersUpdate(newSelection);
             this.setState({
@@ -55,7 +55,7 @@ class Filters extends React.Component {
         return (
             <div>
                 <h1 className="title">What filters do you have enabled?</h1>
-                <ListSelection 
+                <ListSelection
                     dataArray={this.props.selectedFilters}
                     mapDataToInputProps={this.mapDataToInputProps}
                     mapDataToListPropsArray={this.mapDataToListPropsArray}
@@ -69,18 +69,18 @@ class Filters extends React.Component {
                     <FilterEntry />
                 </ListSelection>
             </div>
-        )
+        );
     }
 }
 
 // to be elaborated...
-function FilterEntry(props) { 
+function FilterEntry(props) {
     return (
         <div className="filter">
             <span className="filter__title">{props.label}</span>
             <span className="filter__remove" onClick={props.onClose}>x</span>
         </div>
-    )
+    );
 }
 
 export default Filters = connect((state) => ({

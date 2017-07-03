@@ -13,24 +13,23 @@ const PAGE_SUBMIT = 7;
 function NavButtons(props) {
     let completed = props.completedPages[props.currentPage];
     const onNavBtnClick = (event) => {
-        if(event.target.name == "prev") {
+        if (event.target.name == 'prev') {
             movePage(-1);
-        }
-        else if(event.target.name == "next") {
-            if(completed) {
+        } else if (event.target.name == 'next') {
+            if (completed) {
                 movePage(1);
             }
         }
     };
     const onSubmitBtnClick = () => {
-/*
+        /*
         TEMPORARILY DISABLED FOR TESTING
-        if(props.captchaResponse.validity) {
+        if (props.captchaResponse.validity) {
             submit();
         }
 */
         submit();
-    }
+    };
     return (
         <div className="buttons">
             { props.currentPage > PAGE_START && <button type="button" className="button button--green" name="prev" onClick={onNavBtnClick}>Prev</button> }
@@ -50,7 +49,7 @@ export default connect(
 
 
 const getIssueTitle = (state) => {
-    return extractDomain(state.problemURL.value) + " - " + state.problemType.value;
+    return extractDomain(state.problemURL.value) + ' - ' + state.problemType.value;
 };
 
 const getIssueBody = (state) => {
@@ -58,78 +57,84 @@ const getIssueBody = (state) => {
     const NEW_LINE = '\n';
     const buf = [];
 
-    buf.push('[//]: # (***You can leave the strings with "[//]:" They will not be added to the issue text)');
-    buf.push('[//]: # (***Строки, которые начинаются с "[//]:" можно не удалять. Они не будут видны)');
+    // buf.push('[//]: # (***You can leave the strings with "[//]:" They will not be added to the issue text)');
+    // buf.push('[//]: # (***Строки, которые начинаются с "[//]:" можно не удалять. Они не будут видны)');
     buf.push('');
 
-    if(state.comments.validity) {
-        buf.push("***Comment***: " + state.comments.value)
+    if (state.comments.validity) {
+        buf.push('***Comment***: ' + state.comments.value);
     }
 
-    buf.push("Screenshot: ");
+    buf.push('Screenshot: ');
 
     state.screenshotURLs.forEach((el, index) => {
         buf.push(`[${index}](${el})`);
-    })
-    buf.push("");
+    });
+    buf.push('');
 
-    buf.push("***System configuration***");
-    buf.push("");
-    buf.push("Information | value");
-    buf.push("--- | ---");
-    buf.push("Platform: | " + state.productType.value);
-    buf.push("Adguard version: | " + state.productVersion.value);
+    buf.push('***System configuration***');
+    buf.push('');
+    buf.push('Information | value');
+    buf.push('--- | ---');
+    buf.push('Platform: | ' + state.productType.value);
+    buf.push('Adguard version: | ' + state.productVersion.value);
 
-    if(state.probOnWebOrApp == 'web') {
-        let browserDetail = state.browserSelection.value == "Other" ? state.browserDetail.value : state.browserSelection.value;
-        if(state.productType.value == "And" && state.isDataCompressionEnabled) {
-            browserDetail += " (with data compression enabled)";
+    if (state.probOnWebOrApp == 'web') {
+        let browserDetail = state.browserSelection.value == 'Other' ? state.browserDetail.value : state.browserSelection.value;
+
+        if (state.productType.value == 'And' && state.isDataCompressionEnabled) {
+            browserDetail += ' (with data compression enabled)';
         }
-        buf.push("Browser: | " + browserDetail);
+        buf.push('Browser: | ' + browserDetail);
     }
 
-    if(state.productType.value == 'Win') {
-        buf.push("Adguard driver: | " + ( state.winWFPEnabled.value ? 'WFP' : 'TDI' ));
-        if(state.winStealthEnabled.value) {
+    if (state.productType.value == 'Win') {
+        buf.push('Adguard driver: | ' + ( state.winWFPEnabled.value ? 'WFP' : 'TDI' ));
+
+        if (state.winStealthEnabled.value) {
             let stealthOptions = [];
+
             STEALTH_OPTIONS.forEach((el, index) => {
                 let option = state.winStealthOptions[index];
                 let str = '';
-                if(option.enabled) {
+
+                if (option.enabled) {
                     str += el.label;
-                    if(el.type != "Bool") {
+
+                    if (el.type != 'Bool') {
                         str += `(${option.detail.value})`;
                     }
+
                     stealthOptions.push(str);
                 }
             });
-            buf.push("Stealth mode options: | " + stealthOptions.join(','));
+            buf.push('Stealth mode options: | ' + stealthOptions.join(','));
         }
     }
 
-    if(state.productType.value == 'And') {
-        buf.push("Adguard mode: | " + state.androidFilteringMode.value);
-        buf.push("Filtering quality: | " + state.androidFilteringMethod.value);
+    if (state.productType.value == 'And') {
+        buf.push('Adguard mode: | ' + state.androidFilteringMode.value);
+        buf.push('Filtering quality: | ' + state.androidFilteringMethod.value);
     }
 
-    if(state.productType.value == 'iOS') {
-        buf.push("System wide filtering: | " + ( state.iosSystemWideFilteringEnabled.value ? 'enabled' : 'disabled' ));
-        buf.push("Simplified filters: | " + ( state.iosSimplifiedFiltersEnabled.value ? 'enabled' : 'disabled' ));
-        buf.push("Adguard DNS: | " + state.iosDNS.value);
+    if (state.productType.value == 'iOS') {
+        buf.push('System wide filtering: | ' + ( state.iosSystemWideFilteringEnabled.value ? 'enabled' : 'disabled' ));
+        buf.push('Simplified filters: | ' + ( state.iosSimplifiedFiltersEnabled.value ? 'enabled' : 'disabled' ));
+        buf.push('Adguard DNS: | ' + state.iosDNS.value);
     }
 
-    buf.push("Filters: | " + state.selectedFilters.toString());
+    buf.push('Filters: | ' + state.selectedFilters.toString());
 
     return buf.join(NEW_LINE);
 };
 
 const getLabels = (state) => {
-    let labels = [];
-    labels.push(state.problemType.value);
-    if(state.probOnWebOrApp.value == "app") {
-        labels.push("Android");
+    let labels = [state.problemType.value];
+
+    if (state.probOnWebOrApp.value == 'app') {
+        labels.push('Android');
     }
-}
+};
 
 function submit() {
     let state = store.getState();
@@ -145,10 +150,10 @@ function submit() {
 
     let issueData = new FormData();
 
-    issueData.append("url", state.problemURL.value);
-    issueData.append("text", getIssueBody(state));
-    issueData.append("label", state.problemType.value);
-    issueData.append("recaptcha", state.captchaResponse.value);
+    issueData.append('url', state.problemURL.value);
+    issueData.append('text', getIssueBody(state));
+    issueData.append('label', state.problemType.value);
+    issueData.append('recaptcha', state.captchaResponse.value);
 
     xhr.onerror = () => { /* some err handling */ };
     xhr.send(issueData);

@@ -2,11 +2,17 @@
 function sortedIndex(array, value) {
     let low = 0,
         high = array.length;
+
     while (low < high) {
         let mid = (low + high) >>> 1;
-        if (array[mid] < value) low = mid + 1;
-        else high = mid;
+
+        if (array[mid] < value) {
+            low = mid + 1;
+        } else {
+            high = mid;
+        }
     }
+
     return low;
 }
 
@@ -31,13 +37,14 @@ export function delVal(array, value) {
 // get complement of it from [0,1,..., length-1]
 export function complement(array, length) {
     let j = 0, result = new Array(0);
-    for(let i = 1; i < length; i++) {
-        if(i == array[j]) {
+
+    for (let i = 1; i < length; i++) {
+        if (i == array[j]) {
             j++;
-        }
-        else {
+        } else {
             Array.prototype.push.call(result, i);
         }
     }
+
     return result;
 }

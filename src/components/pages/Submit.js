@@ -31,7 +31,7 @@ function SubmitAndCaptcha(props) {
                         Adguard Product:
                     </div>
                     <div className="summary__cell">
-                        { prodName + " " + props.productVersion.value + " version" }
+                        { prodName + ' ' + props.productVersion.value + ' version' }
                     </div>
                 </div>
                 <div className="summary__row">
@@ -49,7 +49,7 @@ function SubmitAndCaptcha(props) {
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        { props.isProbOnWebOrApp == 'web' ? "Problem URL" : "Problem App" }
+                        { props.isProbOnWebOrApp == 'web' ? 'Problem URL' : 'Problem App' }
                     </div>
                     <div className="summary__cell">
                         { props.problemURL.value }
@@ -96,7 +96,7 @@ function SubmitAndCaptcha(props) {
                 />
             </div>
         </div>
-    )
+    );
 }
 
 export default connect((state) => state)(SubmitAndCaptcha);

@@ -17,26 +17,27 @@ function validateURL(url) {
 }
 
 function validatePlayStoreURL(url) {
-    return /^(https?\:\/\/)?play\.google\.com\/store\/apps\/details\?id=/.test(url);
+    return /^(https?:\/\/)?play\.google\.com\/store\/apps\/details\?id=/.test(url);
 }
 
 function shouldSkip(skip, productType, problemType) {
-    if(skip) {
-        if(skip.on_prod) {
-            if(skip.on_prod.indexOf(productType) != -1) {
+    if (skip) {
+        if (skip.on_prod) {
+            if (skip.on_prod.indexOf(productType) != -1) {
                 return true;
             }
         }
-        if(skip.except_on_prob) {
-            if(skip.except_on_prob.indexOf(problemType) == -1) {
+
+        if (skip.except_on_prob) {
+            if (skip.except_on_prob.indexOf(problemType) == -1) {
                 return true;
             }
         }
+
         return false;
     }
-    else {
-        return false;
-    }
+
+    return false;
 }
 
 
@@ -62,7 +63,7 @@ const INITIAL_STATE = (function() {
     _state.winWFPEnabled = new InputData(null, false);
     _state.winStealthEnabled = new InputData(null, false);
     _state.winStealthOptions = STEALTH_OPTIONS.map((el) => (
-        el.type == "Bool" ? {
+        el.type == 'Bool' ? {
             enabled: false
         } : {
             enabled: false,
@@ -115,16 +116,17 @@ const updateValidatedPages = function(state) { // further arguemnts are page num
     return Object.assign({}, state, {
         completedPages: Object.assign([], state.completedPages, newCompletedPages)
     });
-}
+};
 
 updateValidatedPages['0'] = function(state) {
     return state.productType.validity && state.productVersion.validity;
 };
 
 updateValidatedPages['1'] = function(state) {
-    if(!state.isPlatformSpecificQuestionsVisible) {
+    if (!state.isPlatformSpecificQuestionsVisible) {
         return false;
     }
+
     switch(state.productType.value) {
         case 'Win':
             return state.winWFPEnabled.validity && state.winStealthEnabled.validity;
@@ -140,7 +142,7 @@ updateValidatedPages['1'] = function(state) {
 updateValidatedPages['2'] = function(state) {
     return state.problemURL.validity && (
         (
-            state.probOnWebOrApp == 'web' && state.browserSelection.validity && (state.browserSelection.value != "Other" || state.browserDetail.validity)
+            state.probOnWebOrApp == 'web' && state.browserSelection.validity && (state.browserSelection.value != 'Other' || state.browserDetail.validity)
         )
         || state.probOnWebOrApp == 'app'
     );
@@ -152,18 +154,18 @@ updateValidatedPages['4'] = function(state) {
 
 
 const reducer = function(state, action) {
-    if(typeof state === 'undefined') {
+    if (typeof state === 'undefined') {
         return INITIAL_STATE;
     }
-    switch(action.type) {
-        case "MOVE_PAGE": {
+    switch (action.type) {
+        case 'MOVE_PAGE': {
             return Object.assign({}, state, {
                 currentPage: state.currentPage + action.data
             });
         }
-        case "UPDATE_PRODUCT_TYPE": {
-            if(state.productType.value !== action.data) {
-                let newProbOnWebOrApp = action.data == "And" ? null : "web";
+        case 'UPDATE_PRODUCT_TYPE': {
+            if (state.productType.value !== action.data) {
+                let newProbOnWebOrApp = action.data == 'And' ? null : 'web';
                 let newProductType = new InputData(action.data, action.data !== null ? true : false);
                 return updateValidatedPages(Object.assign({}, state, {
                     productType: newProductType,
@@ -174,15 +176,15 @@ const reducer = function(state, action) {
             }
             return state;
         }
-        case "UPDATE_PRODUCT_VERSION": {
+        case 'UPDATE_PRODUCT_VERSION': {
             let newProductVersion = new InputData(action.data, validateVersion(action.data));
 
             return updateValidatedPages(Object.assign({}, state, {
                 productVersion: newProductVersion
             }), 0);
         }
-        case "UPDATE_PROBLEM_TYPE": {
-            if(state.problemType.value !== action.data) {
+        case 'UPDATE_PROBLEM_TYPE': {
+            if (state.problemType.value !== action.data) {
                 return updateValidatedPages(Object.assign({}, state, {
                     problemType: new InputData(action.data, action.data !== null ? true : false),
                     checklistAnswers: INITIAL_STATE.checklistAnswers,
@@ -191,15 +193,15 @@ const reducer = function(state, action) {
             }
             return state;
         }
-        case "UPDATE_CHECKLIST_ANSWER": {
+        case 'UPDATE_CHECKLIST_ANSWER': {
             let answerTF = action.data.value, answerIndex = action.data.index;
             let isPlatformSpecificQuestionsVisible;
             let tmp = Object.assign([], state.checklistAnswers, {
                 [answerIndex]: answerTF
             });
-            if(answerTF) {
+            if (answerTF) {
                 let nextIndex = checklists.findIndex((el, index) => (index > answerIndex && !shouldSkip(el.skip, state.productType.value, state.problemType.value)));
-                if(nextIndex !== -1) {
+                if (nextIndex !== -1) {
                     tmp = Object.assign([], tmp, {
                         [nextIndex]: null
                     }); // make it visible
@@ -221,17 +223,17 @@ const reducer = function(state, action) {
                 isPlatformSpecificQuestionsVisible: isPlatformSpecificQuestionsVisible
             }), 1);
         }
-        case "UPDATE_WFP_ANSWER": {
+        case 'UPDATE_WFP_ANSWER': {
             return updateValidatedPages(Object.assign({}, state, {
                 winWFPEnabled: new InputData(action.data, true)
             }), 1);
         }
-        case "UPDATE_STEALTH_ANSWER": {
+        case 'UPDATE_STEALTH_ANSWER': {
             return updateValidatedPages(Object.assign({}, state, {
                 winStealthEnabled: new InputData(action.data, true)
             }), 1);
         }
-        case "UPDATE_STEALTH_OPTION_ANSWER": { // specifying enabled stealth mode options is optional
+        case 'UPDATE_STEALTH_OPTION_ANSWER': { // specifying enabled stealth mode options is optional
             return Object.assign({}, state, {
                 winStealthOptions: Object.assign([], state.winStealthOptions, {
                     [action.data.index]: Object.assign({}, state.winStealthOptions[action.data.index], {
@@ -240,7 +242,7 @@ const reducer = function(state, action) {
                 })
             });
         }
-        case "UPDATE_STEALTH_OPTION_ANSWER_DETAIL": {
+        case 'UPDATE_STEALTH_OPTION_ANSWER_DETAIL': {
             return Object.assign({}, state, {
                 winStealthOptions: Object.assign([], state.winStealthOptions, {
                     [action.data.index]: Object.assign({}, state.winStealthOptions[action.data.index], {
@@ -249,78 +251,78 @@ const reducer = function(state, action) {
                 })
             });
         }
-        case "UPDATE_ANDROID_FILTERING_MODE": {
+        case 'UPDATE_ANDROID_FILTERING_MODE': {
             return updateValidatedPages(Object.assign({}, state, {
                 androidFilteringMode: new InputData(action.data, true)
             }), 1);
         }
-        case "UPDATE_ANDROID_FILTERING_METHOD": {
+        case 'UPDATE_ANDROID_FILTERING_METHOD': {
             return updateValidatedPages(Object.assign({}, state, {
                 androidFilteringMethod: new InputData(action.data, true)
             }), 1);
         }
-        case "UPDATE_IOS_SYSTEM_WIDE_FILTERING": {
+        case 'UPDATE_IOS_SYSTEM_WIDE_FILTERING': {
             return updateValidatedPages(Object.assign({}, state, {
                 iosSystemWideFilteringEnabled: new InputData(action.data, true)
             }), 1);
         }
-        case "UPDATE_IOS_SIMPLIFIED_FILTERS_MODE": {
+        case 'UPDATE_IOS_SIMPLIFIED_FILTERS_MODE': {
             return updateValidatedPages(Object.assign({}, state, {
                 iosSimplifiedFiltersEnabled: new InputData(action.data, true)
             }), 1);
         }
-        case "UPDATE_IOS_DNS": {
+        case 'UPDATE_IOS_DNS': {
             return updateValidatedPages(Object.assign({}, state, {
                 iosDNS: new InputData(action.data, true)
             }), 1);
         }
-        case "UPDATE_WEB_OR_APP": {
+        case 'UPDATE_WEB_OR_APP': {
             return updateValidatedPages(Object.assign({}, state, {
                 probOnWebOrApp: action.data
-            }), 2)
+            }), 2);
         }
-        case "UPDATE_BROWSER_SELECTION": {
+        case 'UPDATE_BROWSER_SELECTION': {
             return updateValidatedPages(Object.assign({}, state, {
                 browserSelection: new InputData(action.data, action.data !== null ? true : false),
-                browserDetail: action.data == "Other" ? state.browserDetail : new InputData(undefined, false) // Or maybe it can be cleared not immediately, only after a page navigation.
-            }))
+                browserDetail: action.data == 'Other' ? state.browserDetail : new InputData(undefined, false) // Or maybe it can be cleared not immediately, only after a page navigation.
+            }));
         }
-        case "UPDATE_BROWSER_DETAIL": {
+        case 'UPDATE_BROWSER_DETAIL': {
             return updateValidatedPages(Object.assign({}, state, {
                 browserDetail: new InputData(action.data, action.data.length > 0)
-            }), 2)
+            }), 2);
         }
-        case "UPDATE_DATA_COMPRESSION_ENABLED": {
+        case 'UPDATE_DATA_COMPRESSION_ENABLED': {
             return Object.assign({}, state, {
                 isDataCompressionEnabled: action.data
             });
         }
-        case "UPDATE_PROBLEM_URL": {
+        case 'UPDATE_PROBLEM_URL': {
             return updateValidatedPages(Object.assign({}, state, {
-                problemURL: new InputData(action.data, state.probOnWebOrApp=="web" ? validateURL(action.data) : validatePlayStoreURL(action.data)),
-            }), 2)
+                problemURL: new InputData(action.data, state.probOnWebOrApp=='web' ? validateURL(action.data) : validatePlayStoreURL(action.data)),
+            }), 2);
         }
-        case "UPDATE_ENABLED_FILTERS": {
+        case 'UPDATE_ENABLED_FILTERS': {
             return Object.assign({}, state, {
                 selectedFilters: action.data
             });
         }
-        case "UPDATE_SCREENSHOT_URL_CURRENT": {
+        case 'UPDATE_SCREENSHOT_URL_CURRENT': {
             return Object.assign({}, state, {
                 screenshotURLCurrent: new InputData(action.data, validateURL(action.data))
             });
         }
-        case "UPDATE_SCREENSHOT_URLS": {
+        case 'UPDATE_SCREENSHOT_URLS': {
             return updateValidatedPages(Object.assign({}, state, {
                 screenshotURLs: action.data
-            }), 4)
+            }), 4);
         }
-        case "UPDATE_COMMENTS": {
+        case 'UPDATE_COMMENTS': {
             return Object.assign({}, state, {
                 comments: new InputData(action.data, true)
             });
         }
-        case "UPDATE_CAPTCHA_RESPONSE": {
+        case 'UPDATE_CAPTCHA_RESPONSE': {
             return Object.assign({}, state, {
                 captchaResponse: new InputData(action.data, true)
             });
