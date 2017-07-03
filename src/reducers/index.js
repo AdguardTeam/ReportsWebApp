@@ -45,8 +45,7 @@ const INITIAL_STATE = (function() {
     var _state = Object.create(null);
 
     _state.currentPage = 0;
-    _state.completedPages = [false/*ProdType*/, false/*ProbType*/, false/*ProbURL*/, true/*Filters*/, false/*Screenshots*/, true/*Comments*/, true/*Submit&Captcha*/, false];
-
+    _state.completedPages = [false/*ProdType*/, false/*ProbType*/, false/*ProbURL*/, true/*Filters*/, false/*Screenshots*/, true/*Comments*/, process.env.NODE_ENV == 'production' ? false : true/*Submit&Captcha*/, false];
 
     /* Page 1 */
     _state.productType = new InputData('', false);
@@ -151,6 +150,10 @@ updateValidatedPages['2'] = function(state) {
 updateValidatedPages['4'] = function(state) {
     return state.screenshotURLs.length > 0;
 };
+
+updateValidatedPages['6'] = function(state) {
+    return state.captchaResponse.validity;
+}
 
 
 const reducer = function(state, action) {
@@ -323,9 +326,9 @@ const reducer = function(state, action) {
             });
         }
         case 'UPDATE_CAPTCHA_RESPONSE': {
-            return Object.assign({}, state, {
+            return updateValidatedPages(Object.assign({}, state, {
                 captchaResponse: new InputData(action.data, true)
-            });
+            }), 6);
         }
         default:
             return state;
