@@ -146,7 +146,7 @@ function submit() {
 
     issueData.append('url', state.problemURL.value);
     issueData.append('text', getIssueBody(state));
-    issueData.append('label', state.problemType.value);
+    issueData.append('labels', state.problemType.value);
     issueData.append('recaptcha', state.captchaResponse.value);
 
     xhr.onerror = () => { /* some err handling */ };
