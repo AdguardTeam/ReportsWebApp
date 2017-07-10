@@ -141,7 +141,7 @@ function submit() {
     xhr.open('POST', window.report_url || '/submit.json');
     xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
-            completeSubmitResponse(xhr.response);
+            completeSubmitResponse( JSON.parse(xhr.response).url || null );
         } else {
             completeSubmitResponse(null);
         }
