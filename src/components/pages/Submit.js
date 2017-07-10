@@ -15,11 +15,21 @@ function SubmitAndCaptcha(props) {
     let prodName = productTypeOptions.filter((el) => (el.value == props.productType.value))[0].label;
 
     let recaptchaInstance;
-    const sitekey = window.recaptcha_key || '';
+    const sitekey = window.recaptcha_key || 'xxxxxxx';
 
     const onChange = (response) => {
         receivedCaptchaResponse(response);
     };
+
+    if (props.waitingResponse) {
+        return (
+            <div>
+                <h1 className="title">Your report is being submitted</h1>
+                <div className="loading"></div>
+                <div className="text">Please wait...</div>
+            </div>
+        );
+    }
 
     return (
         <div>

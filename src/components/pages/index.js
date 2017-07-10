@@ -7,6 +7,7 @@ import Filters from './Filters.js';
 import Screenshots from './Screenshots.js';
 import Comments from './Comments.js';
 import SubmitAndCaptcha from './Submit.js';
+import Result from './Result.js';
 
 
 function Pages(props) {
@@ -25,6 +26,8 @@ function Pages(props) {
             return (<Comments/>);
         case 6:
             return (<SubmitAndCaptcha />);
+        case 7:
+            return (<Result />);
         default:
             return null;
     }

@@ -1,14 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { movePage } from '../dispatchers';
+import { movePage, startSubmitRequest, completeSubmitResponse } from '../dispatchers';
 
 import store from '../reducers';
 import { extractDomain } from '../utils/parse-url.js';
-import { STEALTH_OPTIONS } from '../constants/input-options.js';
-
-
-const PAGE_START = 0;
-const PAGE_SUBMIT = 7;
+import { STEALTH_OPTIONS, filterOptions } from '../constants/input-options.js';
+import * as PAGE from '../constants/page_num.js';
 
 function NavButtons(props) {
     let completed = props.completedPages[props.currentPage];
@@ -22,13 +19,18 @@ function NavButtons(props) {
         }
     };
     const onSubmitBtnClick = () => {
-            submit();
+        submit();
     };
+
+    if (props.waitingResponse) {
+        return null;
+    }
+
     return (
         <div className="buttons">
-            { props.currentPage > PAGE_START && <button type="button" className="button button--green" name="prev" onClick={onNavBtnClick}>Prev</button> }
-            { props.currentPage < PAGE_SUBMIT && <button type="button" className="button button--green" name="next" disabled={!completed} onClick={onNavBtnClick}>Next</button> }
-            { props.currentPage == PAGE_SUBMIT && <button type="button" className="button button--green" name="submit" disabled={process.env.NODE_ENV === 'production' ? !props.captchaResponse.validity : false} onClick={onSubmitBtnClick}>Submit</button> }
+            { props.currentPage > PAGE.START && ( props.currentPage < PAGE.RESULT || !props.issueUrl.validity ) && <button type="button" className="button button--green" name="prev" onClick={onNavBtnClick}>Prev</button> }
+            { props.currentPage < PAGE.SUBMIT && <button type="button" className="button button--green" name="next" disabled={!completed} onClick={onNavBtnClick}>Next</button> }
+            { props.currentPage == PAGE.SUBMIT && <button type="button" className="button button--green" name="submit" disabled={process.env.NODE_ENV === 'production' ? !props.captchaResponse.validity : false} onClick={onSubmitBtnClick}>Submit</button> }
         </div>
     );
 }
@@ -37,7 +39,9 @@ export default connect(
     state => ({
         currentPage: state.currentPage,
         completedPages: state.completedPages,
-        captchaResponse: state.captchaResponse
+        captchaResponse: state.captchaResponse,
+        waitingResponse: state.waitingResponse,
+        issueUrl: state.issueUrl
     })
 )(NavButtons);
 
@@ -51,8 +55,6 @@ const getIssueBody = (state) => {
     const NEW_LINE = '\n';
     const buf = [];
 
-    // buf.push('[//]: # (***You can leave the strings with "[//]:" They will not be added to the issue text)');
-    // buf.push('[//]: # (***Строки, которые начинаются с "[//]:" можно не удалять. Они не будут видны)');
     buf.push('');
 
     if (state.comments.validity) {
@@ -77,7 +79,7 @@ const getIssueBody = (state) => {
         let browserDetail = state.browserSelection.value == 'Other' ? state.browserDetail.value : state.browserSelection.value;
 
         if (state.productType.value == 'And' && state.isDataCompressionEnabled) {
-            browserDetail += ' (with data compression enabled)';
+            browserDetail += ' (data compression)';
         }
         buf.push('Browser: | ' + browserDetail);
     }
@@ -117,7 +119,7 @@ const getIssueBody = (state) => {
         buf.push('Adguard DNS: | ' + state.iosDNS.value);
     }
 
-    buf.push('Filters: | ' + state.selectedFilters.toString());
+    buf.push('Filters: | ' + state.selectedFilters.map((filterId) => filterOptions.filter((el) => (el.value == filterId))[0].label.replace(/\sfilter$/, '')).toString());
 
     return buf.join(NEW_LINE);
 };
@@ -128,6 +130,8 @@ const getLabels = (state) => {
     if (state.probOnWebOrApp.value == 'app') {
         labels.push('Android');
     }
+
+    return labels;
 };
 
 function submit() {
@@ -137,18 +141,23 @@ function submit() {
     xhr.open('POST', window.report_url || '/submit.json');
     xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
-
-        } else { /* some err handling */ }
+            completeSubmitResponse(xhr.response);
+        } else {
+            completeSubmitResponse(null);
+        }
     };
-
+    xhr.onerror = () => { completeSubmitResponse(null); };
 
     let issueData = new FormData();
 
     issueData.append('url', state.problemURL.value);
     issueData.append('text', getIssueBody(state));
-    issueData.append('labels[]', state.problemType.value);
+    getLabels(state).forEach((label) => {
+        issueData.append('labels[]', label);
+    });
     issueData.append('recaptcha', state.captchaResponse.value);
 
-    xhr.onerror = () => { /* some err handling */ };
     xhr.send(issueData);
+
+    startSubmitRequest();
 }

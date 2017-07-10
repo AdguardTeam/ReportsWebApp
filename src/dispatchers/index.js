@@ -173,3 +173,16 @@ export function receivedCaptchaResponse(val) {
         data: val
     });
 }
+
+export function startSubmitRequest() {
+    store.dispatch({
+        type: 'SUBMIT_REQUEST_SENT'
+    });
+}
+
+export function completeSubmitResponse(val) {
+    store.dispatch({
+        type: 'SUBMIT_RESPONSE_COMPLETED',
+        data: val
+    });
+}
