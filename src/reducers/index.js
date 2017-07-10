@@ -2,6 +2,7 @@ Object.assign = require('object-assign');
 import { createStore } from 'redux';
 import { checklists, STEALTH_OPTIONS } from '../constants/input-options.js';
 import { R_URL } from '../constants/regexes.js';
+import * as PAGE from '../constants/page_num.js';
 
 function InputData(value, validity) {
     this.value = value;
@@ -44,7 +45,7 @@ function shouldSkip(skip, productType, problemType) {
 const INITIAL_STATE = (function() {
     var _state = Object.create(null);
 
-    _state.currentPage = 0;
+    _state.currentPage = PAGE.START;
     _state.completedPages = [false/*ProdType*/, false/*ProbType*/, false/*ProbURL*/, true/*Filters*/, false/*Screenshots*/, true/*Comments*/, process.env.NODE_ENV == 'production' ? false : true/*Submit&Captcha*/, false];
 
     /* Page 1 */
@@ -99,6 +100,9 @@ const INITIAL_STATE = (function() {
 
     /* Page 7 */
     _state.captchaResponse = new InputData('', false);
+
+    _state.waitingResponse = false;
+    _state.issueUrl = new InputData('', false);
 
     return _state;
 })();
@@ -163,7 +167,7 @@ const reducer = function(state, action) {
     switch (action.type) {
         case 'MOVE_PAGE': {
             return Object.assign({}, state, {
-                currentPage: state.currentPage + action.data
+                currentPage: state.currentPage + action.data,
             });
         }
         case 'UPDATE_PRODUCT_TYPE': {
@@ -329,6 +333,18 @@ const reducer = function(state, action) {
             return updateValidatedPages(Object.assign({}, state, {
                 captchaResponse: new InputData(action.data, true)
             }), 6);
+        }
+        case 'SUBMIT_REQUEST_SENT': {
+            return Object.assign({}, state, {
+                waitingResponse: true
+            });
+        }
+        case 'SUBMIT_RESPONSE_COMPLETED': {
+            return Object.assign({}, state, {
+                currentPage: PAGE.RESULT,
+                waitingResponse: false,
+                issueUrl: new InputData(action.data, validateURL(action.data))
+            });
         }
         default:
             return state;
