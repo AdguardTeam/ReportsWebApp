@@ -87,7 +87,7 @@ export const filterOptions = [
     { value: 3, label: 'Spyware filter' },
     { value: 4, label: 'Social media filter' },
     { value: 14, label: 'Annoyances filter' },
-    { value: 10, label: 'Filter unblocking useful ads' },
+    { value: 10, label: 'Filter unblocking search ads and self-promotion' },
     { value: 1, label: 'Russian filter' },
     { value: 6, label: 'German filter' },
     { value: 16, label: 'French filter' },
