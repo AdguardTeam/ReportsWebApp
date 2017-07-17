@@ -55,7 +55,10 @@ const INITIAL_STATE = (function() {
     /* Page 2 */
     _state.problemType = new InputData('', false);
 
-    _state.checklistAnswers = [null, undefined, undefined, undefined];
+    _state.checklistAnswers = checklists.map((el, index) => {
+        if(index === 0) { return null; }
+        else { return undefined; }
+    });
     _state.isResolvedTextVisible = false;
 
     _state.isPlatformSpecificQuestionsVisible = false;

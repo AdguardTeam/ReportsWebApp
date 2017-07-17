@@ -28,11 +28,11 @@ export const checklists = [
     {
         label: 'Please disable User filter. Is the problem still present?',
         skip: { on_prod: ['Con'] }
-    },
+    },/*
     {
         label: 'If you have \'Show useful ads\' option enabled, please disable it. Is the problem still present?',
         skip: { except_on_prob: ['Ads','Social Widget','Annoyance'] }
-    },
+    },*/
     {
         label: 'If you don\'t have HTTPs filtering enabled, please enable it. Is the problem still present?',
         skip: { on_prod:['iOS','Ext','Con'], except_on_prob: ['Ads','Social Widget','Annoyance'] }
