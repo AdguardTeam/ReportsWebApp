@@ -10,6 +10,8 @@ import { receivedCaptchaResponse } from '../../dispatchers';
 
 import { R_URL_DOMAIN_MATCH } from '../../constants/regexes.js';
 
+import Translator from '../../constants/strings';
+
 
 function SubmitAndCaptcha(props) {
     let prodName = productTypeOptions.filter((el) => (el.value == props.productType.value))[0].label;
@@ -24,42 +26,42 @@ function SubmitAndCaptcha(props) {
     if (props.waitingResponse) {
         return (
             <div>
-                <h1 className="title">Your report is being submitted</h1>
+                <h1 className="title">{Translator.trans('7TitleDuringSubmission')}</h1>
                 <div className="loading"></div>
-                <div className="text">Please wait...</div>
+                <div className="text"> {Translator.trans('7PlsWait')} </div>
             </div>
         );
     }
 
     return (
         <div>
-            <h1 className="title">Check the information</h1>
+            <h1 className="title">{Translator.trans('7Title')}</h1>
 
             <div className="summary">
                 <div className="summary__row">
                     <div className="summary__cell">
-                        Adguard Product:
+                        {Translator.trans('7AGProd')}
                     </div>
                     <div className="summary__cell">
-                        { prodName + ' ' + props.productVersion.value + ' version' }
+                        { prodName + ' ' + props.productVersion.value + ' ' + Translator.trans('7AGVer') }
                     </div>
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        Browser:
+                        {Translator.trans('7Brws')}
                     </div>
                     <div className="summary__cell">
                         {
                             props.browserSelection == 'Other' ? props.browserDetail.value : props.browserSelection.value
                         }
                         {
-                            props.isDataCompressionEnabled === true && ' with data compression enabled'
+                            props.isDataCompressionEnabled === true && ' ' + Translator.trans('7DataCompEnabled')
                         }
                     </div>
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        { props.isProbOnWebOrApp == 'web' ? 'Problem URL' : 'Problem App' }
+                        { props.isProbOnWebOrApp == 'web' ? Translator.trans('7ProbUrl') : Translator.trans('7ProbApp') }
                     </div>
                     <div className="summary__cell">
                         { props.problemURL.value }
@@ -67,7 +69,7 @@ function SubmitAndCaptcha(props) {
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        Problem type:
+                        { Translator.trans('7ProbType') }
                     </div>
                     <div className="summary__cell">
                         { props.problemType.value }
@@ -75,7 +77,7 @@ function SubmitAndCaptcha(props) {
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        Filters:
+                        { Translator.trans('7Filters') }
                     </div>
                     <div className="summary__cell">
                         {props.selectedFilters.toString()}
@@ -83,14 +85,14 @@ function SubmitAndCaptcha(props) {
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        Screenshots:
+                        { Translator.trans('7Scrs') }
                     </div>
                     <div className="summary__cell">
                     </div>
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        Comments:
+                        { Translator.trans('7Comments') }
                     </div>
                     <div className="summary__cell">
                         {props.comments.value}

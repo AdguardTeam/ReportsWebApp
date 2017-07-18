@@ -10,6 +10,8 @@ import { problemTypeChange, checklistAnswerChange } from '../../dispatchers';
 
 import { YN, problemTypeOptions, checklists, STEALTH_OPTIONS } from '../../constants/input-options.js';
 
+import Translator from '../../constants/strings';
+
 Array.prototype.findIndex||Object.defineProperty(Array.prototype,'findIndex',{value:function(c,d){if (null==this)throw new TypeError('"this" is null or not defined');var b=Object(this),e=b.length>>>0;if ('function'!==typeof c)throw new TypeError('predicate must be a function');for(var a=0;a<e;){if (c.call(d,b[a],a,b))return a;a++;}return-1;}});
 
 
@@ -36,7 +38,7 @@ function ProbType(props) {
 
     return (
         <div>
-            <h1 className="title">What type of problem have you encountered?</h1>
+            <h1 className="title">{Translator.trans('2Title')}</h1>
             <Select
                 name="ProbType"
                 className="select"
@@ -44,7 +46,7 @@ function ProbType(props) {
                 options={problemTypeOptions}
                 onChange={onProbTypeChange}
             />
-            <div className="text">If the problem does not fall under any category that is listed here, please contact our tech support: <a className="link" href="mailto:support@adguard.com">support@adguard.com</a></div>
+            <div className="text">{Translator.trans('2ContactSupport')}<a className="link" href="mailto:support@adguard.com">{Translator.trans('2SupportEmail')}</a></div>
             <Checklist />
             { props.isPlatformSpecificQuestionsVisible && (
                 props.productType.value == 'Win' ? <WinSpecific/> : props.productType.value == 'And' ? <AndSpecific/> : props.productType.value == 'iOS' ? <IOSSpecific/> : null )}
@@ -85,7 +87,7 @@ function Checklist(props) {
                     );
                 }
             ) }
-            { props.isResolvedTextVisible && <div className = "text text--bold">Great! Thank you for using Adguard!</div> }
+            { props.isResolvedTextVisible && <div className = "text text--bold">{Translator.trans('2Great')}</div> }
         </div>
     );
 }
@@ -118,7 +120,7 @@ function WinSpecific(props) {
         <div>
             <RadioInputGroup text="Do you have WFP driver enabled in Adguard network settings?" name="WFP" options={YN} checkedValue={props.winWFPEnabled.value} onChangeHandler={onWFPInputChange} />
             <RadioInputGroup text="Do you have Stealth Mode enabled?" name="Stealth" options={YN} checkedValue={props.winStealthEnabled.value} onChangeHandler={onStealthInputChange} />
-            <div className="text text--subtitle">Please mark any of these options if you have them enabled in Stealth Mode</div>
+            <div className="text text--subtitle">{Translator.trans('2Stealth')}</div>
             { STEALTH_OPTIONS.map((option, index) => {
                 return (
                     <div key={index} className="row row--checkbox">
@@ -155,8 +157,8 @@ import { VPN_PROXY, FILTERING_METHODS } from '../../constants/input-options.js';
 function AndSpecific(props) {
     return (
         <div>
-            <RadioInputGroup text="Do you use VPN or HTTP proxy mode?" name="VPN/proxy" options={VPN_PROXY} checkedValue={props.androidFilteringMode.value} onChangeHandler={androidFilteringModeChange} />
-            <RadioInputGroup text="What filtering method do you use?" name="method" options={FILTERING_METHODS} checkedValue={props.androidFilteringMethod.value} onChangeHandler={androidFilteringMethodChange} />
+            <RadioInputGroup text={Translator.trans('2AndFiltMode')} name="VPN/proxy" options={VPN_PROXY} checkedValue={props.androidFilteringMode.value} onChangeHandler={androidFilteringModeChange} />
+            <RadioInputGroup text={Translator.trans('2AndFiltMethod')} name="method" options={FILTERING_METHODS} checkedValue={props.androidFilteringMethod.value} onChangeHandler={androidFilteringMethodChange} />
         </div>
     );
 }
@@ -179,9 +181,9 @@ function IOSSpecific(props) {
     };
     return (
         <div>
-            <RadioInputGroup text="Do you use System-wide filtering?" name="SystemWide" options={YN} checkedValue={props.iosSystemWideFilteringEnabled.value} onChangeHandler={onSystemWideSelectionChange} />
-            <RadioInputGroup text="Do you use Simplified filters mode?" name="Simplified" options={YN} checkedValue={props.iosSimplifiedFiltersEnabled.value} onChangeHandler={onSimplifiedFiltersChange} />
-            <RadioInputGroup text="Do you use Adguard DNS?" name="DNS" options={DNS_OPTIONS} checkedValue={props.iosDNS.value} onChangeHandler={iosDNSChange} />
+            <RadioInputGroup text={Translator.trans('2iosSysWideFilt')} name="SystemWide" options={YN} checkedValue={props.iosSystemWideFilteringEnabled.value} onChangeHandler={onSystemWideSelectionChange} />
+            <RadioInputGroup text={Translator.trans('2iosSimpFilt')} name="Simplified" options={YN} checkedValue={props.iosSimplifiedFiltersEnabled.value} onChangeHandler={onSimplifiedFiltersChange} />
+            <RadioInputGroup text={Translator.trans('2iosDNS')} name="DNS" options={DNS_OPTIONS} checkedValue={props.iosDNS.value} onChangeHandler={iosDNSChange} />
         </div>
     );
 }

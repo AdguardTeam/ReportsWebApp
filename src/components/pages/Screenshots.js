@@ -6,6 +6,8 @@ import { screenshotURLCurrentUpdate, screenshotsUpdate } from '../../dispatchers
 
 import { pushVal, delInd } from '../../utils/immutable.js';
 
+import Translator from '../../constants/strings';
+
 
 function Screenshots(props) {
     const onInputChange = (url) => {
@@ -32,23 +34,42 @@ function Screenshots(props) {
         }
     };
 
+    const repPh = (str, ph, el) => { // Replaces a placeholder into a React element.
+        ph.test(str);
+        let l = RegExp.leftContext;
+        let r = RegExp.rightContext;
+        return ( <div className="text"> {l}{el}{r} </div> );
+    };
+
     return (
         <div>
-            <h1 className="title">Submit a screenshot</h1>
-            <div className="text">Please take a screenshot (or screenshots, if needed) of the problem and upload it to any cloud service.</div>
-            <div className="text">If you are unsure of how to do it, read our <a href="https://www.take-a-screenshot.org/" className="link">manual</a>.</div>
-            <div className="text">When taking the screenshot(s), please keep in mind following requirements:</div>
+            <h1 className="title">{Translator.trans('5Title')}</h1>
+            <div className="text">{Translator.trans('5PleaseTake')}</div>
+            {
+                repPh(Translator.trans('5HowTo'), /%ManualLink%/, (
+                    <a href="https://www.take-a-screenshot.org/" className="link">
+                        {Translator.trans('5Manual')}
+                    </a>
+                ))
+            }
+            <div className="text">{Translator.trans('5ScReq')}</div>
             <div className="list list--ordered">
                 <div className="list__item">
-                    <div className="text">If it is unclear from the screenshot what the problem is, highlight it with an arrow/frame/etc;</div>
+                    <div className="text">{Translator.trans('5Highlight')}</div>
                 </div>
                 <div className="list__item">
-                    <div className="text">The full browser window should be visible;</div>
+                    <div className="text">{Translator.trans('5FullVisible')}</div>
                 </div>
                 {
                     (props.productType == 'And' || props.productType=='iOS') &&
                     <div className="list__item">
-                        <div className="text">Please take a "long" screenshot (<a href="http://phandroid.com/2016/07/13/scrolling-screenshots-android/" className="link">what is "long" screenshot?</a>)</div>
+                    {
+                        repPh(Translator.trans('5LongScrs'), /%InstructionLink%/, (
+                            <a href="http://phandroid.com/2016/07/13/scrolling-screenshots-android/" className="link">
+                                {Translator.trans('5InstrLink')}
+                            </a>
+                        ))
+                    }
                     </div>
                 }
             </div>
@@ -91,8 +112,8 @@ function ImageBox(props) {
 function InputBoxWithAddButton(props) {
     return (
         <div className="form form--file">
-            <TextInput placeholder="Enter screenshot URL..." {...props.inputProps}/>
-            <button className="button button--green button--file" type="button" onClick={props.onAdd} disabled={!props.inputProps.validity}>Add</button>
+            <TextInput placeholder={Translator.trans('5ScrsUrlPh')} {...props.inputProps}/>
+            <button className="button button--green button--file" type="button" onClick={props.onAdd} disabled={!props.inputProps.validity}>{Translator.trans('5ScrsAdd')}</button>
         </div>
     );
 }

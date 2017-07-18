@@ -10,6 +10,7 @@ import { productTypeChange, productVersionChange } from '../../dispatchers';
 
 import { productTypeOptions } from '../../constants/input-options.js';
 
+import Translator from '../../constants/strings';
 
 function ProdType(props) {
     const onProdTypeChange = (event) => {
@@ -22,7 +23,7 @@ function ProdType(props) {
     };
     return (
         <div>
-            <h1 className="title">What product type do you use?</h1>
+            <h1 className="title">{Translator.trans('1Title')}</h1>
             <Select
                 name="ProdType"
                 className="select"
