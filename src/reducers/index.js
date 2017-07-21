@@ -1,6 +1,6 @@
 Object.assign = require('object-assign');
 import { createStore } from 'redux';
-import { checklists, STEALTH_OPTIONS } from '../constants/input-options.js';
+import { productTypeOptions, browserOptions, checklists, STEALTH_OPTIONS } from '../constants/input-options.js';
 import { R_URL } from '../constants/regexes.js';
 import * as PAGE from '../constants/page_num.js';
 
@@ -108,6 +108,67 @@ const INITIAL_STATE = (function() {
 })();
 
 
+function parseQuery(qstr) {
+    var query = Object.create(null);
+    var a = (qstr[0] === '?' ? qstr.substr(1) : qstr).split('&');
+    for (var i = 0; i < a.length; i++) {
+        var b = a[i].split('=');
+        query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+    }
+    return query;
+}
+
+/**
+ * Product type: pt
+ * Product version: pv
+ * Stealth mode settings: st
+ * Browser and version: br
+ * Page URL or app's package name: url
+ * Enabled filters: ft
+ */
+function getInitialStateFromQuery() {
+    var a = parseQuery(location.search);
+    var b = Object.create(null);
+    if ('pt' in a) {
+        b.productType = new InputData(productTypeOptions[a.pt].value, true);
+    }
+    if ('pv' in a) {
+        b.productVersion = new InputData(a.pv, true);
+    }
+    // [true, true, [true, detailStr], ...]
+    if ('st' in a) {
+        if (!a.st) {
+            b.winStealthEnabled = new InputData('false', true);
+        }
+        else {
+            let st = JSON.parse(a.st);
+            b.winStealthEnabled = new InputData(true, true);
+            b.winStealthOptions = STEALTH_OPTIONS.map((el, index) => (
+                el.type == 'Bool' ? {
+                    enabled: !!st[index]
+                } : {
+                    enabled: !!st[index][0],
+                    detail: new InputData(st[index][1], true)
+                }
+            ));
+        }
+    }
+    if ('br' in a) {
+        b.browserSelection = new InputData(a.br, true);
+    }
+    if ('bd' in a) {
+        b.browserSelection = new InputData(browserOptions.length - 1, true);
+        b.browserDetail = new InputData(a.bd, true);
+    }
+    if ('url' in a) {
+        b.problemUrl = new InputData(a.url, validateURL(a.url));
+    }
+    if ('ft' in a) {
+        b.selectedFilters = a.ft.split(',')
+    }
+    return updateValidatedPages(Object.assign(Object.create(null), INITIAL_STATE, b), 0, 1, 2, 4, 6);
+}
+
 const updateValidatedPages = function(state) { // further arguemnts are page numbers to update validity.
     let pages = Array.prototype.slice.call(arguments, 1);
     let newCompletedPages = {};
@@ -129,7 +190,6 @@ updateValidatedPages['1'] = function(state) {
     if (!state.isPlatformSpecificQuestionsVisible) {
         return false;
     }
-
     switch(state.productType.value) {
         case 'Win':
             return state.winWFPEnabled.validity && state.winStealthEnabled.validity;
@@ -162,7 +222,7 @@ updateValidatedPages['6'] = function(state) {
 
 const reducer = function(state, action) {
     if (typeof state === 'undefined') {
-        return INITIAL_STATE;
+        return getInitialStateFromQuery();
     }
     switch (action.type) {
         case 'MOVE_PAGE': {
@@ -195,6 +255,7 @@ const reducer = function(state, action) {
                 return updateValidatedPages(Object.assign({}, state, {
                     problemType: new InputData(action.data, action.data !== null ? true : false),
                     checklistAnswers: INITIAL_STATE.checklistAnswers,
+                    isResolvedTextVisible: false,
                     isPlatformSpecificQuestionsVisible: false
                 }), 1, 2);
             }
