@@ -20,13 +20,13 @@ function ProbURL(props) {
     let webOrApp = props.probOnWebOrApp;
     return (
         <div>
-            <h1 className="title">{Translator.trans('3Title')}</h1>
+            <h1 className="title">{Translator.trans('step_3.title')}</h1>
             {
                 props.productType.value == 'And' &&
                 <div>
                     <RadioInput value="web" labelText="Browser" checked={webOrApp == 'web'} onChangeHandler={webOrAppChange}/>
                     <RadioInput value="app" labelText="Google Play app" checked={webOrApp == 'app'} onChangeHandler={webOrAppChange}/>
-                    <div className="text">{Translator.trans('3ContactSupport')}<a className="link" href="mailto:support@adguard.com">{Translator.trans('3SupportEmail')}</a></div>
+                    <div className="text">{Translator.trans('step_3.contact_support')}<a className="link" href="mailto:support@adguard.com">{Translator.trans('step_3.contact_support')}</a></div>
                 </div>
             }
             { webOrApp == 'web' && <WebDetails /> }
@@ -50,14 +50,14 @@ function WebDetails(props) {
             <Select
                 name="WebURL"
                 className="select"
-                placeholder={Translator.trans('3WebUrlPlaceholder')}
+                placeholder={Translator.trans('step_3.web.web_url_placeholder')}
                 value={props.browserSelection.value}
                 options={browserOptions}
                 onChange={onBrowserSelectionChange}
             />
             {
                 props.browserSelection.value == 'Other' &&
-                <TextInput {...props.browserDetail} placeholder={Translator.trans('3BrNamePlaceholder')} onChangeHandler={browserDetailChange} />
+                <TextInput {...props.browserDetail} placeholder={Translator.trans('step_3.web.browser_name_placeholder')} onChangeHandler={browserDetailChange} />
             }
             {
                 props.productType.value == 'And' &&
@@ -68,7 +68,7 @@ function WebDetails(props) {
                         onChange={onDataCompEnabledChnge}
                     />
                     <span className="checkbox__text">
-                        {Translator.trans('3DataComp')}
+                        {Translator.trans('step_3.web.datacomp_enabled')}
                     </span>
                 </label>
             }
@@ -77,8 +77,8 @@ function WebDetails(props) {
             {
                 props.browserSelection.value && (props.browserSelection.value != 'Other' || props.browserDetail.validity) &&
                 <div>
-                    <div className="text">{Translator.trans('3AboveUrlInput')}</div>
-                    <TextInput {...props.problemURL} placeholder={Translator.trans('3UrlInputPlaceholder')} onChangeHandler={problemURLChange}/>
+                    <div className="text">{Translator.trans('step_3.web.above_url_input')}</div>
+                    <TextInput {...props.problemURL} placeholder={Translator.trans('step_3.web.url_input_placeholder')} onChangeHandler={problemURLChange}/>
                     <div className="text">Is any additional information required to reproduce the problem? (e.g. login/password etc.) Please include it here, <span className="text text--strong">it will remain secure and will not be shown publicly</span>.</div>
                 </div>
             }
@@ -96,8 +96,8 @@ WebDetails = connect((state) => ({
 function AppDetails(props) {
     return (
         <div>
-            <div className="text">{Translator.trans('3AppInstr')}</div>
-            <TextInput {...props.problemURL} placeholder={Translator.trans('3AppUrlPlaceholder')} onChangeHandler={problemURLChange}/>
+            <div className="text">{Translator.trans('step_3.app.how_to_get_url')}</div>
+            <TextInput {...props.problemURL} placeholder={Translator.trans('step_3.app.url_placeholder')} onChangeHandler={problemURLChange}/>
             <div className = "text">Is any additional information required to reproduce the problem? (e.g. login/password etc.) Please include it here, <span className="text text--strong">it will remain secure and will not be shown publicly</span></div>
         </div>
     );

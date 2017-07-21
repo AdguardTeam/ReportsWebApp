@@ -38,7 +38,7 @@ function ProbType(props) {
 
     return (
         <div>
-            <h1 className="title">{Translator.trans('2Title')}</h1>
+            <h1 className="title">{Translator.trans('step_2.title')}</h1>
             <Select
                 name="ProbType"
                 className="select"
@@ -46,7 +46,7 @@ function ProbType(props) {
                 options={problemTypeOptions}
                 onChange={onProbTypeChange}
             />
-            <div className="text">{Translator.trans('2ContactSupport')}<a className="link" href="mailto:support@adguard.com">{Translator.trans('2SupportEmail')}</a></div>
+            <div className="text">{Translator.trans('step_2.contact_support')}<a className="link" href="mailto:support@adguard.com">{Translator.trans('step_2.support_email')}</a></div>
             <Checklist />
             { props.isPlatformSpecificQuestionsVisible && (
                 props.productType.value == 'Win' ? <WinSpecific/> : props.productType.value == 'And' ? <AndSpecific/> : props.productType.value == 'iOS' ? <IOSSpecific/> : null )}
@@ -87,7 +87,7 @@ function Checklist(props) {
                     );
                 }
             ) }
-            { props.isResolvedTextVisible && <div className = "text text--bold">{Translator.trans('2Great')}</div> }
+            { props.isResolvedTextVisible && <div className = "text text--bold">{Translator.trans('step_2.when_the_problem_is_resolved')}</div> }
         </div>
     );
 }
@@ -120,7 +120,7 @@ function WinSpecific(props) {
         <div>
             <RadioInputGroup text="Do you have WFP driver enabled in Adguard network settings?" name="WFP" options={YN} checkedValue={props.winWFPEnabled.value} onChangeHandler={onWFPInputChange} />
             <RadioInputGroup text="Do you have Stealth Mode enabled?" name="Stealth" options={YN} checkedValue={props.winStealthEnabled.value} onChangeHandler={onStealthInputChange} />
-            <div className="text text--subtitle">{Translator.trans('2Stealth')}</div>
+            <div className="text text--subtitle">{Translator.trans('step_2.win.mark_stealth_options_below')}</div>
             { STEALTH_OPTIONS.map((option, index) => {
                 return (
                     <div key={index} className="row row--checkbox">
@@ -157,8 +157,8 @@ import { VPN_PROXY, FILTERING_METHODS } from '../../constants/input-options.js';
 function AndSpecific(props) {
     return (
         <div>
-            <RadioInputGroup text={Translator.trans('2AndFiltMode')} name="VPN/proxy" options={VPN_PROXY} checkedValue={props.androidFilteringMode.value} onChangeHandler={androidFilteringModeChange} />
-            <RadioInputGroup text={Translator.trans('2AndFiltMethod')} name="method" options={FILTERING_METHODS} checkedValue={props.androidFilteringMethod.value} onChangeHandler={androidFilteringMethodChange} />
+            <RadioInputGroup text={Translator.trans('step_2.android.select_filtering_mode')} name="VPN/proxy" options={VPN_PROXY} checkedValue={props.androidFilteringMode.value} onChangeHandler={androidFilteringModeChange} />
+            <RadioInputGroup text={Translator.trans('step_2.android.select_filtering_method')} name="method" options={FILTERING_METHODS} checkedValue={props.androidFilteringMethod.value} onChangeHandler={androidFilteringMethodChange} />
         </div>
     );
 }
@@ -181,9 +181,9 @@ function IOSSpecific(props) {
     };
     return (
         <div>
-            <RadioInputGroup text={Translator.trans('2iosSysWideFilt')} name="SystemWide" options={YN} checkedValue={props.iosSystemWideFilteringEnabled.value} onChangeHandler={onSystemWideSelectionChange} />
-            <RadioInputGroup text={Translator.trans('2iosSimpFilt')} name="Simplified" options={YN} checkedValue={props.iosSimplifiedFiltersEnabled.value} onChangeHandler={onSimplifiedFiltersChange} />
-            <RadioInputGroup text={Translator.trans('2iosDNS')} name="DNS" options={DNS_OPTIONS} checkedValue={props.iosDNS.value} onChangeHandler={iosDNSChange} />
+            <RadioInputGroup text={Translator.trans('step_2.ios.is_syswide_filt_enabled')} name="SystemWide" options={YN} checkedValue={props.iosSystemWideFilteringEnabled.value} onChangeHandler={onSystemWideSelectionChange} />
+            <RadioInputGroup text={Translator.trans('step_2.ios.is_simplified_filt_enabled')} name="Simplified" options={YN} checkedValue={props.iosSimplifiedFiltersEnabled.value} onChangeHandler={onSimplifiedFiltersChange} />
+            <RadioInputGroup text={Translator.trans('step_2.ios.is_DNS_enabled')} name="DNS" options={DNS_OPTIONS} checkedValue={props.iosDNS.value} onChangeHandler={iosDNSChange} />
         </div>
     );
 }

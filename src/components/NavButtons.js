@@ -31,9 +31,9 @@ function NavButtons(props) {
 
     return (
         <div className="buttons">
-            { props.currentPage > PAGE.START && ( props.currentPage < PAGE.RESULT || !props.issueUrl.validity ) && <button type="button" className="button button--green" name="prev" onClick={onNavBtnClick}>{Translator.trans('NavPrev')}</button> }
-            { props.currentPage < PAGE.SUBMIT && <button type="button" className="button button--green" name="next" disabled={!completed} onClick={onNavBtnClick}>{Translator.trans('NavNext')}</button> }
-            { props.currentPage == PAGE.SUBMIT && <button type="button" className="button button--green" name="submit" disabled={process.env.NODE_ENV === 'production' ? !props.captchaResponse.validity : false} onClick={onSubmitBtnClick}>{Translator.trans('NavSubmit')}</button> }
+            { props.currentPage > PAGE.START && ( props.currentPage < PAGE.RESULT || !props.issueUrl.validity ) && <button type="button" className="button button--green" name="prev" onClick={onNavBtnClick}>{Translator.trans('global.nav.prev')}</button> }
+            { props.currentPage < PAGE.SUBMIT && <button type="button" className="button button--green" name="next" disabled={!completed} onClick={onNavBtnClick}>{Translator.trans('global.nav.next')}</button> }
+            { props.currentPage == PAGE.SUBMIT && <button type="button" className="button button--green" name="submit" disabled={process.env.NODE_ENV === 'production' ? !props.captchaResponse.validity : false} onClick={onSubmitBtnClick}>{Translator.trans('global.nav.submit')}</button> }
         </div>
     );
 }

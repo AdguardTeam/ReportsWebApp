@@ -12,9 +12,9 @@ function Comments(props) {
     };
     return (
         <div>
-            <h1 className="title">{Translator.trans('6Title')}</h1>
-            <div className="text">{Translator.trans('6SubText')}</div>
-            <textarea className="input input--textarea" value={props.comments.value} onChange={onTextareaChange} placeholder = {Translator.trans('6CommentPh')} rows={5}/>
+            <h1 className="title">{Translator.trans('step_6.title')}</h1>
+            <div className="text">{Translator.trans('step_6.this_step_is_optional')}</div>
+            <textarea className="input input--textarea" value={props.comments.value} onChange={onTextareaChange} placeholder = {Translator.trans('step_6.comment_textbox_placeholder')} rows={5}/>
         </div>
     );
 }

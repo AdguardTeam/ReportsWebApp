@@ -43,30 +43,30 @@ function Screenshots(props) {
 
     return (
         <div>
-            <h1 className="title">{Translator.trans('5Title')}</h1>
-            <div className="text">{Translator.trans('5PleaseTake')}</div>
+            <h1 className="title">{Translator.trans('step_5.title')}</h1>
+            <div className="text">{Translator.trans('step_5.please_take_a_screenshot')}</div>
             {
-                repPh(Translator.trans('5HowTo'), /%ManualLink%/, (
+                repPh(Translator.trans('step_5.how_do_i_do_it'), /%ManualLink%/, (
                     <a href="https://www.take-a-screenshot.org/" className="link">
-                        {Translator.trans('5Manual')}
+                        {Translator.trans('step_5.manual')}
                     </a>
                 ))
             }
-            <div className="text">{Translator.trans('5ScReq')}</div>
+            <div className="text">{Translator.trans('step_5.screenshot_requirements')}</div>
             <div className="list list--ordered">
                 <div className="list__item">
-                    <div className="text">{Translator.trans('5Highlight')}</div>
+                    <div className="text">{Translator.trans('step_5.please_highlight_screenshot')}</div>
                 </div>
                 <div className="list__item">
-                    <div className="text">{Translator.trans('5FullVisible')}</div>
+                    <div className="text">{Translator.trans('step_5.full_br_should_be_visible')}</div>
                 </div>
                 {
                     (props.productType == 'And' || props.productType=='iOS') &&
                     <div className="list__item">
                     {
-                        repPh(Translator.trans('5LongScrs'), /%InstructionLink%/, (
+                        repPh(Translator.trans('step_5.take_a_long_screenshot'), /%InstructionLink%/, (
                             <a href="http://phandroid.com/2016/07/13/scrolling-screenshots-android/" className="link">
-                                {Translator.trans('5InstrLink')}
+                                {Translator.trans('step_5.what_is_a_long_screenshot')}
                             </a>
                         ))
                     }
@@ -112,8 +112,8 @@ function ImageBox(props) {
 function InputBoxWithAddButton(props) {
     return (
         <div className="form form--file">
-            <TextInput placeholder={Translator.trans('5ScrsUrlPh')} {...props.inputProps}/>
-            <button className="button button--green button--file" type="button" onClick={props.onAdd} disabled={!props.inputProps.validity}>{Translator.trans('5ScrsAdd')}</button>
+            <TextInput placeholder={Translator.trans('step_5.screenshot_inputbox_placeholder')} {...props.inputProps}/>
+            <button className="button button--green button--file" type="button" onClick={props.onAdd} disabled={!props.inputProps.validity}>{Translator.trans('step_5.screenshot_addbtn')}</button>
         </div>
     );
 }

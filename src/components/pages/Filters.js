@@ -56,7 +56,7 @@ class Filters extends React.Component {
     render() {
         return (
             <div>
-                <h1 className="title">{Translator.trans('4Title')}</h1>
+                <h1 className="title">{Translator.trans('step_4.title')}</h1>
                 <ListSelection
                     dataArray={this.props.selectedFilters}
                     mapDataToInputProps={this.mapDataToInputProps}
@@ -64,7 +64,7 @@ class Filters extends React.Component {
                 >
                     <Select
                         className="select"
-                        placeholder={Translator.trans('4FilterPlaceholder')}
+                        placeholder={Translator.trans('step_4.filter_input_placeholder')}
                         value={this.state.current}
                         onChange={this.onSelectChange}
                     />

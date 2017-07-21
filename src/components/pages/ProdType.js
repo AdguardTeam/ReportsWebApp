@@ -23,7 +23,7 @@ function ProdType(props) {
     };
     return (
         <div>
-            <h1 className="title">{Translator.trans('1Title')}</h1>
+            <h1 className="title">{Translator.trans('step_1.title')}</h1>
             <Select
                 name="ProdType"
                 className="select"
