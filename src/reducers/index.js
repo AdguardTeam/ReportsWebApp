@@ -134,6 +134,9 @@ function getInitialStateFromQuery() {
                 return el.value === a.pt;
             }).length === 1) {
             b.productType = new InputData(a.pt, true);
+            if (a.pt != 'And') {
+                b.probOnWebOrApp = 'web';
+            }
         }
     }
     if ('pv' in a) {
