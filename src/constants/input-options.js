@@ -40,18 +40,18 @@ export const checklists = [
 ];
 
 export const STEALTH_OPTIONS = [
-    { label: 'Hide your search queries', type: 'Bool' },
-    { label: 'Send Do-Not-Track header', type: 'Bool' },
-    { label: 'Remove X-Client-Data header from HTTP requests', type: 'Bool' },
-    { label: 'Self-destructing first-party cookies', type: 'Number' },
-    { label: 'Self-destructing third-party cookies', type: 'Number' },
-    { label: 'Disable cache for third-party requests', type: 'Bool' },
-    { label: 'Block WebRTC', type: 'Bool' },
-    { label: 'Block Push API', type: 'Bool' },
-    { label: 'Block Location API', type: 'Bool' },
-    { label: 'Hide your Referrer from third-parties', type: 'String' },
-    { label: 'Hide your User-Agent', type: 'String' },
-    { label: 'Hide your IP address', type: 'String' }
+    { label: 'Hide your search queries', type: 'Bool', shorthand: 'sq' },
+    { label: 'Send Do-Not-Track header', type: 'Bool', shorthand: 'dnt' },
+    { label: 'Remove X-Client-Data header from HTTP requests', type: 'Bool', shorthand: 'xcl' },
+    { label: 'Self-destructing first-party cookies', type: 'Number', shorthand: '1co' },
+    { label: 'Self-destructing third-party cookies', type: 'Number', shorthand: '3co' },
+    { label: 'Disable cache for third-party requests', type: 'Bool', shorthand: 'dca' },
+    { label: 'Block WebRTC', type: 'Bool', shorthand: 'rtc' },
+    { label: 'Block Push API', type: 'Bool', shorthand: 'psh' },
+    { label: 'Block Location API', type: 'Bool', shorthand: 'loc' },
+    { label: 'Hide your Referrer from third-parties', type: 'String', shorthand: 'ref' },
+    { label: 'Hide your User-Agent', type: 'String', shorthand: 'ua' },
+    { label: 'Hide your IP address', type: 'String', shorthand: 'ip' }
 ];
 
 export const VPN_PROXY = [

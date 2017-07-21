@@ -130,7 +130,11 @@ function getInitialStateFromQuery() {
     var a = parseQuery(location.search);
     var b = Object.create(null);
     if ('pt' in a) {
-        b.productType = new InputData(productTypeOptions[a.pt].value, true);
+        if (productTypeOptions.filter((el) => {
+                return el.value === a.pt;
+            }).length === 1) {
+            b.productType = new InputData(a.pt, true);
+        }
     }
     if ('pv' in a) {
         b.productVersion = new InputData(a.pv, true);
@@ -138,33 +142,36 @@ function getInitialStateFromQuery() {
     // [true, true, [true, detailStr], ...]
     if ('st' in a) {
         if (!a.st) {
-            b.winStealthEnabled = new InputData('false', true);
+            b.winStealthEnabled = new InputData(false, true);
         }
         else {
             let st = JSON.parse(a.st);
             b.winStealthEnabled = new InputData(true, true);
             b.winStealthOptions = STEALTH_OPTIONS.map((el, index) => (
                 el.type == 'Bool' ? {
-                    enabled: !!st[index]
+                    enabled: st[el.shorthand] === undefined ? false : !!st[el.shorthand]
                 } : {
-                    enabled: !!st[index][0],
-                    detail: new InputData(st[index][1], true)
+                    enabled: st[el.shorthand] === undefined,
+                    detail: new InputData(st[el.shorthand], true)
                 }
             ));
         }
     }
     if ('br' in a) {
-        b.browserSelection = new InputData(a.br, true);
+        if (browserOptions.filter((el) =>  {
+                return el.value == a.br;
+            }).length === 1) {
+            b.browserSelector = new InputData(a.br, true);
+        }
     }
     if ('bd' in a) {
-        b.browserSelection = new InputData(browserOptions.length - 1, true);
         b.browserDetail = new InputData(a.bd, true);
     }
     if ('url' in a) {
         b.problemUrl = new InputData(a.url, validateURL(a.url));
     }
     if ('ft' in a) {
-        b.selectedFilters = a.ft.split(',')
+        b.selectedFilters = a.ft.split(',');
     }
     return updateValidatedPages(Object.assign(Object.create(null), INITIAL_STATE, b), 0, 1, 2, 4, 6);
 }
