@@ -344,10 +344,10 @@ body {
 /*Filters*/
 
 .filter {
-    margin: 10px 5px 0;
+    margin: 10px 10px 0 0;
     display: inline-block;
     vertical-align: middle;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     white-space: nowrap;
@@ -358,8 +358,8 @@ body {
         font-size: 1.3rem;
     }
 
-    .filter:first-child {
-        margin-left: 0;
+    .filter:last-child {
+        margin-right: 0;
     }
 }
 
