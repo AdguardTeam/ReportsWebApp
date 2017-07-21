@@ -7,6 +7,9 @@ import { extractDomain } from '../utils/parse-url.js';
 import { STEALTH_OPTIONS, filterOptions } from '../constants/input-options.js';
 import * as PAGE from '../constants/page_num.js';
 
+import Translator from '../constants/strings';
+
+
 function NavButtons(props) {
     let completed = props.completedPages[props.currentPage];
     const onNavBtnClick = (event) => {
@@ -28,9 +31,9 @@ function NavButtons(props) {
 
     return (
         <div className="buttons">
-            { props.currentPage > PAGE.START && ( props.currentPage < PAGE.RESULT || !props.issueUrl.validity ) && <button type="button" className="button button--green" name="prev" onClick={onNavBtnClick}>Prev</button> }
-            { props.currentPage < PAGE.SUBMIT && <button type="button" className="button button--green" name="next" disabled={!completed} onClick={onNavBtnClick}>Next</button> }
-            { props.currentPage == PAGE.SUBMIT && <button type="button" className="button button--green" name="submit" disabled={process.env.NODE_ENV === 'production' ? !props.captchaResponse.validity : false} onClick={onSubmitBtnClick}>Submit</button> }
+            { props.currentPage > PAGE.START && ( props.currentPage < PAGE.RESULT || !props.issueUrl.validity ) && <button type="button" className="button button--green" name="prev" onClick={onNavBtnClick}>{Translator.trans('global.nav.prev')}</button> }
+            { props.currentPage < PAGE.SUBMIT && <button type="button" className="button button--green" name="next" disabled={!completed} onClick={onNavBtnClick}>{Translator.trans('global.nav.next')}</button> }
+            { props.currentPage == PAGE.SUBMIT && <button type="button" className="button button--green" name="submit" disabled={process.env.NODE_ENV === 'production' ? !props.captchaResponse.validity : false} onClick={onSubmitBtnClick}>{Translator.trans('global.nav.submit')}</button> }
         </div>
     );
 }

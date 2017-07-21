@@ -24,6 +24,7 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
+    "bazinga-translator": "^2.6.5",
     "react": "^15.4.2",
     "react-async-script": "^0.9.1",
     "react-dom": "^15.4.2",

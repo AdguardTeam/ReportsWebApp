@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { commentUpdate } from '../../dispatchers';
 
+import Translator from '../../constants/strings';
+
 
 function Comments(props) {
     const onTextareaChange = (event) => {
@@ -10,9 +12,9 @@ function Comments(props) {
     };
     return (
         <div>
-            <h1 className="title">Add your comment</h1>
-            <div className="text">This step is optional. Type in the text box below any information that you think is necessary for the developers to know.</div>
-            <textarea className="input input--textarea" value={props.comments.value} onChange={onTextareaChange} placeholder = "Enter any additional information here" rows={5}/>
+            <h1 className="title">{Translator.trans('step_6.title')}</h1>
+            <div className="text">{Translator.trans('step_6.this_step_is_optional')}</div>
+            <textarea className="input input--textarea" value={props.comments.value} onChange={onTextareaChange} placeholder = {Translator.trans('step_6.comment_textbox_placeholder')} rows={5}/>
         </div>
     );
 }

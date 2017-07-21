@@ -11,6 +11,8 @@ import { filterOptions, filterOptionsMap } from '../../constants/input-options.j
 
 import { insVal, delVal } from '../../utils/immutable.js';
 
+import Translator from '../../constants/strings';
+
 
 class Filters extends React.Component {
     constructor(props) {
@@ -54,7 +56,7 @@ class Filters extends React.Component {
     render() {
         return (
             <div>
-                <h1 className="title">What filters do you have enabled?</h1>
+                <h1 className="title">{Translator.trans('step_4.title')}</h1>
                 <ListSelection
                     dataArray={this.props.selectedFilters}
                     mapDataToInputProps={this.mapDataToInputProps}
@@ -62,7 +64,7 @@ class Filters extends React.Component {
                 >
                     <Select
                         className="select"
-                        placeholder="Start typing filters name here..."
+                        placeholder={Translator.trans('step_4.filter_input_placeholder')}
                         value={this.state.current}
                         onChange={this.onSelectChange}
                     />

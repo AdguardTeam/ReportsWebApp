@@ -1,23 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Translator from '../../constants/strings';
+
 
 function Result(props) {
     if (props.issueUrl.validity === false) {
         return (
             <div>
-                <h1 className="title">Your report couldn't be submitted</h1>
-                <div className="text">This could be a temporary network connectivity problem.</div>
-                <div className="text">Please try again later.</div>
+                <h1 className="title">{Translator.trans('step_8.title.fail')}</h1>
+                <div className="text">{Translator.trans('step_8.sub1.fail')}</div>
+                <div className="text">{Translator.trans('step_8.sub2.fail')}</div>
                 {/* With a back button */}
             </div>
         )
     } else if (props.issueUrl.validity === true) {
         return (
             <div>
-                <h1 className="title">Your report has been submitted!</h1>
-                <div className="text">Thank you for reporting the issue.</div>
-                <div className="text">You can keep track of the progress of your report in the below link:</div>
+                <h1 className="title">{Translator.trans('step_8.title.success')}</h1>
+                <div className="text">{Translator.trans('step_8.sub1.success')}</div>
+                <div className="text">{Translator.trans('step_8.sub2.success')}</div>
                 <div className="text"><a className="link" href={props.issueUrl.value}>{props.issueUrl.value}</a></div>
             </div>
         );

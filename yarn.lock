@@ -677,6 +677,10 @@ batch@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.6.1.tgz#dc34314f4e679318093fc760272525f94bf25c16"
 
+bazinga-translator@^2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/bazinga-translator/-/bazinga-translator-2.6.5.tgz#13729dccbe26c2989464fd3b1cca2e774c1ae472"
+
 bcrypt-pbkdf@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.1.tgz#63bc5dcb61331b92bc05fd528953c33462a06f8d"
