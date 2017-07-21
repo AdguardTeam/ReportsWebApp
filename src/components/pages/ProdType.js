@@ -27,14 +27,14 @@ function ProdType(props) {
             <Select
                 name="ProdType"
                 className="select"
-                placeholder="Adguard product type"
+                placeholder={Translator.trans('step_1.prod_type_placeholder')}
                 value={props.productType.value}
                 options={productTypeOptions}
                 onChange={onProdTypeChange}
             />
             <TextInput
                 name="ProdVer"
-                placeholder="Enter the product version..."
+                placeholder={Translator.trans('step_1.prod_version_placeholder')}
                 {...props.productVersion}
                 onChangeHandler={onProdVerChange}
             />

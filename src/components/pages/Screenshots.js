@@ -47,7 +47,7 @@ function Screenshots(props) {
             <div className="text">{Translator.trans('step_5.please_take_a_screenshot')}</div>
             {
                 repPh(Translator.trans('step_5.how_do_i_do_it'), /%ManualLink%/, (
-                    <a href="https://www.take-a-screenshot.org/" className="link">
+                    <a href={Translator.trans('step_5.manual_link')} target="_blank" className="link">
                         {Translator.trans('step_5.manual')}
                     </a>
                 ))
@@ -65,7 +65,7 @@ function Screenshots(props) {
                     <div className="list__item">
                     {
                         repPh(Translator.trans('step_5.take_a_long_screenshot'), /%InstructionLink%/, (
-                            <a href="http://phandroid.com/2016/07/13/scrolling-screenshots-android/" className="link">
+                            <a href={Translator.trans('step_5.long_screenshot_instr_link')} target="_blank" className="link">
                                 {Translator.trans('step_5.what_is_a_long_screenshot')}
                             </a>
                         ))

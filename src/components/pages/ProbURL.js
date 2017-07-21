@@ -24,9 +24,9 @@ function ProbURL(props) {
             {
                 props.productType.value == 'And' &&
                 <div>
-                    <RadioInput value="web" labelText="Browser" checked={webOrApp == 'web'} onChangeHandler={webOrAppChange}/>
-                    <RadioInput value="app" labelText="Google Play app" checked={webOrApp == 'app'} onChangeHandler={webOrAppChange}/>
-                    <div className="text">{Translator.trans('step_3.contact_support')}<a className="link" href="mailto:support@adguard.com">{Translator.trans('step_3.contact_support')}</a></div>
+                    <RadioInput value="web" labelText={Translator.trans('step_3.browser')} checked={webOrApp == 'web'} onChangeHandler={webOrAppChange}/>
+                    <RadioInput value="app" labelText={Translator.trans('step_3.app')} checked={webOrApp == 'app'} onChangeHandler={webOrAppChange}/>
+                    <div className="text">{Translator.trans('step_3.contact_support')}<a className="link" href={Translator.trans('step_3.support_email_link')} target="_blank">{Translator.trans('step_3.support_email')}</a></div>
                 </div>
             }
             { webOrApp == 'web' && <WebDetails /> }
@@ -72,7 +72,7 @@ function WebDetails(props) {
                     </span>
                 </label>
             }
-            <p className="text">{Translator.trans('3ContactSupport')}<a className="link" href="mailto:support@adguard.com">{Translator.trans('3SupportEmail')}</a></p>
+            <p className="text">{Translator.trans('step_3.contact_support')}<a className="link" href={Translator.trans('step_3.support_email_link')} target="_blank">{Translator.trans('step_3.support_email')}</a></p>
 
             {
                 props.browserSelection.value && (props.browserSelection.value != 'Other' || props.browserDetail.validity) &&
