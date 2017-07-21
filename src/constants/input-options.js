@@ -40,17 +40,17 @@ export const checklists = [
 ];
 
 export const STEALTH_OPTIONS = [
-    { label: 'Hide your search queries', type: 'Bool', shorthand: 'sq' },
-    { label: 'Send Do-Not-Track header', type: 'Bool', shorthand: 'dnt' },
-    { label: 'Remove X-Client-Data header from HTTP requests', type: 'Bool', shorthand: 'xcl' },
-    { label: 'Self-destructing first-party cookies', type: 'Number', shorthand: '1co' },
-    { label: 'Self-destructing third-party cookies', type: 'Number', shorthand: '3co' },
-    { label: 'Disable cache for third-party requests', type: 'Bool', shorthand: 'dca' },
-    { label: 'Block WebRTC', type: 'Bool', shorthand: 'rtc' },
-    { label: 'Block Push API', type: 'Bool', shorthand: 'psh' },
-    { label: 'Block Location API', type: 'Bool', shorthand: 'loc' },
-    { label: 'Hide your Referrer from third-parties', type: 'String', shorthand: 'ref' },
-    { label: 'Hide your User-Agent', type: 'String', shorthand: 'ua' },
+    { label: 'Hide your search queries', type: 'Bool', shorthand: 'hide_search_queries' },
+    { label: 'Send Do-Not-Track header', type: 'Bool', shorthand: 'DNT' },
+    { label: 'Remove X-Client-Data header from HTTP requests', type: 'Bool', shorthand: 'x_client' },
+    { label: 'Self-destructing first-party cookies', type: 'Number', shorthand: 'first_party_cookies' },
+    { label: 'Self-destructing third-party cookies', type: 'Number', shorthand: 'third_party_cookies' },
+    { label: 'Disable cache for third-party requests', type: 'Bool', shorthand: 'disable_3rd_party_cache' },
+    { label: 'Block WebRTC', type: 'Bool', shorthand: 'webrtc' },
+    { label: 'Block Push API', type: 'Bool', shorthand: 'push' },
+    { label: 'Block Location API', type: 'Bool', shorthand: 'location' },
+    { label: 'Hide your Referrer from third-parties', type: 'String', shorthand: 'referrer' },
+    { label: 'Hide your User-Agent', type: 'String', shorthand: 'user_agent' },
     { label: 'Hide your IP address', type: 'String', shorthand: 'ip' }
 ];
 

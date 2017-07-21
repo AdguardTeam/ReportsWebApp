@@ -127,54 +127,59 @@ function parseQuery(qstr) {
  * Enabled filters: ft
  */
 function getInitialStateFromQuery() {
-    var a = parseQuery(location.search);
-    var b = Object.create(null);
-    if ('pt' in a) {
+    let a = parseQuery(location.search);
+    let b = Object.create(null);
+    if ('product_type' in a) {
+        let pt = a['product_type'];
         if (productTypeOptions.filter((el) => {
-                return el.value === a.pt;
+                return el.value === pt;
             }).length === 1) {
-            b.productType = new InputData(a.pt, true);
-            if (a.pt != 'And') {
+            b.productType = new InputData(pt, true);
+            if (pt != 'And') {
                 b.probOnWebOrApp = 'web';
             }
         }
     }
-    if ('pv' in a) {
-        b.productVersion = new InputData(a.pv, true);
+    if ('product_version' in a) {
+        b.productVersion = new InputData(a['product_version'], true);
     }
     // [true, true, [true, detailStr], ...]
-    if ('st' in a) {
-        if (!a.st) {
+    if ('stealth.enabled' in a) {
+        if (a['stealth.enabled'] === 'true') {
+            b.winStealthEnabled = new InputData(true, true);
+        } else if (a['stealth.enabled'] === 'false') {
             b.winStealthEnabled = new InputData(false, true);
         }
-        else {
-            let st = JSON.parse(a.st);
-            b.winStealthEnabled = new InputData(true, true);
-            b.winStealthOptions = STEALTH_OPTIONS.map((el, index) => (
-                el.type == 'Bool' ? {
-                    enabled: st[el.shorthand] === undefined ? false : !!st[el.shorthand]
-                } : {
-                    enabled: st[el.shorthand] === undefined,
-                    detail: new InputData(st[el.shorthand], true)
-                }
-            ));
-        }
     }
-    if ('br' in a) {
+
+    b.winStealthOptions = STEALTH_OPTIONS.map((el, index) => {
+        if (('stealth.' + el.shorthand) in a) {
+            return el.type == 'Bool' ? {
+                enabled: a['stealth.' + el.shorthand] == 'true'
+            } : {
+                enabled: true,
+                detail: new InputData(a['stealth.' + el.shorthand], true)
+            };
+        } else {
+            return INITIAL_STATE.winStealthOptions[index];
+        }
+    });
+
+    if ('browser' in a) {
         if (browserOptions.filter((el) =>  {
-                return el.value == a.br;
+                return el.value == a['browser'];
             }).length === 1) {
-            b.browserSelector = new InputData(a.br, true);
+            b.browserSelector = new InputData(a['browser'], true);
         }
     }
-    if ('bd' in a) {
-        b.browserDetail = new InputData(a.bd, true);
+    if ('browser_detail' in a) {
+        b.browserDetail = new InputData(a['browser_detail'], true);
     }
     if ('url' in a) {
-        b.problemUrl = new InputData(a.url, validateURL(a.url));
+        b.problemUrl = new InputData(a['url'], validateURL(a.url));
     }
-    if ('ft' in a) {
-        b.selectedFilters = a.ft.split(',');
+    if ('filters' in a) {
+        b.selectedFilters = a['filters'].split('.');
     }
     return updateValidatedPages(Object.assign(Object.create(null), INITIAL_STATE, b), 0, 1, 2, 4, 6);
 }
