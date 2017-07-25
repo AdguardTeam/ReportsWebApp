@@ -13,8 +13,8 @@ parameter | explanation
 `stealth.hide_search_queries` | Can be `true` or `false`.
 `stealth.DNT` | Can be `true` or `false`.
 `stealth.x_client` | Can be `true` or `false`.
-`stealth.first_party_cookies` | A string representing a decimal number that is specified in the stealth module indicating the number of first-party cookies to be kept. If this query parameter does not exist, it is treated as not enabled.
-`stealth.third_party_cookies` | A string representing a decimal number that is specified in the stealth module indicating the number of third-party cookies to be kept. If this query parameter does not exist, it is treated as not enabled.
+`stealth.first_party_cookies` | A string representing a decimal number that is specified in the stealth module indicating a time of first-party cookies to be kept in seconds. If this query parameter does not exist, it is treated as not enabled.
+`stealth.third_party_cookies` | A string representing a decimal number that is specified in the stealth module indicating a time of third-party cookies to be kept in seconds. If this query parameter does not exist, it is treated as not enabled.
 `stealth.disable_third_party_cache` | Can be `true` or `false`.
 `stealth.webrtc` |  Can be `true` or `false`.
 `stealth.push` |  Can be `true` or `false`.
