@@ -45,7 +45,7 @@ export const STEALTH_OPTIONS = [
     { label: 'Remove X-Client-Data header from HTTP requests', type: 'Bool', shorthand: 'x_client' },
     { label: 'Self-destructing first-party cookies', type: 'Number', shorthand: 'first_party_cookies' },
     { label: 'Self-destructing third-party cookies', type: 'Number', shorthand: 'third_party_cookies' },
-    { label: 'Disable cache for third-party requests', type: 'Bool', shorthand: 'disable_3rd_party_cache' },
+    { label: 'Disable cache for third-party requests', type: 'Bool', shorthand: 'disable_third_party_cache' },
     { label: 'Block WebRTC', type: 'Bool', shorthand: 'webrtc' },
     { label: 'Block Push API', type: 'Bool', shorthand: 'push' },
     { label: 'Block Location API', type: 'Bool', shorthand: 'location' },
