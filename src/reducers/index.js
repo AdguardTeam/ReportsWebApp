@@ -122,12 +122,7 @@ function parseQuery(qstr) {
 }
 
 /**
- * Product type: pt
- * Product version: pv
- * Stealth mode settings: st
- * Browser and version: br
- * Page URL or app's package name: url
- * Enabled filters: ft
+ * See https://github.com/AdguardTeam/ReportsWebApp#pre-filling-the-app-with-query-parameters for details
  */
 function getInitialStateFromQuery() {
     let a = parseQuery(location.search);
@@ -179,7 +174,7 @@ function getInitialStateFromQuery() {
         b.browserDetail = new InputData(a['browser_detail'], true);
     }
     if ('url' in a) {
-        b.problemUrl = new InputData(a['url'], validateURL(a.url));
+        b.problemURL = new InputData(a['url'], validateURL(a.url));
     }
     if ('filters' in a) {
         b.selectedFilters = a['filters'].split('.');
