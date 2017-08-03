@@ -104,6 +104,13 @@ export function iosDNSChange(value) {
     });
 }
 
+export function otherSoftwareNameChanged(value) {
+    store.dispatch({
+        type: 'UPDATE_OTHER_SOFTWARE_NAME',
+        data: value
+    });
+}
+
 export function webOrAppChange(val) {
     store.dispatch({
         type: 'UPDATE_WEB_OR_APP',
