@@ -26,3 +26,6 @@ parameter | explanation
 `browser_detail` |  A string representing a browser's name. When this parameter value is specified, the value of `browser` parameter should be `Other`.
 `url` |  A string representing a url where the problem in which the report is trying to report takes place.
 `filters`| A _period_-separated list of filterIds, as specified in `https://filters.adtidy.org/windows/filters.json`.
+
+#### Example 
+`https://adguardteam.github.io/ReportsWebApp/new_report.html?product_type=Win&product_version=6.2&stealth.enabled=true&stealth.hide_search_queries=true&stealth.DNT=true&stealth.x_client=false&stealth.first_party_cookies=30&stealth.third_party_cookies=2880&stealth.disable_third_party_cache=true&stealth.webrtc=true&stealth.push=false&stealth.location=true&stealth.referrer=http%3A%2F%2Fadguard.com&stealth.user_agent=Mozilla%2F5.0%20(Linux%3B%20Android%206.0.1%3B%20SM-G920I%20Build%2FMMB29K)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F58.0.3029.83%20Mobile%20Safari%2F537.36&stealth.ip=127.0.0.1&browser=Other&browser_detail=Midori&url=http%3A%2F%2Fgoogle.com&filters=2.3.4.5`
