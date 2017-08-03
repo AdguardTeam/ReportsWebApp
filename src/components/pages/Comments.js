@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { commentUpdate } from '../../dispatchers';
 
-import Translator from '../../constants/strings';
+import { translator } from '../../constants/strings';
 
 
 function Comments(props) {
@@ -12,9 +12,9 @@ function Comments(props) {
     };
     return (
         <div>
-            <h1 className="title">{Translator.trans('step_6.title')}</h1>
-            <div className="text">{Translator.trans('step_6.this_step_is_optional')}</div>
-            <textarea className="input input--textarea" value={props.comments.value} onChange={onTextareaChange} placeholder = {Translator.trans('step_6.comment_textbox_placeholder')} rows={5}/>
+            <h1 className="title">{translator.trans('step_6.title')}</h1>
+            <div className="text">{translator.trans('step_6.this_step_is_optional')}</div>
+            <textarea className="input input--textarea" value={props.comments.value} onChange={onTextareaChange} placeholder = {translator.trans('step_6.comment_textbox_placeholder')} rows={5}/>
         </div>
     );
 }

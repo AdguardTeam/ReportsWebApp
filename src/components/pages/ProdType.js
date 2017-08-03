@@ -10,7 +10,7 @@ import { productTypeChange, productVersionChange } from '../../dispatchers';
 
 import { productTypeOptions } from '../../constants/input-options.js';
 
-import Translator from '../../constants/strings';
+import { translator } from '../../constants/strings';
 
 function ProdType(props) {
     const onProdTypeChange = (event) => {
@@ -23,18 +23,18 @@ function ProdType(props) {
     };
     return (
         <div>
-            <h1 className="title">{Translator.trans('step_1.title')}</h1>
+            <h1 className="title">{translator.trans('step_1.title')}</h1>
             <Select
                 name="ProdType"
                 className="select"
-                placeholder={Translator.trans('step_1.prod_type_placeholder')}
+                placeholder={translator.trans('step_1.prod_type_placeholder')}
                 value={props.productType.value}
                 options={productTypeOptions}
                 onChange={onProdTypeChange}
             />
             <TextInput
                 name="ProdVer"
-                placeholder={Translator.trans('step_1.prod_version_placeholder')}
+                placeholder={translator.trans('step_1.prod_version_placeholder')}
                 {...props.productVersion}
                 onChangeHandler={onProdVerChange}
             />

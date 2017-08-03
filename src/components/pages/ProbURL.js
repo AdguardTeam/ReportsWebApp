@@ -14,19 +14,19 @@ import { R_URL_DOMAIN_MATCH } from '../../constants/regexes.js';
 
 import { extractDomain } from '../../utils/parse-url.js';
 
-import Translator from '../../constants/strings';
+import { translator } from '../../constants/strings';
 
 function ProbURL(props) {
     let webOrApp = props.probOnWebOrApp;
     return (
         <div>
-            <h1 className="title">{Translator.trans('step_3.title')}</h1>
+            <h1 className="title">{translator.trans('step_3.title')}</h1>
             {
                 props.productType.value == 'And' &&
                 <div>
-                    <RadioInput value="web" labelText={Translator.trans('step_3.browser')} checked={webOrApp == 'web'} onChangeHandler={webOrAppChange}/>
-                    <RadioInput value="app" labelText={Translator.trans('step_3.app')} checked={webOrApp == 'app'} onChangeHandler={webOrAppChange}/>
-                    <div className="text">{Translator.trans('step_3.contact_support')}<a className="link" href={Translator.trans('step_3.support_email_link')} target="_blank">{Translator.trans('step_3.support_email')}</a></div>
+                    <RadioInput value="web" labelText={translator.trans('step_3.browser')} checked={webOrApp == 'web'} onChangeHandler={webOrAppChange}/>
+                    <RadioInput value="app" labelText={translator.trans('step_3.app')} checked={webOrApp == 'app'} onChangeHandler={webOrAppChange}/>
+                    <div className="text">{translator.trans('step_3.contact_support')}<a className="link" href={translator.trans('step_3.support_email_link')} target="_blank">{translator.trans('step_3.support_email')}</a></div>
                 </div>
             }
             { webOrApp == 'web' && <WebDetails /> }
@@ -50,14 +50,14 @@ function WebDetails(props) {
             <Select
                 name="WebURL"
                 className="select"
-                placeholder={Translator.trans('step_3.web.web_url_placeholder')}
+                placeholder={translator.trans('step_3.web.web_url_placeholder')}
                 value={props.browserSelection.value}
                 options={browserOptions}
                 onChange={onBrowserSelectionChange}
             />
             {
                 props.browserSelection.value == 'Other' &&
-                <TextInput {...props.browserDetail} placeholder={Translator.trans('step_3.web.browser_name_placeholder')} onChangeHandler={browserDetailChange} />
+                <TextInput {...props.browserDetail} placeholder={translator.trans('step_3.web.browser_name_placeholder')} onChangeHandler={browserDetailChange} />
             }
             {
                 props.productType.value == 'And' &&
@@ -68,17 +68,17 @@ function WebDetails(props) {
                         onChange={onDataCompEnabledChnge}
                     />
                     <span className="checkbox__text">
-                        {Translator.trans('step_3.web.datacomp_enabled')}
+                        {translator.trans('step_3.web.datacomp_enabled')}
                     </span>
                 </label>
             }
-            <p className="text">{Translator.trans('step_3.contact_support')}<a className="link" href={Translator.trans('step_3.support_email_link')} target="_blank">{Translator.trans('step_3.support_email')}</a></p>
+            <p className="text">{translator.trans('step_3.contact_support')}<a className="link" href={translator.trans('step_3.support_email_link')} target="_blank">{translator.trans('step_3.support_email')}</a></p>
 
             {
                 props.browserSelection.value && (props.browserSelection.value != 'Other' || props.browserDetail.validity) &&
                 <div>
-                    <div className="text">{Translator.trans('step_3.web.above_url_input')}</div>
-                    <TextInput {...props.problemURL} placeholder={Translator.trans('step_3.web.url_input_placeholder')} onChangeHandler={problemURLChange}/>
+                    <div className="text">{translator.trans('step_3.web.above_url_input')}</div>
+                    <TextInput {...props.problemURL} placeholder={translator.trans('step_3.web.url_input_placeholder')} onChangeHandler={problemURLChange}/>
                     <div className="text">Is any additional information required to reproduce the problem? (e.g. login/password etc.) Please include it here, <span className="text text--strong">it will remain secure and will not be shown publicly</span>.</div>
                 </div>
             }
@@ -96,8 +96,8 @@ WebDetails = connect((state) => ({
 function AppDetails(props) {
     return (
         <div>
-            <div className="text">{Translator.trans('step_3.app.how_to_get_url')}</div>
-            <TextInput {...props.problemURL} placeholder={Translator.trans('step_3.app.url_placeholder')} onChangeHandler={problemURLChange}/>
+            <div className="text">{translator.trans('step_3.app.how_to_get_url')}</div>
+            <TextInput {...props.problemURL} placeholder={translator.trans('step_3.app.url_placeholder')} onChangeHandler={problemURLChange}/>
             <div className = "text">Is any additional information required to reproduce the problem? (e.g. login/password etc.) Please include it here, <span className="text text--strong">it will remain secure and will not be shown publicly</span></div>
         </div>
     );

@@ -6,7 +6,7 @@ import { screenshotURLCurrentUpdate, screenshotsUpdate } from '../../dispatchers
 
 import { pushVal, delInd } from '../../utils/immutable.js';
 
-import Translator from '../../constants/strings';
+import { translator } from '../../constants/strings';
 
 
 function Screenshots(props) {
@@ -43,30 +43,30 @@ function Screenshots(props) {
 
     return (
         <div>
-            <h1 className="title">{Translator.trans('step_5.title')}</h1>
-            <div className="text">{Translator.trans('step_5.please_take_a_screenshot')}</div>
+            <h1 className="title">{translator.trans('step_5.title')}</h1>
+            <div className="text">{translator.trans('step_5.please_take_a_screenshot')}</div>
             {
-                repPh(Translator.trans('step_5.how_do_i_do_it'), /%ManualLink%/, (
-                    <a href={Translator.trans('step_5.manual_link')} target="_blank" className="link">
-                        {Translator.trans('step_5.manual')}
+                repPh(translator.trans('step_5.how_do_i_do_it'), /%ManualLink%/, (
+                    <a href={translator.trans('step_5.manual_link')} target="_blank" className="link">
+                        {translator.trans('step_5.manual')}
                     </a>
                 ))
             }
-            <div className="text">{Translator.trans('step_5.screenshot_requirements')}</div>
+            <div className="text">{translator.trans('step_5.screenshot_requirements')}</div>
             <div className="list list--ordered">
                 <div className="list__item">
-                    <div className="text">{Translator.trans('step_5.please_highlight_screenshot')}</div>
+                    <div className="text">{translator.trans('step_5.please_highlight_screenshot')}</div>
                 </div>
                 <div className="list__item">
-                    <div className="text">{Translator.trans('step_5.full_br_should_be_visible')}</div>
+                    <div className="text">{translator.trans('step_5.full_br_should_be_visible')}</div>
                 </div>
                 {
                     (props.productType == 'And' || props.productType=='iOS') &&
                     <div className="list__item">
                     {
-                        repPh(Translator.trans('step_5.take_a_long_screenshot'), /%InstructionLink%/, (
-                            <a href={Translator.trans('step_5.long_screenshot_instr_link')} target="_blank" className="link">
-                                {Translator.trans('step_5.what_is_a_long_screenshot')}
+                        repPh(translator.trans('step_5.take_a_long_screenshot'), /%InstructionLink%/, (
+                            <a href={translator.trans('step_5.long_screenshot_instr_link')} target="_blank" className="link">
+                                {translator.trans('step_5.what_is_a_long_screenshot')}
                             </a>
                         ))
                     }
@@ -112,8 +112,8 @@ function ImageBox(props) {
 function InputBoxWithAddButton(props) {
     return (
         <div className="form form--file">
-            <TextInput placeholder={Translator.trans('step_5.screenshot_inputbox_placeholder')} {...props.inputProps}/>
-            <button className="button button--green button--file" type="button" onClick={props.onAdd} disabled={!props.inputProps.validity}>{Translator.trans('step_5.screenshot_addbtn')}</button>
+            <TextInput placeholder={translator.trans('step_5.screenshot_inputbox_placeholder')} {...props.inputProps}/>
+            <button className="button button--green button--file" type="button" onClick={props.onAdd} disabled={!props.inputProps.validity}>{translator.trans('step_5.screenshot_addbtn')}</button>
         </div>
     );
 }

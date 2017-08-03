@@ -11,7 +11,7 @@ import { filterOptions, filterOptionsMap } from '../../constants/input-options.j
 
 import { insVal, delVal } from '../../utils/immutable.js';
 
-import Translator from '../../constants/strings';
+import { translator } from '../../constants/strings';
 
 
 class Filters extends React.Component {
@@ -56,7 +56,7 @@ class Filters extends React.Component {
     render() {
         return (
             <div>
-                <h1 className="title">{Translator.trans('step_4.title')}</h1>
+                <h1 className="title">{translator.trans('step_4.title')}</h1>
                 <ListSelection
                     dataArray={this.props.selectedFilters}
                     mapDataToInputProps={this.mapDataToInputProps}
@@ -64,7 +64,7 @@ class Filters extends React.Component {
                 >
                     <Select
                         className="select"
-                        placeholder={Translator.trans('step_4.filter_input_placeholder')}
+                        placeholder={translator.trans('step_4.filter_input_placeholder')}
                         value={this.state.current}
                         onChange={this.onSelectChange}
                     />

@@ -10,7 +10,7 @@ import { receivedCaptchaResponse } from '../../dispatchers';
 
 import { R_URL_DOMAIN_MATCH } from '../../constants/regexes.js';
 
-import Translator from '../../constants/strings';
+import { translator } from '../../constants/strings';
 
 
 function SubmitAndCaptcha(props) {
@@ -26,42 +26,42 @@ function SubmitAndCaptcha(props) {
     if (props.waitingResponse) {
         return (
             <div>
-                <h1 className="title">{Translator.trans('step_7.titleDuringSubmission')}</h1>
+                <h1 className="title">{translator.trans('step_7.titleDuringSubmission')}</h1>
                 <div className="loading"></div>
-                <div className="text"> {Translator.trans('step_7.please_wait')} </div>
+                <div className="text"> {translator.trans('step_7.please_wait')} </div>
             </div>
         );
     }
 
     return (
         <div>
-            <h1 className="title">{Translator.trans('7Title')}</h1>
+            <h1 className="title">{translator.trans('7Title')}</h1>
 
             <div className="summary">
                 <div className="summary__row">
                     <div className="summary__cell">
-                        {Translator.trans('step_7.prod')}
+                        {translator.trans('step_7.prod')}
                     </div>
                     <div className="summary__cell">
-                        { prodName + ' ' + props.productVersion.value + ' ' + Translator.trans('step_7.ver') }
+                        { prodName + ' ' + props.productVersion.value + ' ' + translator.trans('step_7.ver') }
                     </div>
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        {Translator.trans('step_7.br')}
+                        {translator.trans('step_7.br')}
                     </div>
                     <div className="summary__cell">
                         {
                             props.browserSelection == 'Other' ? props.browserDetail.value : props.browserSelection.value
                         }
                         {
-                            props.isDataCompressionEnabled === true && ' ' + Translator.trans('step_7.datacompenabled')
+                            props.isDataCompressionEnabled === true && ' ' + translator.trans('step_7.datacompenabled')
                         }
                     </div>
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        { props.isProbOnWebOrApp == 'web' ? Translator.trans('step_7.prob_url') : Translator.trans('step_7.prob_app_url') }
+                        { props.isProbOnWebOrApp == 'web' ? translator.trans('step_7.prob_url') : translator.trans('step_7.prob_app_url') }
                     </div>
                     <div className="summary__cell">
                         { props.problemURL.value }
@@ -69,7 +69,7 @@ function SubmitAndCaptcha(props) {
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        { Translator.trans('step_7.prob_type') }
+                        { translator.trans('step_7.prob_type') }
                     </div>
                     <div className="summary__cell">
                         { props.problemType.value }
@@ -77,7 +77,7 @@ function SubmitAndCaptcha(props) {
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        { Translator.trans('step_7.filters') }
+                        { translator.trans('step_7.filters') }
                     </div>
                     <div className="summary__cell">
                         {props.selectedFilters.toString()}
@@ -85,14 +85,14 @@ function SubmitAndCaptcha(props) {
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        { Translator.trans('step_7.screenshots') }
+                        { translator.trans('step_7.screenshots') }
                     </div>
                     <div className="summary__cell">
                     </div>
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
-                        { Translator.trans('step_7.comments') }
+                        { translator.trans('step_7.comments') }
                     </div>
                     <div className="summary__cell">
                         {props.comments.value}
