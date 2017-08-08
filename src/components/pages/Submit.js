@@ -35,7 +35,7 @@ function SubmitAndCaptcha(props) {
 
     return (
         <div>
-            <h1 className="title">{translator.trans('7Title')}</h1>
+            <h1 className="title">{translator.trans('step_7.title')}</h1>
 
             <div className="summary">
                 <div className="summary__row">
