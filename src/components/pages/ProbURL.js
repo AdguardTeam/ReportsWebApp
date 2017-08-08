@@ -98,7 +98,6 @@ function AppDetails(props) {
         <div>
             <div className="text">{translator.trans('step_3.app.how_to_get_url')}</div>
             <TextInput {...props.problemURL} placeholder={translator.trans('step_3.app.url_placeholder')} onChangeHandler={problemURLChange}/>
-            <div className = "text">Is any additional information required to reproduce the problem? (e.g. login/password etc.) Please include it here, <span className="text text--strong">it will remain secure and will not be shown publicly</span></div>
         </div>
     );
 }
