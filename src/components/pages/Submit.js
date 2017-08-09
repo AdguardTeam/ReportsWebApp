@@ -88,6 +88,9 @@ function SubmitAndCaptcha(props) {
                         { translator.trans('step_7.screenshots') }
                     </div>
                     <div className="summary__cell">
+                        { props.screenshotURLs.map((el, index) => {
+                            return <a href={el.value} target="_blank" key={el.value} className="link">{index + 1}</a>
+                        }) }
                     </div>
                 </div>
                 <div className="summary__row">
