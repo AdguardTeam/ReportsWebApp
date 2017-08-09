@@ -14,6 +14,7 @@ function Screenshots(props) {
     const mapDataToListPropsArray = (screenshotURLs) => {
         return screenshotURLs.map((el, index) => ({
             src: el.value,
+            loadedOnce: el.validity,
             onDelete: onDelete.bind(this, index),
             onLoad: onLoad.bind(this, index),
             onError: onError.bind(this, index),
@@ -96,15 +97,40 @@ export default Screenshots = connect((state) => ({
     screenshotURLs: state.screenshotURLs
 }))(Screenshots);
 
-// To be elaborated...
-function ImageBox(props) {
-    return (
-        <div className="screenshot">
-            <img className="screenshot__image" src={props.src} onLoad={props.onLoad} onError={props.onError} />
-            <div className="screenshot__remove" onClick={props.onDelete}>X</div>
-        </div>
-    );
+
+class ImageBox extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loaded: props.loadedOnce ? true : null
+        };
+        this.onLoad = this.onLoad.bind(this);
+        this.onError = this.onError.bind(this);
+    }
+    onLoad() {
+        this.setState({
+            loaded: true
+        });
+        this.props.onLoad();
+    }
+    onError() {
+        this.setState({
+            loaded: false
+        });
+        this.props.onError();
+    }
+    render() {
+        return (
+            <div className="screenshot">
+                <img className="screenshot__image" src={this.props.src} onLoad={this.onLoad} onError={this.onError} />
+                { this.state.loaded === null && <div className="loading">loading...</div> }
+                { this.state.loaded === false && <div className="error"></div> }
+                <div className="screenshot__remove" onClick={this.props.onDelete}>X</div>
+            </div>
+        );
+    }
 }
+
 /**
  * props: inputProps, onAdd
  */
