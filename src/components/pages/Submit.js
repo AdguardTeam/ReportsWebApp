@@ -26,7 +26,7 @@ function SubmitAndCaptcha(props) {
     if (props.waitingResponse) {
         return (
             <div>
-                <h1 className="title">{translator.trans('step_7.titleDuringSubmission')}</h1>
+                <h1 className="title">{translator.trans('step_7.your_report_is_being_submitted')}</h1>
                 <div className="loading"></div>
                 <div className="text"> {translator.trans('step_7.please_wait')} </div>
             </div>
