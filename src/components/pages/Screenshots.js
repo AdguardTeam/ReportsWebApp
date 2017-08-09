@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { TextInput, ListSelection } from '../elements';
 
-import { screenshotURLCurrentUpdate, screenshotsUpdate } from '../../dispatchers';
-
-import { pushVal, delInd } from '../../utils/immutable.js';
+import { screenshotURLCurrentUpdate, addScreenshotUrl,  deleteScreenshotUrl, screenshotIsLoaded, screenshotIsErrored } from '../../dispatchers';
 
 import { translator } from '../../constants/strings';
 
@@ -15,23 +13,24 @@ function Screenshots(props) {
     };
     const mapDataToListPropsArray = (screenshotURLs) => {
         return screenshotURLs.map((el, index) => ({
-            src: el,
+            src: el.value,
             onDelete: onDelete.bind(this, index),
-            key: el
+            onLoad: onLoad.bind(this, index),
+            onError: onError.bind(this, index),
+            key: el.value
         }));
     };
     const onDelete = (index) => {
-        let newScreenshotURLs = delInd(props.screenshotURLs, index);
-        screenshotsUpdate(newScreenshotURLs);
+        deleteScreenshotUrl(index);
     };
+    const onLoad = (index) => {
+        screenshotIsLoaded(index);
+    };
+    const onError = (index) => {
+        screenshotIsErrored(index);
+    }
     const onAdd = (event) => {
-        if (props.screenshotURLCurrent.validity && props.screenshotURLs.indexOf(props.screenshotURLCurrent.value) == -1) {
-            let newScreenshotURLs = pushVal(props.screenshotURLs, props.screenshotURLCurrent.value);
-            screenshotsUpdate(newScreenshotURLs);
-        }
-        else {
-            //do nothing, or alert user about it..
-        }
+        addScreenshotUrl();
     };
 
     const repPh = (str, ph, el) => { // Replaces a placeholder into a React element.
@@ -84,7 +83,7 @@ function Screenshots(props) {
                         ...props.screenshotURLCurrent
                     }}
                     onAdd={onAdd} />
-                <ImageBox/> {/* say 100 px for now...*/}
+                <ImageBox/>
             </ListSelection>
         </div>
     );
@@ -101,7 +100,7 @@ export default Screenshots = connect((state) => ({
 function ImageBox(props) {
     return (
         <div className="screenshot">
-            <img className="screenshot__image" src={props.src}/>
+            <img className="screenshot__image" src={props.src} onLoad={props.onLoad} onError={props.onError} />
             <div className="screenshot__remove" onClick={props.onDelete}>X</div>
         </div>
     );
