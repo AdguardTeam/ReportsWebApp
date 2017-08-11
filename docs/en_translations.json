@@ -33,7 +33,7 @@
                 "step_3.app.how_to_get_url": "Please enter the full link to the Google Play app you had encountered the problem in. To do so, open the app in Google Play, scroll down, tap on 'Share' button and choose 'Copy to clipboard'. Then paste to the text field below.",
                 "step_3.app.url_placeholder": "Enter Google Play app URL here...",
                 "step_3.web.datacomp_enabled": "Is the data compression in your browser enabled?",
-                "step_4.title": "What filters do you have enabled?",
+                "step_4.title": "App configuration",
                 "step_4.filter_input_placeholder": "Start typing filters name here...",
                 "step_5.title": "Submit a screenshot",
                 "step_5.please_take_a_screenshot": "Please take a screenshot (or screenshots, if needed) of the problem and upload it to any cloud service.",

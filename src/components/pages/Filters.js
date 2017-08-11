@@ -5,6 +5,9 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 import { ListSelection } from '../elements';
+import WinSpecific from './config-questions/Win';
+import AndSpecific from './config-questions/And';
+import IOSSpecific from './config-questions/iOS';
 
 import { filtersUpdate } from '../../dispatchers';
 import { filterOptions, filterOptionsMap } from '../../constants/input-options.js';
@@ -54,9 +57,25 @@ class Filters extends React.Component {
         filtersUpdate(newSelection);
     }
     render() {
+        let SpecificQuestions;
+        switch(this.props.productType.value) {
+            case 'Win':
+                SpecificQuestions = WinSpecific;
+                break;
+            case 'And':
+                SpecificQuestions = AndSpecific;
+                break;
+            case 'iOS':
+                SpecificQuestions = IOSSpecific;
+                break;
+            default:
+                SpecificQuestions = () => <div/>;
+        }
+
         return (
             <div>
                 <h1 className="title">{translator.trans('step_4.title')}</h1>
+                <div className="text">What filters do you have enabled?</div>
                 <ListSelection
                     dataArray={this.props.selectedFilters}
                     mapDataToInputProps={this.mapDataToInputProps}
@@ -70,6 +89,7 @@ class Filters extends React.Component {
                     />
                     <FilterEntry />
                 </ListSelection>
+                <SpecificQuestions />
             </div>
         );
     }
@@ -86,6 +106,7 @@ function FilterEntry(props) {
 }
 
 export default Filters = connect((state) => ({
+    productType: state.productType,
     selectedFilterCurrent: state.selectedFilterCurrent,
     selectedFilters: state.selectedFilters
 }))(Filters);
