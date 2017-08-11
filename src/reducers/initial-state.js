@@ -189,8 +189,8 @@ export function getInitialStateFromQuery() {
     }
 
     if ('ios.DNS' in queryMap) {
-        if (optionHasGivenValue(DNS_OPTIONS, queryMap['iosDNS'])) {
-            state.iosDNS = new InputData(queryMap['iosDNS'], true);
+        if (optionHasGivenValue(DNS_OPTIONS, queryMap['ios.DNS'])) {
+            state.iosDNS = new InputData(queryMap['ios.DNS'], true);
         }
     }
 

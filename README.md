@@ -43,4 +43,4 @@ AG for Android:
 
 AG for iOS:
 
-`https://adguardteam.github.io/ReportsWebApp/new_report.html?product_type=iOS&product_version=1.3.0&browser=Safari&url=https%3A%2F%2F9to5mac.com%2F&filters=2.3.11.12`
+`https://adguardteam.github.io/ReportsWebApp/new_report.html?product_type=iOS&product_version=1.3.0&browser=Safari&url=https%3A%2F%2F9to5mac.com%2F&filters=2.3.11.12&ios.systemwide=true&ios.simplified=false&ios.DNS=Family`

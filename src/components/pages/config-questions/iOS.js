@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { RadioInputGroup } from '../../elements';
 import { iosSystemWideFilteringChange, iosSimplifiedFiltersModeChange, iosDNSChange } from '../../../dispatchers';
-import { DNS_OPTIONS } from '../../../constants/input-options.js';
+import { YN, DNS_OPTIONS } from '../../../constants/input-options.js';
 import { translator } from '../../../constants/strings';
 
 function IOSSpecific(props) {
