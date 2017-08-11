@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { RadioInputGroup } from '../../elements';
+import { TextInput, RadioInputGroup } from '../../elements';
 import { wfpAnswerChange, stealthAnswerChange, stealthOptionAnswerChange, stealthOptionDetailAnswerChange } from '../../../dispatchers';
 import { YN, STEALTH_OPTIONS } from '../../../constants/input-options';
 import { translator } from '../../../constants/strings';
@@ -22,9 +22,9 @@ function WinSpecific(props) {
     };
     return (
         <div>
-            <RadioInputGroup text={translator.trans('step_2.wfp_enabled')} name="WFP" options={YN} checkedValue={props.winWFPEnabled.value} onChangeHandler={onWFPInputChange} />
-            <RadioInputGroup text={translator.trans('step_2.stealth_enabled')} name="Stealth" options={YN} checkedValue={props.winStealthEnabled.value} onChangeHandler={onStealthInputChange} />
-            <div className="text text--subtitle">{translator.trans('step_2.win.mark_stealth_options_below')}</div>
+            <RadioInputGroup text={translator.trans('config.wfp_enabled')} name="WFP" options={YN} checkedValue={props.winWFPEnabled.value} onChangeHandler={onWFPInputChange} />
+            <RadioInputGroup text={translator.trans('config.stealth_enabled')} name="Stealth" options={YN} checkedValue={props.winStealthEnabled.value} onChangeHandler={onStealthInputChange} />
+            <div className="text text--subtitle">{translator.trans('config.win.mark_stealth_options_below')}</div>
             { STEALTH_OPTIONS.map((option, index) => {
                 return (
                     <div key={index} className="row row--checkbox">

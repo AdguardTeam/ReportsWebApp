@@ -35,6 +35,49 @@ export function checklistAnswerChange(val) {
     });
 }
 
+export function webOrAppChange(val) {
+    store.dispatch({
+        type: 'UPDATE_WEB_OR_APP',
+        data: val
+    });
+}
+
+export function browserSelectionChange(val) {
+    store.dispatch({
+        type: 'UPDATE_BROWSER_SELECTION',
+        data: val
+    });
+}
+
+export function browserDetailChange(val) {
+    store.dispatch({
+        type: 'UPDATE_BROWSER_DETAIL',
+        data: val
+    });
+}
+
+export function dataCompEnabledChange(val) {
+    store.dispatch({
+        type: 'UPDATE_DATA_COMPRESSION_ENABLED',
+        data: val
+    });
+}
+
+export function problemURLChange(val) {
+    store.dispatch({
+        type: 'UPDATE_PROBLEM_URL',
+        data: val
+    });
+}
+
+export function filtersUpdate(val) {
+    store.dispatch({
+        type: 'UPDATE_ENABLED_FILTERS',
+        data: val
+    });
+}
+
+
 export function wfpAnswerChange(val) {
     store.dispatch({
         type: 'UPDATE_WFP_ANSWER',
@@ -101,48 +144,6 @@ export function iosDNSChange(value) {
     store.dispatch({
         type: 'UPDATE_IOS_DNS',
         data: value
-    });
-}
-
-export function webOrAppChange(val) {
-    store.dispatch({
-        type: 'UPDATE_WEB_OR_APP',
-        data: val
-    });
-}
-
-export function browserSelectionChange(val) {
-    store.dispatch({
-        type: 'UPDATE_BROWSER_SELECTION',
-        data: val
-    });
-}
-
-export function browserDetailChange(val) {
-    store.dispatch({
-        type: 'UPDATE_BROWSER_DETAIL',
-        data: val
-    });
-}
-
-export function dataCompEnabledChange(val) {
-    store.dispatch({
-        type: 'UPDATE_DATA_COMPRESSION_ENABLED',
-        data: val
-    });
-}
-
-export function problemURLChange(val) {
-    store.dispatch({
-        type: 'UPDATE_PROBLEM_URL',
-        data: val
-    });
-}
-
-export function filtersUpdate(val) {
-    store.dispatch({
-        type: 'UPDATE_ENABLED_FILTERS',
-        data: val
     });
 }
 

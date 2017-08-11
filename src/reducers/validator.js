@@ -72,11 +72,20 @@ updateValidatedPages['2'] = function(state) {
 
 updateValidatedPages['3'] = function(state) {
     if (state.selectedFilters.length === 0) { return false; }
-    
     switch(state.productType.value) {
         case 'Win':
-            /** should require stealth mode options */
-            return state.winWFPEnabled.validity && state.winStealthEnabled.validity;
+            if (!state.winWFPEnabled.validity || !state.winStealthEnabled.validity) {
+                return false;
+            }
+            let check = true;
+            STEALTH_OPTIONS.forEach((el, index) => {
+                if (el.type !== 'Bool') {
+                    if (!state.winStealthOptions[index].detail.validity) {
+                        check = false;
+                    }
+                }  
+            });
+            return check;
         case 'And':
             return state.androidFilteringMethod.validity && state.androidFilteringMode.validity;
         case 'iOS':

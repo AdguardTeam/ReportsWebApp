@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ProdType from './ProdType.js';
 import ProbType from './ProbType.js';
 import ProbURL from './ProbURL.js';
-import Filters from './Filters.js';
+import AppConfig from './AppConfig.js';
 import Screenshots from './Screenshots.js';
 import Comments from './Comments.js';
 import SubmitAndCaptcha from './Submit.js';
@@ -19,7 +19,7 @@ function Pages(props) {
         case 2:
             return (<ProbURL/>);
         case 3:
-            return (<Filters/>);
+            return (<AppConfig/>);
         case 4:
             return (<Screenshots/>);
         case 5:

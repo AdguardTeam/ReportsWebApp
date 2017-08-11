@@ -1,6 +1,6 @@
-import { productTypeOptions, checklists, browserOptions, STEALTH_OPTIONS } from '../constants/input-options';
+import { productTypeOptions, checklists, browserOptions, STEALTH_OPTIONS, VPN_PROXY, FILTERING_METHODS, DNS_OPTIONS } from '../constants/input-options';
 import * as PAGE from '../constants/page_num';
-import updateValidatedPages, { validateURL } from './validator';
+import updateValidatedPages, { validateURL, validatePlayStoreURL } from './validator';
 
 
 export function InputData(value, validity) {
@@ -88,63 +88,111 @@ function parseQuery(qstr) {
     return query;
 }
 
+function optionHasGivenValue(option, value) {
+    return option.filter((el) => {
+        return el.value === value;
+    }).length === 1;
+}
+
 /**
  * See https://github.com/AdguardTeam/ReportsWebApp#pre-filling-the-app-with-query-parameters for details
  */
 export function getInitialStateFromQuery() {
-    let a = parseQuery(location.search);
-    let b = Object.create(null);
-    if ('product_type' in a) {
-        let pt = a['product_type'];
-        if (productTypeOptions.filter((el) => {
-                return el.value === pt;
-            }).length === 1) {
-            b.productType = new InputData(pt, true);
+    let queryMap = parseQuery(location.search);
+    let state = Object.create(null);
+    if ('product_type' in queryMap) {
+        let pt = queryMap['product_type'];
+        if (optionHasGivenValue(productTypeOptions, pt)) {
+            state.productType = new InputData(pt, true);
             if (pt != 'And') {
-                b.probOnWebOrApp = 'web';
+                state.probOnWebOrApp = 'web';
             }
         }
     }
-    if ('product_version' in a) {
-        b.productVersion = new InputData(a['product_version'], true);
+    if ('product_version' in queryMap) {
+        state.productVersion = new InputData(queryMap['product_version'], true);
     }
-    // [true, true, [true, detailStr], ...]
-    if ('stealth.enabled' in a) {
-        if (a['stealth.enabled'] === 'true') {
-            b.winStealthEnabled = new InputData(true, true);
-        } else if (a['stealth.enabled'] === 'false') {
-            b.winStealthEnabled = new InputData(false, true);
+    if ('browser' in queryMap) {
+        if (optionHasGivenValue(browserOptions, queryMap['browser'])) {
+            state.browserSelection = new InputData(queryMap['browser'], true);
+            if (state.productType.value == 'And') {
+                state.probOnWebOrApp = 'web';
+            }
+        }
+    }
+    if ('browser_detail' in queryMap) {
+        state.browserDetail = new InputData(queryMap['browser_detail'], true);
+    }
+    if ('url' in queryMap) {
+        let url = queryMap['url'];
+        if (queryMap['product_type'] == 'And' && validatePlayStoreURL(url)) {
+            state.probOnWebOrApp = 'app';
+            state.problemURL = new InputData(queryMap['url'], true);
+        } else {
+            state.problemURL = new InputData(queryMap['url'], validateURL(queryMap.url));
+        }
+    }
+    if ('filters' in queryMap) {
+        state.selectedFilters = queryMap['filters'].split('.');
+    }
+    if ('win.wfp' in queryMap) {
+        if (queryMap['win.wfp'] === 'true') {
+            state.winWFPEnabled = new InputData(true, true);
+        } else if (queryMap['win.wfp'] === 'false') {
+            state.winWFPEnabled = new InputData(false, true);
+        }
+    }
+    if ('stealth.enabled' in queryMap) {
+        if (queryMap['stealth.enabled'] === 'true') {
+            state.winStealthEnabled = new InputData(true, true);
+        } else if (queryMap['stealth.enabled'] === 'false') {
+            state.winStealthEnabled = new InputData(false, true);
         }
     }
 
-    b.winStealthOptions = STEALTH_OPTIONS.map((el, index) => {
-        if (('stealth.' + el.shorthand) in a) {
+    state.winStealthOptions = STEALTH_OPTIONS.map((el, index) => {
+        if (('stealth.' + el.shorthand) in queryMap) {
             return el.type == 'Bool' ? {
-                enabled: a['stealth.' + el.shorthand] == 'true'
+                enabled: queryMap['stealth.' + el.shorthand] == 'true'
             } : {
                 enabled: true,
-                detail: new InputData(a['stealth.' + el.shorthand], true)
+                detail: new InputData(queryMap['stealth.' + el.shorthand], true)
             };
         } else {
             return INITIAL_STATE.winStealthOptions[index];
         }
     });
 
-    if ('browser' in a) {
-        if (browserOptions.filter((el) =>  {
-                return el.value == a['browser'];
-            }).length === 1) {
-            b.browserSelector = new InputData(a['browser'], true);
+    if ('android.mode' in queryMap) {
+        if (optionHasGivenValue(VPN_PROXY, queryMap['android.mode'])) {
+            state.androidFilteringMode = new InputData(queryMap['android.mode'], true);
         }
     }
-    if ('browser_detail' in a) {
-        b.browserDetail = new InputData(a['browser_detail'], true);
+    if ('android.method' in queryMap) {
+        if (optionHasGivenValue(FILTERING_METHODS, queryMap['android.method'])) {
+            state.androidFilteringMethod = new InputData(queryMap['android.method'], true);
+        }
     }
-    if ('url' in a) {
-        b.problemURL = new InputData(a['url'], validateURL(a.url));
+    if ('ios.systemwide' in queryMap) {
+        if (queryMap['ios.systemwide'] === 'true') {
+            state.iosSystemWideFilteringEnabled = new InputData(true, true);
+        } else if (queryMap['ios.systemwide'] === 'false') {
+            state.iosSystemWideFilteringEnabled = new InputData(false, true);
+        }
     }
-    if ('filters' in a) {
-        b.selectedFilters = a['filters'].split('.');
+    if ('ios.simplified' in queryMap) {
+        if (queryMap['ios.simplified'] === 'true') {
+            state.iosSimplifiedFiltersEnabled = new InputData(true, true);
+        } else if (queryMap['ios.simplified'] === 'false') {
+            state.iosSimplifiedFiltersEnabled = new InputData(false, true);
+        }
     }
-    return updateValidatedPages(Object.assign(Object.create(null), INITIAL_STATE, b), 0, 1, 2, 4, 6);
+
+    if ('ios.DNS' in queryMap) {
+        if (optionHasGivenValue(DNS_OPTIONS, queryMap['iosDNS'])) {
+            state.iosDNS = new InputData(queryMap['iosDNS'], true);
+        }
+    }
+
+    return updateValidatedPages(Object.assign(Object.create(null), INITIAL_STATE, state), 0, 1, 2, 3, 4, 6);
 }

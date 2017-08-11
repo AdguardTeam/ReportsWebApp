@@ -17,7 +17,7 @@ import { insVal, delVal } from '../../utils/immutable.js';
 import { translator } from '../../constants/strings';
 
 
-class Filters extends React.Component {
+class AppConfig extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -105,8 +105,8 @@ function FilterEntry(props) {
     );
 }
 
-export default Filters = connect((state) => ({
+export default AppConfig = connect((state) => ({
     productType: state.productType,
     selectedFilterCurrent: state.selectedFilterCurrent,
     selectedFilters: state.selectedFilters
-}))(Filters);
+}))(AppConfig);

@@ -79,7 +79,7 @@ const reducer = function(state, action) {
             return updateValidatedPages(Object.assign({}, state, {
                 browserSelection: new InputData(action.data, action.data !== null ? true : false),
                 browserDetail: action.data == 'Other' ? state.browserDetail : new InputData(undefined, false) // Or maybe it can be cleared not immediately, only after a page navigation.
-            }));
+            }), 2);
         }
         case 'UPDATE_BROWSER_DETAIL': {
             return updateValidatedPages(Object.assign({}, state, {

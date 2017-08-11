@@ -9,8 +9,8 @@ import { translator } from '../../../constants/strings';
 function AndSpecific(props) {
     return (
         <div>
-            <RadioInputGroup text={translator.trans('step_2.android.select_filtering_mode')} name="VPN/proxy" options={VPN_PROXY} checkedValue={props.androidFilteringMode.value} onChangeHandler={androidFilteringModeChange} />
-            <RadioInputGroup text={translator.trans('step_2.android.select_filtering_method')} name="method" options={FILTERING_METHODS} checkedValue={props.androidFilteringMethod.value} onChangeHandler={androidFilteringMethodChange} />
+            <RadioInputGroup text={translator.trans('config.android.select_filtering_mode')} name="VPN/proxy" options={VPN_PROXY} checkedValue={props.androidFilteringMode.value} onChangeHandler={androidFilteringModeChange} />
+            <RadioInputGroup text={translator.trans('config.android.select_filtering_method')} name="method" options={FILTERING_METHODS} checkedValue={props.androidFilteringMethod.value} onChangeHandler={androidFilteringMethodChange} />
         </div>
     );
 }
