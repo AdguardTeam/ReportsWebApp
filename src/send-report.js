@@ -3,10 +3,6 @@ import { startSubmitRequest, completeSubmitResponse } from './dispatchers';
 import { STEALTH_OPTIONS, filterOptions } from './constants/input-options';
 
 
-const getIssueTitle = (state) => {
-    return extractDomain(state.problemURL.value) + ' - ' + state.problemType.value;
-};
-
 const getIssueBody = (state) => {
 
     const NEW_LINE = '\n';
@@ -90,6 +86,10 @@ const getLabels = (state) => {
 
     if (state.probOnWebOrApp.value == 'app') {
         labels.push('Android');
+    }
+
+    if (state.isNSFWURL) {
+        labels.push('NSFW');
     }
 
     return labels;

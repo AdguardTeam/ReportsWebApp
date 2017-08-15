@@ -139,6 +139,13 @@ export function dataCompEnabledChange(val) {
     });
 }
 
+export function nsfwChange(val) {
+    store.dispatch({
+        type: 'UPDATE_NSFW_URL',
+        data: val
+    });
+}
+
 export function problemURLChange(val) {
     store.dispatch({
         type: 'UPDATE_PROBLEM_URL',
