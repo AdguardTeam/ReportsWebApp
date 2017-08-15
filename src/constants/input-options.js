@@ -34,7 +34,7 @@ export const checklists = [
         skip: { except_on_prob: ['Ads','Social Widget','Annoyance'] }
     },*/
     {
-        label: 'If you don\'t have HTTPs filtering enabled, please enable it. Is the problem still present?',
+        label: 'If you don\'t have HTTPS filtering enabled, please enable it. Is the problem still present?',
         skip: { on_prod:['iOS','Ext','Con'], except_on_prob: ['Ads','Social Widget','Annoyance'] }
     }
 ];

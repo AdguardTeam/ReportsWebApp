@@ -81,6 +81,8 @@ const INITIAL_STATE = (function() {
     _state.iosSimplifiedFiltersEnabled = new InputData(null, false);
     _state.iosDNS = new InputData(null, false);
 
+    _state.otherExtensions = new InputData('', false);
+
     /* Page 3 */
     _state.probOnWebOrApp = null;
 
@@ -356,6 +358,11 @@ const reducer = function(state, action) {
             return updateValidatedPages(Object.assign({}, state, {
                 iosDNS: new InputData(action.data, true)
             }), 1);
+        }
+        case 'UPDATE_OTHER_SOFTWARE_NAME': {
+            return Object.assign({}, state, {
+                otherExtensions: new InputData(action.data, !!action.data.length)
+            });
         }
         case 'UPDATE_WEB_OR_APP': {
             return updateValidatedPages(Object.assign({}, state, {

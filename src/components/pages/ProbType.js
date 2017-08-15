@@ -50,6 +50,7 @@ function ProbType(props) {
             <Checklist />
             { props.isPlatformSpecificQuestionsVisible && (
                 props.productType.value == 'Win' ? <WinSpecific/> : props.productType.value == 'And' ? <AndSpecific/> : props.productType.value == 'iOS' ? <IOSSpecific/> : null )}
+            { props.isPlatformSpecificQuestionsVisible && <OtherExtensionsInfo/> }
         </div>
     );
 
@@ -193,3 +194,22 @@ IOSSpecific = connect((state) => ({
     iosSimplifiedFiltersEnabled: state.iosSimplifiedFiltersEnabled,
     iosDNS: state.iosDNS
 }))(IOSSpecific);
+
+import { otherSoftwareNameChanged } from '../../dispatchers';
+
+function OtherExtensionsInfo(props) {
+    return (
+        <div>
+            <div className="text">Please include names of other extensions or anti-virus software that you are using below, if there are any.</div>
+            <TextInput
+                {...props.otherExtensions}
+                placeholder=""
+                onChangeHandler={otherSoftwareNameChanged}
+            />
+        </div>
+    )
+}
+
+OtherExtensionsInfo = connect((state) => ({
+    otherExtensions: state.otherExtensions
+}))(OtherExtensionsInfo);
