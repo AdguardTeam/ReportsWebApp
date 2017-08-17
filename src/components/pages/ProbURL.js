@@ -6,7 +6,7 @@ import 'react-select/dist/react-select.css';
 
 import { TextInput, RadioInput } from '../elements';
 
-import { webOrAppChange, browserSelectionChange, browserDetailChange, dataCompEnabledChange, problemURLChange } from '../../dispatchers';
+import { webOrAppChange, browserSelectionChange, browserDetailChange, nsfwChange, dataCompEnabledChange, problemURLChange } from '../../dispatchers';
 
 import { browserOptions } from '../../constants/input-options.js';
 
@@ -41,10 +41,12 @@ function WebDetails(props) {
         browserSelectionChange(data);
     };
 
-    const onDataCompEnabledChnge = (event) => {
+    const onDataCompEnabledChange = (event) => {
         dataCompEnabledChange(event.currentTarget.checked);
     };
-
+    const onNSFWChange = (event) => {
+        nsfwChange(event.currentTarget.checked);
+    }
     return (
         <div>
             <Select
@@ -65,7 +67,7 @@ function WebDetails(props) {
                     <input type="checkbox"
                         className="checkbox__input"
                         checked={props.isDataCompressionEnabled}
-                        onChange={onDataCompEnabledChnge}
+                        onChange={onDataCompEnabledChange}
                     />
                     <span className="checkbox__text">
                         {translator.trans('step_3.web.datacomp_enabled')}
@@ -79,6 +81,16 @@ function WebDetails(props) {
                 <div>
                     <div className="text">{translator.trans('step_3.web.above_url_input')}</div>
                     <TextInput {...props.problemURL} placeholder={translator.trans('step_3.web.url_input_placeholder')} onChangeHandler={problemURLChange}/>
+                    <label className="checkbox">
+                        <input type="checkbox"
+                            className="checkbox__input"
+                            checked={props.isNSFWURL}
+                            onChange={onNSFWChange}
+                        />
+                        <span className="checkbox__text">
+                            {translator.trans('step_3.web.is_url_nsfw')}
+                        </span>
+                    </label>
                 </div>
             }
         </div>
@@ -88,6 +100,7 @@ WebDetails = connect((state) => ({
     productType: state.productType,
     browserSelection: state.browserSelection,
     browserDetail: state.browserDetail,
+    isNSFWURL: state.isNSFWURL,
     isDataCompressionEnabled: state.isDataCompressionEnabled,
     problemURL: state.problemURL
 }))(WebDetails);

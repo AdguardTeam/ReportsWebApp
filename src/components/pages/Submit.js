@@ -64,7 +64,7 @@ function SubmitAndCaptcha(props) {
                         { props.isProbOnWebOrApp == 'web' ? translator.trans('step_7.prob_url') : translator.trans('step_7.prob_app_url') }
                     </div>
                     <div className="summary__cell">
-                        { props.problemURL.value }
+                        { (props.isNSFWURL ? '[NSFW] ' : '' ) + props.problemURL.value }
                     </div>
                 </div>
                 <div className="summary__row">

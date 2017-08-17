@@ -91,6 +91,7 @@ const INITIAL_STATE = (function() {
     _state.browserDetail = new InputData('', false);
 
     _state.problemURL = new InputData('', false);
+    _state.isNSFWURL = false;
 
     _state.isDataCompressionEnabled = false;
 
@@ -391,6 +392,11 @@ const reducer = function(state, action) {
         case 'UPDATE_DATA_COMPRESSION_ENABLED': {
             return Object.assign({}, state, {
                 isDataCompressionEnabled: action.data
+            });
+        }
+        case 'UPDATE_NSFW_URL': {
+            return Object.assign({}, state, {
+                isNSFWURL: action.data
             });
         }
         case 'UPDATE_PROBLEM_URL': {
