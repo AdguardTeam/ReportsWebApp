@@ -25,7 +25,7 @@ class Filters extends React.Component {
     }
     mapDataToInputProps(selected) { // selected is props.selectedFilters
         let options = filterOptions.filter((el) => {
-            return selected.indexOf(el.value) > -1 ? false : true;
+            return selected.indexOf(el.value) === -1;
         });
         return { options };
     }
@@ -86,6 +86,5 @@ function FilterEntry(props) {
 }
 
 export default Filters = connect((state) => ({
-    selectedFilterCurrent: state.selectedFilterCurrent,
     selectedFilters: state.selectedFilters
 }))(Filters);

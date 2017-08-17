@@ -160,9 +160,29 @@ export function screenshotURLCurrentUpdate(val) {
     });
 }
 
-export function screenshotsUpdate(val) {
+export function addScreenshotUrl() {
     store.dispatch({
-        type: 'UPDATE_SCREENSHOT_URLS',
+        type: 'ADD_SCREENSHOT_URL'
+    });
+}
+
+export function deleteScreenshotUrl(val) {
+    store.dispatch({
+        type: 'DELETE_SCREENSHOT_URL',
+        data: val
+    });
+}
+
+export function screenshotIsLoaded(val) {
+    store.dispatch({
+        type: 'LOAD_SCREENSHOT',
+        data: val
+    });
+}
+
+export function screenshotIsErrored(val) {
+    store.dispatch({
+        type: 'ERROR_SCREENSHOT',
         data: val
     });
 }

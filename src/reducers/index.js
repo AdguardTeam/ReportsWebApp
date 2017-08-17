@@ -3,6 +3,7 @@ import { createStore } from 'redux';
 import { productTypeOptions, browserOptions, checklists, STEALTH_OPTIONS } from '../constants/input-options.js';
 import { R_URL } from '../constants/regexes.js';
 import * as PAGE from '../constants/page_num.js';
+import { pushVal, delInd } from '../utils/immutable.js';
 
 function InputData(value, validity) {
     this.value = value;
@@ -179,7 +180,9 @@ function getInitialStateFromQuery() {
         b.problemURL = new InputData(a['url'], validateURL(a.url));
     }
     if ('filters' in a) {
-        b.selectedFilters = a['filters'].split('.');
+        b.selectedFilters = a['filters'].split('.').map((str) => {
+            return parseInt(str, 10);
+        });
     }
     return updateValidatedPages(Object.assign(Object.create(null), INITIAL_STATE, b), 0, 1, 2, 4, 6);
 }
@@ -227,7 +230,12 @@ updateValidatedPages['2'] = function(state) {
 };
 
 updateValidatedPages['4'] = function(state) {
-    return state.screenshotURLs.length > 0;
+    if (state.screenshotURLs.length === 0) { return false; }
+    let check = true;
+    state.screenshotURLs.forEach((el) => {
+        if (el.validity !== true) { check = false; }
+    })
+    return check;
 };
 
 updateValidatedPages['6'] = function(state) {
@@ -400,9 +408,34 @@ const reducer = function(state, action) {
                 screenshotURLCurrent: new InputData(action.data, validateURL(action.data))
             });
         }
-        case 'UPDATE_SCREENSHOT_URLS': {
+        case 'ADD_SCREENSHOT_URL': {
+            if (state.screenshotURLs.findIndex((el) => {
+                return el.value === state.screenshotURLCurrent.value;
+            }) === -1) {
+                return updateValidatedPages(Object.assign({}, state, {
+                    screenshotURLs: pushVal(state.screenshotURLs, new InputData(state.screenshotURLCurrent.value, false))
+                }), 4);
+            } else {
+                return state;
+            }
+        }
+        case 'DELETE_SCREENSHOT_URL': {
             return updateValidatedPages(Object.assign({}, state, {
-                screenshotURLs: action.data
+                screenshotURLs: delInd(state.screenshotURLs, action.data)
+            }), 4);
+        }
+        case 'LOAD_SCREENSHOT': {
+            return updateValidatedPages(Object.assign({}, state, {
+                screenshotURLs: Object.assign([], state.screenshotURLs, {
+                    [action.data]: new InputData(state.screenshotURLs[action.data].value, true)
+                })
+            }), 4);
+        }
+        case 'ERROR_SCREENSHOT': {
+            return updateValidatedPages(Object.assign({}, state, {
+                screenshotURLs: Object.assign([], state.screenshotURLs, {
+                    [action.data]: new InputData(state.screenshotURLs[action.data].value, false)
+                })
             }), 4);
         }
         case 'UPDATE_COMMENTS': {
