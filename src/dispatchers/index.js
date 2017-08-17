@@ -35,6 +35,21 @@ export function checklistAnswerChange(val) {
     });
 }
 
+export function problemURLChange(val) {
+    store.dispatch({
+        type: 'UPDATE_PROBLEM_URL',
+        data: val
+    });
+}
+
+export function filtersUpdate(val) {
+    store.dispatch({
+        type: 'UPDATE_ENABLED_FILTERS',
+        data: val
+    });
+}
+
+
 export function wfpAnswerChange(val) {
     store.dispatch({
         type: 'UPDATE_WFP_ANSWER',
@@ -142,20 +157,6 @@ export function dataCompEnabledChange(val) {
 export function nsfwChange(val) {
     store.dispatch({
         type: 'UPDATE_NSFW_URL',
-        data: val
-    });
-}
-
-export function problemURLChange(val) {
-    store.dispatch({
-        type: 'UPDATE_PROBLEM_URL',
-        data: val
-    });
-}
-
-export function filtersUpdate(val) {
-    store.dispatch({
-        type: 'UPDATE_ENABLED_FILTERS',
         data: val
     });
 }
