@@ -107,7 +107,10 @@ class ImageBox extends React.Component {
         this.onLoad = this.onLoad.bind(this);
         this.onError = this.onError.bind(this);
     }
-    onLoad() {
+    onLoad(evt) {
+        if (!evt) { this.onError(); }
+        let img = evt.target;
+        if (img.naturalHeight + img.naturalWidth === 0) { this.onError(); }
         this.setState({
             loaded: true
         });

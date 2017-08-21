@@ -132,11 +132,6 @@ const reducer = function(state, action) {
             }), 2);
         }
         case 'UPDATE_ENABLED_FILTERS': {
-            return Object.assign({}, state, {
-                selectedFilters: action.data
-            });
-        }
-        case 'UPDATE_ENABLED_FILTERS': {
             return updateValidatedPages(Object.assign({}, state, {
                 selectedFilters: action.data
             }), 3);
