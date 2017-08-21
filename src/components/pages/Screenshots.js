@@ -11,8 +11,14 @@ function Screenshots(props) {
     const onInputChange = (url) => {
         screenshotURLCurrentUpdate(url);
     };
-    const mapDataToListPropsArray = (screenshotURLs) => {
-        return screenshotURLs.map((el, index) => ({
+    const mapDataToInputProps = (data) => {
+        return {
+            value: data.value
+        };
+    }
+    const mapDataToListPropsArray = (data) => {
+        // data is [screenshotURLCurrent, screenshotURLs]
+        return data[1].map((el, index) => ({
             src: el.value,
             loadedOnce: el.validity,
             onDelete: onDelete.bind(this, index),
@@ -74,8 +80,8 @@ function Screenshots(props) {
                 }
             </div>
             <ListSelection
-                dataArray={props.screenshotURLs}
-                mapDataToInputProps={() =>{} }
+                dataArray={[props.screenshotURLCurrent, props.screenshotURLs]}
+                mapDataToInputProps={mapDataToInputProps}
                 mapDataToListPropsArray={mapDataToListPropsArray}
             >
                 <InputBoxWithAddButton

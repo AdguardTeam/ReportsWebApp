@@ -199,6 +199,7 @@ const reducer = function(state, action) {
                 return el.value === state.screenshotURLCurrent.value;
             }) === -1) {
                 return updateValidatedPages(Object.assign({}, state, {
+                    screenshotURLCurrent: new InputData('', false),
                     screenshotURLs: pushVal(state.screenshotURLs, new InputData(state.screenshotURLCurrent.value, false))
                 }), 4);
             } else {

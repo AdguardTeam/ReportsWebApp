@@ -15,6 +15,13 @@ export class TextInput extends React.Component {
             value: e.target.value
         });
     }
+    componentWillReceiveProps(nextProps) {
+        if (this.state.value !== nextProps.value) {
+            this.setState({
+                value: nextProps.value
+            });
+        }
+    }
     render() {
         let classStr = 'input'; // To be used on something else..
 
