@@ -89,7 +89,9 @@ function SubmitAndCaptcha(props) {
                     </div>
                     <div className="summary__cell">
                         { props.screenshotURLs.map((el, index) => {
-                            return <a href={el.value} target="_blank" key={el.value} className="link">{index + 1}</a>
+                            return <a href={el.value} target="_blank" key={el.value} className="link">
+                                <img src={el.value} style={{maxWidth:'100px',maxHeight:'100px'}}/>
+                            </a>
                         }) }
                     </div>
                 </div>
