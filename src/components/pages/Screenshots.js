@@ -13,7 +13,7 @@ function Screenshots(props) {
     };
     const mapDataToInputProps = (data) => {
         return {
-            value: data.value
+            value: data[0].value
         };
     }
     const mapDataToListPropsArray = (data) => {
