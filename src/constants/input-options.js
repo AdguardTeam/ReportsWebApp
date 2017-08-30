@@ -1,32 +1,35 @@
+import { translator } from './strings';
+
+
 export const YN = [
-    { value: true, label: 'Yes' },
-    { value: false, label: 'No' }
+    { value: true, label: 'options.YN.yes' },
+    { value: false, label: 'options.YN.no' }
 ];
 
 export const productTypeOptions = [
-    { value: 'Win', label: 'Adguard for Windows' },
-    { value: 'Mac', label: 'Adguard for Mac' },
-    { value: 'And', label: 'Adguard for Android' },
-    { value: 'iOS', label: 'Adguard/Adguard Pro for iOS' },
-    { value: 'Ext', label: 'Adguard Browser extension' },
-    { value: 'Con', label: 'Adguard Content blocker' }
+    { value: 'Win', label: 'options.product_type.Win' },
+    { value: 'Mac', label: 'options.product_type.Mac' },
+    { value: 'And', label: 'options.product_type.And' },
+    { value: 'iOS', label: 'options.product_type.iOS' },
+    { value: 'Ext', label: 'options.product_type.Ext' },
+    { value: 'Con', label: 'options.product_type.Con' }
 ];
 
 export const problemTypeOptions = [ // label is how it will be shown in UI, value is the "name" of the corresponding GitHub label names.
-    { value: 'Ads', label: 'Missed ad' },
-    { value: 'Incorrect Blocking', label: 'Excessive blocking' },
-    { value: 'Social Widget', label: 'Social media elements'},
-    { value: 'Anti Adblock Script', label: 'Anti-adblock script' },
-    { value: 'Annoyance', label: 'Annoyance' }
+    { value: 'Ads', label: 'options.problem_type.Ads' },
+    { value: 'Incorrect Blocking', label: 'options.problem_type.Incorrect_Blocking' },
+    { value: 'Social Widget', label: 'options.problem_type.Social_Widget' },
+    { value: 'Anti Adblock Script', label: 'options.problem_type.Anti_Adblock' },
+    { value: 'Annoyance', label: 'options.problem_type.Annoyance' }
 ];
 
 export const checklists = [
     {
-        label: 'Please check Adguard for filter updates. Is the problem still present?',
+        label: 'options.checklists.filter_update',
         skip: {}
     },
     {
-        label: 'Please disable User filter. Is the problem still present?',
+        label: 'options.checklists.disable_user_filter',
         skip: { on_prod: ['Con'] }
     },/*
     {
@@ -34,41 +37,41 @@ export const checklists = [
         skip: { except_on_prob: ['Ads','Social Widget','Annoyance'] }
     },*/
     {
-        label: 'If you don\'t have HTTPS filtering enabled, please enable it. Is the problem still present?',
+        label: 'options.checklists.HTTPS_filtering',
         skip: { on_prod:['iOS','Ext','Con'], except_on_prob: ['Ads','Social Widget','Annoyance'] }
     }
 ];
 
 export const STEALTH_OPTIONS = [
-    { label: 'Hide your search queries', type: 'Bool', shorthand: 'hide_search_queries' },
-    { label: 'Send Do-Not-Track header', type: 'Bool', shorthand: 'DNT' },
-    { label: 'Remove X-Client-Data header from HTTP requests', type: 'Bool', shorthand: 'x_client' },
-    { label: 'Self-destructing first-party cookies', type: 'Number', shorthand: 'first_party_cookies' },
-    { label: 'Self-destructing third-party cookies', type: 'Number', shorthand: 'third_party_cookies' },
-    { label: 'Disable cache for third-party requests', type: 'Bool', shorthand: 'disable_third_party_cache' },
-    { label: 'Block WebRTC', type: 'Bool', shorthand: 'webrtc' },
-    { label: 'Block Push API', type: 'Bool', shorthand: 'push' },
-    { label: 'Block Location API', type: 'Bool', shorthand: 'location' },
-    { label: 'Hide your Referrer from third-parties', type: 'String', shorthand: 'referrer' },
-    { label: 'Hide your User-Agent', type: 'String', shorthand: 'user_agent' },
-    { label: 'Hide your IP address', type: 'String', shorthand: 'ip' }
+    { label: 'options.stealth.hide_search_queries', type: 'Bool', shorthand: 'hide_search_queries' },
+    { label: 'options.stealth.DNT', type: 'Bool', shorthand: 'DNT' },
+    { label: 'options.stealth.x_client', type: 'Bool', shorthand: 'x_client' },
+    { label: 'options.stealth.first_party_cookies', type: 'Number', shorthand: 'first_party_cookies' },
+    { label: 'options.stealth.third_party_cookies', type: 'Number', shorthand: 'third_party_cookies' },
+    { label: 'options.stealth.disable_third_party_cache', type: 'Bool', shorthand: 'disable_third_party_cache' },
+    { label: 'options.stealth.webrtc', type: 'Bool', shorthand: 'webrtc' },
+    { label: 'options.stealth.push', type: 'Bool', shorthand: 'push' },
+    { label: 'options.stealth.location', type: 'Bool', shorthand: 'location' },
+    { label: 'options.stealth.referrer', type: 'String', shorthand: 'referrer' },
+    { label: 'options.stealth.user_agent', type: 'String', shorthand: 'user_agent' },
+    { label: 'options.stealth.ip', type: 'String', shorthand: 'ip' }
 ];
 
 export const VPN_PROXY = [
-    { value: 'VPN', label: 'VPN' },
-    { value: 'proxy', label:'proxy' }
+    { value: 'VPN', label: 'options.android.vpn' },
+    { value: 'proxy', label:'options.android.proxy' }
 ];
 
 export const FILTERING_METHODS = [
-    { value: 'High-quality', label: 'High-quality' },
-    { value: 'High-speed', label: 'High-speed' },
-    { value: 'Simplified', label: 'Simplified' }
+    { value: 'High-quality', label: 'options.android.high_quality' },
+    { value: 'High-speed', label: 'options.android.high_speed' },
+    { value: 'Simplified', label: 'options.android.simplified' }
 ];
 
 export const DNS_OPTIONS = [
-    { value: 'Default', label: 'Default' },
-    { value: 'Family', label: 'Family Protection' },
-    { value: 'None', label: 'None' }
+    { value: 'Default', label: 'options.dns.default' },
+    { value: 'Family', label: 'options.dns.family' },
+    { value: 'None', label: 'options.dns.none' }
 ];
 
 export const browserOptions = [
@@ -170,3 +173,19 @@ export const filterOptionsMap = (function() {
     });
     return map;
 })();
+
+
+let initialized = false;
+
+const requireLabelUpdate = [YN, productTypeOptions, problemTypeOptions, checklists, STEALTH_OPTIONS, VPN_PROXY, FILTERING_METHODS, DNS_OPTIONS];
+
+export default function initialize() {
+    if (initialized) { return; }
+    initialized = true;
+
+    requireLabelUpdate.forEach((optionArray) => {
+        optionArray.forEach((option) => {
+            option.label = translator.trans(option.label);
+        });
+    });
+}

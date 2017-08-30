@@ -78,7 +78,6 @@ export const INITIAL_STATE = (function() {
     return _state;
 })();
 
-
 function parseQuery(qstr) {
     var query = Object.create(null);
     var a = (qstr[0] === '?' ? qstr.substr(1) : qstr).split('&');

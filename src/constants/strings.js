@@ -1,8 +1,8 @@
 import Translator from 'bazinga-translator';
-
+import initialize_input_options from './input-options';
 
 export let translator;
-export let onTranslationLoad = [];
+export let onTranslationLoad = [initialize_input_options];
 
 const xhr = new XMLHttpRequest();
 xhr.open('GET', window.translations_url);
