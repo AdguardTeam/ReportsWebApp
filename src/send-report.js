@@ -17,7 +17,7 @@ const getIssueBody = (state) => {
     buf.push('Screenshot: ');
 
     state.screenshotURLs.forEach((el, index) => {
-        buf.push(`[${index}](${el})`);
+        buf.push(`[${index}](${el.value})`);
     });
     buf.push('');
 
