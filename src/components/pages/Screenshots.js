@@ -133,7 +133,7 @@ class ImageBox extends React.Component {
             <div className="screenshot">
                 <img className="screenshot__image" src={this.props.src} onLoad={this.onLoad} onError={this.onError} />
                 { this.state.loaded === null && <div className="loading"></div> }
-                { this.state.loaded === false && <div className="error"></div> }
+                { this.state.loaded === false && <div className="screenshot__error"></div> }
                 <div className="screenshot__remove" onClick={this.props.onDelete}>X</div>
             </div>
         );
