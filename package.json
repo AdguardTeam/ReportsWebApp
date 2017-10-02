@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "bazinga-translator": "^2.6.5",
+    "raven-js": "^3.18.1",
     "react": "^15.4.2",
     "react-async-script": "^0.9.1",
     "react-dom": "^15.4.2",
