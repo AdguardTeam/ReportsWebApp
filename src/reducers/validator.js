@@ -2,7 +2,7 @@ import { productTypeOptions, browserOptions, checklists, STEALTH_OPTIONS } from 
 import { R_URL } from '../constants/regexes.js';
 
 export function validateVersion(ver) {
-    return /^\d+(?:\.\d+(?:\.\d+)?)?$/.test(ver);
+    return /^\d[0-9\.]+\d$/.test(ver);
 }
 
 export function validateURL(url) {
@@ -83,7 +83,7 @@ updateValidatedPages['3'] = function(state) {
                     if (!state.winStealthOptions[index].detail.validity) {
                         check = false;
                     }
-                }  
+                }
             });
             return check;
         case 'And':
@@ -99,9 +99,9 @@ updateValidatedPages['4'] = function(state) {
     if (state.screenshotURLs.length === 0) { return false; }
     let check = true;
     state.screenshotURLs.forEach((el) => {
-        if (el.validity !== true) { check = false; } 
+        if (el.validity !== true) { check = false; }
     });
-    return check; 
+    return check;
 };
 
 updateValidatedPages['6'] = function(state) {
