@@ -69,7 +69,7 @@ const getIssueBody = (state) => {
     if (state.productType.value == 'iOS') {
         buf.push('System wide filtering: | ' + ( state.iosSystemWideFilteringEnabled.value ? 'enabled' : 'disabled' ));
         buf.push('Simplified filters: | ' + ( state.iosSimplifiedFiltersEnabled.value ? 'enabled' : 'disabled' ));
-        buf.push('Adguard DNS: | ' + state.iosDNS.value);
+        buf.push('Adguard DNS: | ' + (state.iosDNS.value === 'Other' ? 'Other - ' + state.iosDNSCustom.value : state.iosDNS.value));
     }
 
     buf.push('Filters: | ' + state.selectedFilters.map((filterId) => filterOptions.filter((el) => (el.value == filterId))[0].label.replace(/\sfilter$/, '')).toString());

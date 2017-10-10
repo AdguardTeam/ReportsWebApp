@@ -24,26 +24,32 @@ function WinSpecific(props) {
         <div>
             <RadioInputGroup text={translator.trans('config.wfp_enabled')} name="WFP" options={YN} checkedValue={props.winWFPEnabled.value} onChangeHandler={onWFPInputChange} />
             <RadioInputGroup text={translator.trans('config.stealth_enabled')} name="Stealth" options={YN} checkedValue={props.winStealthEnabled.value} onChangeHandler={onStealthInputChange} />
-            <div className="text text--subtitle">{translator.trans('config.win.mark_stealth_options_below')}</div>
-            { STEALTH_OPTIONS.map((option, index) => {
-                return (
-                    <div key={index} className="row row--checkbox">
-                        <label className="checkbox">
-                            <input className="checkbox__input" type="checkbox" checked={props.winStealthOptions[index].enabled} onChange={onStealthOptionInputChange.bind(null, index)} disabled={!props.winStealthEnabled.value}/>
-                            <span className="checkbox__text">{option.label}</span>
-                        </label>
-                        {
-                            option.type !== 'Bool' &&
+            {/* https://github.com/AdguardTeam/ReportsWebApp/issues/57 */}
+            {
+                props.winStealthEnabled.value === true &&
+                <div>
+                    <div className="text text--subtitle">{translator.trans('config.win.mark_stealth_options_below')}</div>
+                    { STEALTH_OPTIONS.map((option, index) => {
+                        return (
+                            <div key={index} className="row row--checkbox">
+                                <label className="checkbox">
+                                    <input className="checkbox__input" type="checkbox" checked={props.winStealthOptions[index].enabled} onChange={onStealthOptionInputChange.bind(null, index)} disabled={!props.winStealthEnabled.value}/>
+                                    <span className="checkbox__text">{option.label}</span>
+                                </label>
+                                {
+                                    option.type !== 'Bool' &&
 
-                            <TextInput {...props.winStealthOptions[index].detail}
-                                placeholder=""
-                                onChangeHandler={onStealthOptionDetailInputChange.bind(null, index)}
-                                disabled={!props.winStealthEnabled.value||!props.winStealthOptions[index].enabled}
-                            />
-                        }
-                    </div>
-                );
-            }) }
+                                    <TextInput {...props.winStealthOptions[index].detail}
+                                        placeholder=""
+                                        onChangeHandler={onStealthOptionDetailInputChange.bind(null, index)}
+                                        disabled={!props.winStealthEnabled.value||!props.winStealthOptions[index].enabled}
+                                    />
+                                }
+                            </div>
+                        );
+                    }) }
+                </div>
+            }
         </div>
     );
 }

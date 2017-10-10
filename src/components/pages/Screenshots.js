@@ -6,6 +6,8 @@ import { screenshotURLCurrentUpdate, addScreenshotUrl,  deleteScreenshotUrl, scr
 
 import { translator } from '../../constants/strings';
 
+import alertify from 'alertify.js';
+
 
 function Screenshots(props) {
     const onInputChange = (url) => {
@@ -35,6 +37,7 @@ function Screenshots(props) {
     };
     const onError = (index) => {
         screenshotIsErrored(index);
+        alertify.error(translator.trans('step_5.entered_an_invalid_screenshot_URL'));
     }
     const onAdd = (event) => {
         addScreenshotUrl();

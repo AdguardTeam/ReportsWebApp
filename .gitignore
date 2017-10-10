@@ -42,3 +42,6 @@ credentials
 #issues database
 issues.db
 .DS_Store
+
+#
+docs/new_report.html

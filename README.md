@@ -32,6 +32,7 @@ parameter | explanation
 `ios.systemwide` | Can be `true` or `false`, indicates whether system-wide filtering is enabled on Adguard iOS or not.
 `ios.simplified` | Can be `true` or `false`, indicates whether simplified filtering is enabled on Adguard iOS or not. 
 `ios.DNS` | Can be  `Default`, `Family`, `None`.
+`ios.CustomDNS` | Can be any url-encoded string that indicates the custom DNS setting that is being used. If this value is set, the value of `ios.DNS` will be `Other` regardless of the value of `ios.DNS`.
 
 ### Example 
 AG for Windows:
@@ -44,4 +45,4 @@ AG for Android:
 
 AG for iOS:
 
-`https://adguardteam.github.io/ReportsWebApp/new_report.html?product_type=iOS&product_version=1.3.0&browser=Safari&url=https%3A%2F%2F9to5mac.com%2F&filters=2.3.11.12&ios.systemwide=true&ios.simplified=false&ios.DNS=Family`
+`https://adguardteam.github.io/ReportsWebApp/new_report.html?product_type=iOS&product_version=1.3.0&browser=Safari&url=https%3A%2F%2F9to5mac.com%2F&filters=2.3.11.12&ios.systemwide=true&ios.simplified=false&ios.CustomDNS=Google%20Public%20DNS`

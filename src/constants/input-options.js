@@ -69,9 +69,10 @@ export const FILTERING_METHODS = [
 ];
 
 export const DNS_OPTIONS = [
+    { value: 'None', label: 'options.dns.none' },
     { value: 'Default', label: 'options.dns.default' },
     { value: 'Family', label: 'options.dns.family' },
-    { value: 'None', label: 'options.dns.none' }
+    { value: 'Other', label: 'options.dns.other' }
 ];
 
 export const browserOptions = [

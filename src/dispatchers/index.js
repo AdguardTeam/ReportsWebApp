@@ -119,6 +119,13 @@ export function iosDNSChange(value) {
     });
 }
 
+export function iosCustomDNSNameChange(value) {
+    store.dispatch({
+        type: 'UPDATE_IOS_CUSTOM_DNS_NAME',
+        data: value
+    });
+}
+
 export function otherSoftwareNameChanged(value) {
     store.dispatch({
         type: 'UPDATE_OTHER_SOFTWARE_NAME',

@@ -13,8 +13,6 @@ import { YN, problemTypeOptions, checklists, STEALTH_OPTIONS } from '../../const
 import { translator } from '../../constants/strings';
 
 
-
-
 function ProbType(props) {
     const onProbTypeChange = (event) => {
         let data = event && typeof event.value == 'string' ? event.value : null;
@@ -57,6 +55,23 @@ function Checklist(props) {
         });
     };
 
+    const getResolvedText = () => {
+        let indexWithFalsyResponse = props.checklistAnswers.findIndex((el) => {
+            return el === false;
+        });
+        switch (indexWithFalsyResponse) {
+            case 0:
+                return translator.trans('step_2.resolved.with_filter_updates');
+            case 1:
+                return translator.trans('step_2.resolved.with_disabling_user_filter');
+            case 2:
+                return translator.trans('step_2.resolved.with_enabling_HTTPS_filtering');
+            default:
+                // Note: this part will never be executed in a current checklist
+                return translator.trans('step_2.resolved.default');
+        }
+    }
+
     if (!props.productType.validity || !props.problemType.validity) {
         return null;
     }
@@ -72,7 +87,7 @@ function Checklist(props) {
                     );
                 }
             ) }
-            { props.isResolvedTextVisible && <div className = "text text--bold">{translator.trans('step_2.when_the_problem_is_resolved')}</div> }
+            { props.isResolvedTextVisible && <div className = "text text--bold">{getResolvedText()}</div> }
         </div>
     );
 }
@@ -91,7 +106,9 @@ import { otherSoftwareNameChanged } from '../../dispatchers';
 function OtherExtensionsInfo(props) {
     return (
         <div>
-            <div className="text">Please include names of other extensions or anti-virus software that you are using below, if there are any.</div>
+            <div className="text">
+                {translator.trans('step_2.provide_other_extensions_info')}
+            </div>
             <TextInput
                 {...props.otherExtensions}
                 placeholder=""

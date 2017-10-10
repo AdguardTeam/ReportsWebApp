@@ -89,7 +89,8 @@ updateValidatedPages['3'] = function(state) {
         case 'And':
             return state.androidFilteringMethod.validity && state.androidFilteringMode.validity;
         case 'iOS':
-            return state.iosSystemWideFilteringEnabled.validity && state.iosSimplifiedFiltersEnabled.validity && state.iosDNS.validity;
+            // https://github.com/AdguardTeam/ReportsWebApp/issues/55
+            return state.iosSystemWideFilteringEnabled.validity && state.iosSimplifiedFiltersEnabled.validity && state.iosDNS.validity && (state.iosDNS.value !== 'Other' || state.iosDNSCustom.validity);
         default:
             return true;
     }

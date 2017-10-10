@@ -188,7 +188,12 @@ const reducer = function(state, action) {
             return updateValidatedPages(Object.assign({}, state, {
                 iosDNS: new InputData(action.data, true)
             }), 3);
-        }        
+        }
+        case 'UPDATE_IOS_CUSTOM_DNS_NAME': {
+            return updateValidatedPages(Object.assign({}, state, {
+                iosDNSCustom: new InputData(action.data, !!action.data)
+            }), 3);
+        }
         case 'UPDATE_SCREENSHOT_URL_CURRENT': {
             return Object.assign({}, state, {
                 screenshotURLCurrent: new InputData(action.data, validateURL(action.data))

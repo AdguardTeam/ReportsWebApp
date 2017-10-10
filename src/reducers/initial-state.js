@@ -61,6 +61,7 @@ export const INITIAL_STATE = (function() {
     _state.iosSystemWideFilteringEnabled = new InputData(null, false);
     _state.iosSimplifiedFiltersEnabled = new InputData(null, false);
     _state.iosDNS = new InputData(null, false);
+    _state.iosDNSCustom = new InputData('', false);
 
     /* Page 5 */
     _state.screenshotURLCurrent = new InputData('', false);
@@ -189,11 +190,14 @@ export function getInitialStateFromQuery() {
             state.iosSimplifiedFiltersEnabled = new InputData(false, true);
         }
     }
-
     if ('ios.DNS' in queryMap) {
         if (optionHasGivenValue(DNS_OPTIONS, queryMap['ios.DNS'])) {
             state.iosDNS = new InputData(queryMap['ios.DNS'], true);
         }
+    }
+    if ('ios.CustomDNS' in queryMap) {
+        state.iosDNSCustom = new InputData(decodeURIComponent(queryMap['ios.CustomDNS']), true);
+        state.iosDNS = new InputData('Other', true);
     }
 
     return updateValidatedPages(Object.assign(Object.create(null), INITIAL_STATE, state), 0, 1, 2, 3, 4, 6);
