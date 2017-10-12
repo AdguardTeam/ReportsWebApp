@@ -9,6 +9,7 @@ const getIssueBody = (state) => {
     const buf = [];
 
     buf.push('');
+    buf.push('***Issue URL***: ' + state.problemURL.value);
 
     if (state.comments.validity) {
         buf.push('***Comment***: ' + state.comments.value);
