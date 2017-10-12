@@ -42,13 +42,20 @@ export function problemURLChange(val) {
     });
 }
 
-export function filtersUpdate(val) {
+
+export function addFilter(val) {
     store.dispatch({
-        type: 'UPDATE_ENABLED_FILTERS',
+        type: 'ADD_NEW_SELECTED_FILTER',
         data: val
     });
 }
 
+export function deleteFilter(val) {
+    store.dispatch({
+        type: 'DELETE_SELECTED_FILTER',
+        data: val
+    });
+}
 
 export function wfpAnswerChange(val) {
     store.dispatch({

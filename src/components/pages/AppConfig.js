@@ -9,52 +9,51 @@ import WinSpecific from './config-questions/Win';
 import AndSpecific from './config-questions/And';
 import IOSSpecific from './config-questions/iOS';
 
-import { filtersUpdate } from '../../dispatchers';
+import { addFilter, deleteFilter } from '../../dispatchers';
 import { filterOptions, filterOptionsMap } from '../../constants/input-options.js';
 
-import { insVal, delVal } from '../../utils/immutable.js';
-
 import { translator } from '../../constants/strings';
+
+import { validateURL } from '../../reducers/validator';
 
 
 class AppConfig extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            current: '' // Should I store it in the store too?
-        };
         this.onSelectChange = this.onSelectChange.bind(this);
         this.mapDataToListPropsArray = this.mapDataToListPropsArray.bind(this);
     }
-    mapDataToInputProps(selected) { // selected is props.selectedFilters
+    mapDataToInputProps([selectedFilters, selectedCustomFilters]) {
         let options = filterOptions.filter((el) => {
-            return selected.indexOf(el.value) === -1;
+            return selectedFilters.indexOf(el.value) === -1;
         });
         return { options };
     }
     onSelectChange(event) {
         if (event) {
-            let newSelection = insVal(this.props.selectedFilters, event.value);
-            filtersUpdate(newSelection);
-            this.setState({
-                current: event.value
-            });
+            addFilter(event.value);
         }
     }
-    mapDataToListPropsArray(selected) {
-        let self = this;
-        return selected.map( (val, index) => {
+    mapDataToListPropsArray([selectedFilters, selectedCustomFilters]) {
+        let filters = selectedFilters.map( (val, index) => {
             let label = filterOptions[filterOptionsMap[val]].label;
             return {
                 label: label,
-                onClose: self.onDelete.bind(self, val),
+                onClose: this.onDelete.bind(this, val),
                 key: label
             };
         });
+        let customFilters = selectedCustomFilters.map( (val) => {
+            return {
+                label: val,
+                onClose: this.onDelete.bind(this, val),
+                key: val
+            };
+        });
+        return filters.concat(customFilters);
     }
     onDelete(val) {
-        let newSelection = delVal(this.props.selectedFilters, val);
-        filtersUpdate(newSelection);
+        deleteFilter(val);
     }
     render() {
         let SpecificQuestions;
@@ -75,18 +74,35 @@ class AppConfig extends React.Component {
         return (
             <div>
                 <h1 className="title">{translator.trans('step_4.title')}</h1>
-                <div className="text">What filters do you have enabled?</div>
+                <div className="text">{translator.trans('step_4.what_filter_do_you_have_enabled')}</div>
                 <ListSelection
-                    dataArray={this.props.selectedFilters}
+                    dataArray={[this.props.selectedFilters, this.props.selectedCustomFilters]}
                     mapDataToInputProps={this.mapDataToInputProps}
                     mapDataToListPropsArray={this.mapDataToListPropsArray}
                 >
-                    <Select
+
+                    <Select.Creatable
                         className="select"
                         placeholder={translator.trans('step_4.filter_input_placeholder')}
-                        value={this.state.current}
+                        
                         onChange={this.onSelectChange}
+
+                        isValidNewOption={
+                            ({ label: filterUrl }) => {
+                                return filterUrl && validateURL(filterUrl.trim());
+                            }
+                        }
+
+                        promptTextCreator={
+                            (filterUrl) => {
+                                return translator.trans('step_4.enter_custom_filter_subscription', {
+                                    'filterUrl': filterUrl
+                                })
+                            }
+                        }
                     />
+
+
                     <FilterEntry />
                 </ListSelection>
                 <SpecificQuestions />
@@ -107,6 +123,9 @@ function FilterEntry(props) {
 
 export default AppConfig = connect((state) => ({
     productType: state.productType,
+    
     selectedFilterCurrent: state.selectedFilterCurrent,
-    selectedFilters: state.selectedFilters
+    
+    selectedFilters: state.selectedFilters,
+    selectedCustomFilters: state.selectedCustomFilters
 }))(AppConfig);

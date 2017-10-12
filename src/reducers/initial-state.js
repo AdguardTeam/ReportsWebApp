@@ -43,6 +43,7 @@ export const INITIAL_STATE = (function() {
 
     /* Page 4 */
     _state.selectedFilters = [];
+    _state.selectedCustomFilters = [];
 
     _state.winWFPEnabled = new InputData(null, false);
     _state.winStealthEnabled = new InputData(null, false);
@@ -138,6 +139,9 @@ export function getInitialStateFromQuery() {
             return parseInt(str, 10);
         });
     }
+    if ('custom_filters' in queryMap) {
+        state.selectedCustomFilters = queryMap['custom_filters'].split(',');
+    }
     if ('win.wfp' in queryMap) {
         if (queryMap['win.wfp'] === 'true') {
             state.winWFPEnabled = new InputData(true, true);
@@ -152,7 +156,6 @@ export function getInitialStateFromQuery() {
             state.winStealthEnabled = new InputData(false, true);
         }
     }
-
     state.winStealthOptions = STEALTH_OPTIONS.map((el, index) => {
         if (('stealth.' + el.shorthand) in queryMap) {
             return el.type == 'Bool' ? {
@@ -196,8 +199,36 @@ export function getInitialStateFromQuery() {
         }
     }
     if ('ios.CustomDNS' in queryMap) {
-        state.iosDNSCustom = new InputData(decodeURIComponent(queryMap['ios.CustomDNS']), true);
+        state.iosDNSCustom = new InputData(queryMap['ios.CustomDNS'], true);
         state.iosDNS = new InputData('Other', true);
+    }
+    let comments = '';
+    if ('referrer' in queryMap) {
+        comments += '\n';
+        comments += 'Referrer:\n';
+        comments += queryMap['referrer'] + '\n';
+    }
+    if ('userscripts' in queryMap) {
+        comments += '\n';
+        comments += 'Custom userscripts:\n';
+        let userscripts = queryMap['userscripts'].split(',');
+        userscripts.forEach((userscriptUrl) => {
+            comments += userscriptUrl + '\n';
+        });
+    }
+    if (comments.length) {
+        state.comments = new InputData(comments, true);
+    }
+    /**
+     * user_agent should be parsed to retrieve browser's name and version from it.
+     * This information should be used to pre-fill step 3.
+     * Selected browser should always be "Other" in this case,
+     * and the text area should contain browser name & version,
+     * e.g. "Chrome 61.0.3163.100"
+     */
+    if ('user_agent' in queryMap) {
+        state.browserSelection = new InputData('Other', true);
+        state.browserDetail = new InputData(queryMap['user_agent'], true);
     }
 
     return updateValidatedPages(Object.assign(Object.create(null), INITIAL_STATE, state), 0, 1, 2, 3, 4, 6);

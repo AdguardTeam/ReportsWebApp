@@ -85,6 +85,14 @@ function SubmitAndCaptcha(props) {
                 </div>
                 <div className="summary__row">
                     <div className="summary__cell">
+                        { translator.trans('step_7.custom_filters') }
+                    </div>
+                    <div className="summary__cell">
+                        {props.selectedCustomFilters.join(',\r\n')}
+                    </div>
+                </div>
+                <div className="summary__row">
+                    <div className="summary__cell">
                         { translator.trans('step_7.screenshots') }
                     </div>
                     <div className="summary__cell">

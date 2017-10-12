@@ -5,9 +5,9 @@ Array.prototype.findIndex||Object.defineProperty(Array.prototype,'findIndex',{va
 import { createStore } from 'redux';
 import * as PAGE from '../constants/page_num';
 import updateValidatedPages from './validator';
-import { validateVersion, validateURL, validatePlayStoreURL, getNextIndex } from './validator';
+import { validateVersion, validateURL, validatePlayStoreURL, getNextIndex, parseComments } from './validator';
 import { INITIAL_STATE, getInitialStateFromQuery, InputData } from './initial-state';
-import { pushVal, delInd } from '../utils/immutable';
+import { pushVal, insVal, delInd, delVal } from '../utils/immutable';
 
 const reducer = function(state, action) {
     if (typeof state === 'undefined') {
@@ -131,10 +131,54 @@ const reducer = function(state, action) {
                 problemURL: new InputData(action.data, state.probOnWebOrApp=='web' ? validateURL(action.data) : validatePlayStoreURL(action.data)),
             }), 2);
         }
-        case 'UPDATE_ENABLED_FILTERS': {
-            return updateValidatedPages(Object.assign({}, state, {
-                selectedFilters: action.data
-            }), 3);
+        case 'ADD_NEW_SELECTED_FILTER': {
+            let value = action.data;
+            switch (typeof value) {
+                case 'number': {
+                    // It indicates a filter ID.
+                    let newSelection = insVal(state.selectedFilters, value)
+                    return updateValidatedPages(Object.assign({}, state, {
+                        selectedFilters: newSelection
+                    }), 3);
+                }
+                case 'string': {
+                    // It indicates a custom filter subscription URL.
+                    value = value.trim(); // trim whitespaces at the start and the end.
+
+                    // If it is a duplicate value, do not update state.
+                    if (state.selectedCustomFilters.indexOf(value) !== -1) {
+                        return state;
+                    }
+
+                    let newSelection = pushVal(state.selectedCustomFilters, value);
+                    return updateValidatedPages(Object.assign({}, state, {
+                        selectedCustomFilters: newSelection
+                    }), 3);
+                }
+                default:
+                    return state;
+            }
+        }
+        case 'DELETE_SELECTED_FILTER': {
+            let value = action.data;
+            switch (typeof value) {
+                case 'number': {
+                    // It indicates a filter ID.
+                    let newSelection = delVal(state.selectedFilters, value);
+                    return updateValidatedPages(Object.assign({}, state, {
+                        selectedFilters: newSelection
+                    }), 3);
+                }
+                case 'string': {
+                    // It indicates a custom filter subscription URL.
+                    let newSelection = delVal(state.selectedCustomFilters, value);
+                    return updateValidatedPages(Object.assign({}, state, {
+                        selectedCustomFilters: newSelection
+                    }), 3);
+                }
+                default:
+                    return state;
+            }
         }
         case 'UPDATE_WFP_ANSWER': {
             return updateValidatedPages(Object.assign({}, state, {

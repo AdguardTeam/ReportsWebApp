@@ -17,7 +17,7 @@ const getIssueBody = (state) => {
     buf.push('Screenshot: ');
 
     state.screenshotURLs.forEach((el, index) => {
-        buf.push(`[${index}](${el.value})`);
+        buf.push(`[Screenshot ${index + 1}](${el.value})`);
     });
     buf.push('');
 
@@ -72,7 +72,13 @@ const getIssueBody = (state) => {
         buf.push('Adguard DNS: | ' + (state.iosDNS.value === 'Other' ? 'Other - ' + state.iosDNSCustom.value : state.iosDNS.value));
     }
 
-    buf.push('Filters: | ' + state.selectedFilters.map((filterId) => filterOptions.filter((el) => (el.value == filterId))[0].label.replace(/\sfilter$/, '')).toString());
+    buf.push('Filters: | ' + state.selectedFilters.map((filterId) => {
+        return filterOptions.filter((el) => {
+            return el.value == filterId
+        })[0].label.replace(/\sfilter$/, '')
+    }).toString());
+
+    buf.push('Custom filter subscriptions: | ' + state.selectedCustomFilters.join(', '));
 
     if (state.otherExtensions.validity) {
         buf.push(`Other extensions used: | ${state.otherExtensions.value}`);
