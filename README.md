@@ -9,7 +9,7 @@ parameter | explanation
 --- | ---
 `product_type` | One among `Win`, `Mac`, `And`, `iOS`, `Ext`, `Con`.
 `product_version` | A string representing the version number. _Example_: 6.2
-`browser` |  Can be one among `Chrome`, `Firefox`, `Opera`, `Opera 40+`, `Safari`, `IE`, `Edge`, `Other`. If the browser does not fall into this categories, the value should be set as `Other` and the string representing the browser name should be attached as a value of a `browser_detail` parameter.
+`browser` |  Can be one among `Chrome`, `Firefox`, `oldFirefox`, `Opera`, `Presto`, `Safari`, `IE`, `Edge`, `Other`. If the browser does not fall into this categories, the value should be set as `Other` and the string representing the browser name should be attached as a value of a `browser_detail` parameter.
 `browser_detail` |  A string representing a browser's name. When this parameter value is specified, the value of `browser` parameter should be `Other`.
 `url` |  A string representing a url where the problem in which the report is trying to report takes place.
 `filters`| A _period_-separated list of filterIds, as specified in `https://filters.adtidy.org/windows/filters.json`.
