@@ -1,7 +1,7 @@
 # ReportsWebApp
 Allows users to report a problem with Adguard filters
 
-https://adguardteam.github.io/ReportsWebApp/new_report.html
+https://reports.adguard.com/en/new_issue.html
 
 ## Pre-filling the app with query parameters
 
