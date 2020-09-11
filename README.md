@@ -59,7 +59,7 @@ AG for Windows:
 
 AG for Android:
 
-`https://reports.adguard.com/new_issue.html?product_type=And&product_version=2.9.1&browser=Chrome&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.espn.score_center&filters=1.2.3.4.5.6& dns.enabled=true& &android.mode=VPN&android.method=High-quality`
+`https://reports.adguard.com/new_issue.html?product_type=And&product_version=2.9.1&browser=Chrome&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.espn.score_center&filters=1.2.3.4.5.6&dns.enabled=true&dns.servers=tls://dns.adguard.com&dns.filters_enabled=true&dns.filters=https://filters.adtidy.org/android/filters/15_optimized.txt&android.mode=VPN&android.method=High-quality`
 
 AG for iOS:
 
