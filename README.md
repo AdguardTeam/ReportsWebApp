@@ -7,15 +7,22 @@ https://reports.adguard.com/en/new_issue.html
 
 parameter | explanation
 --- | ---
-`product_type` | One among `Win`, `Mac`, `And`, `iOS`, `Ext`, `Con`.
+`product_type` | One among `Win`, `Mac`, `And`, `iOS`, `Ext`, `Saf`, `Con`.
 `product_version` | A string representing the version number. _Example_: 6.2
-`browser` |  Can be one among `Chrome`, `Firefox`, `oldFirefox`, `Opera`, `Presto`, `Safari`, `IE`, `Edge`, `Other`. If the browser does not fall into this categories, the value should be set as `Other` and the string representing the browser name should be attached as a value of a `browser_detail` parameter.
+`browser` |  Can be one among `Chrome`, `Safari`, `Firefox`, `Opera`, `Edge`, `IE`, `Other`. If the browser does not fall into this categories, the value should be set as `Other` and the string representing the browser name should be attached as a value of a `browser_detail` parameter.
 `browser_detail` |  A string representing a browser's name. When this parameter value is specified, the value of `browser` parameter should be `Other`.
+`user_agent` | A url-encoded string containing user agent information. If this value is set, `browser` and `browser_detail` query parameters will be ignored and set to `Other` and the value of `user_agent` parameter, respectively.
 `url` |  A string representing a url where the problem in which the report is trying to report takes place.
 `filters`| A _period_-separated list of filterIds, as specified in `https://filters.adtidy.org/windows/filters.json`.
 `custom_filters` | An url-encoded string that includes URLs (or paths to local files) of custom filters, separated by _commas_.
 `userscripts` | An url-encoded string that includes URLs (or paths to local files) of installed userscripts, separated by _commas_.
 `win.wfp` | Can be `true` or `false`, indicates whether WFP driver in AG for Win is enabled or not.
+`browsing_security.enabled`| Can be `true` or `false`.
+`browsing_security.statictics_enabled`| Can be `true` or `false` (needed if `browsing_security.enabled` is `true`).
+`parental_control.enabled`| Can be `true` or `false`.
+`parental_control.sensitivity`| Can be one among `Early`, `Young`, `Teen` or `Disabled`.
+`parental_control.safe_search`| Can be `true` or `false`.
+`parental_control.block_exe`| Can be `true` or `false`.
 `stealth.enabled`| Can be `true` or `false`.
 `stealth.hide_search_queries` | Can be `true` or `false`.
 `stealth.DNT` | Can be `true` or `false`.
@@ -33,6 +40,12 @@ parameter | explanation
 `stealth.referrer` |  A string representing a URL that is used by the stealth module as a referrer value. If this query parameter does not exist, it is treated as not enabled.
 `stealth.user_agent` |  A string representing a user agent that is used by the stealth module as a user agent value. It can be an empty string. If this query parameter does not exist, it is treated as not enabled.
 `stealth.ip` |  A string representing a IP address that is used by the stealth module as a ip address. If this query parameter does not exist, it is treated as not enabled.
+`dns.enabled`| Can be `true` or `false`.
+`dns.server`| Can be one among `System`, `AdGuard`, `AdGuardFamily`, `Google`, `Cloudflare`, `CloudflareAntiMalware`, `CloudflareFamily`, `Cisco`, `CiscoFamily`, `Quad9` or `Other` (for custom server).
+`dns.custom_server` | An url-encoded string that includes URLs of installed set DNS-servers, separated by _commas_.
+`dns.type`| Can be one among `Regular`, `DNSCrypt`, `DNSoverHTTPS`, `DNSoverTLS` (depands on server; not for `Other`).
+`dns.filters_enabled`| Can be `true` or `false`.
+`dns.filters`| An url-encoded string that includes URLs (or paths to local files) of filters, separated by _commas_.
 `android.mode` | Can be `VPN` or `proxy`.
 `android.method` | Can be `High-quality`, `High-speed`, or `Simplified`.
 `ios.systemwide` | Can be `true` or `false`, indicates whether system-wide filtering is enabled on Adguard iOS or not.
@@ -40,7 +53,6 @@ parameter | explanation
 `ios.DNS` | Can be  `Default`, `Family`, `None`.
 `ios.CustomDNS` | Can be any url-encoded string that indicates the custom DNS setting that is being used. If this value is set, the value of `ios.DNS` will be `Other` regardless of the value of `ios.DNS`.
 `referrer` | An url-encoded string containing referrer value with which the page was visited.
-`user_agent` | A url-encoded string containing user agent information. If this value is set, `browser` and `browser_detail` query parameters will be ignored and set to `Other` and the value of `user_agent` parameter, respectively.
 
 ### Example 
 AG for Windows:
