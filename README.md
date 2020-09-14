@@ -41,9 +41,7 @@ parameter | explanation
 `stealth.user_agent` |  A string representing a user agent that is used by the stealth module as a user agent value. It can be an empty string. If this query parameter does not exist, it is treated as not enabled.
 `stealth.ip` |  A string representing a IP address that is used by the stealth module as a ip address. If this query parameter does not exist, it is treated as not enabled.
 `dns.enabled`| Can be `true` or `false`.
-`dns.server`| Can be one among `System`, `AdGuard`, `AdGuardFamily`, `Google`, `Cloudflare`, `CloudflareAntiMalware`, `CloudflareFamily`, `Cisco`, `CiscoFamily`, `Quad9` or `Other` (for custom server).
-`dns.custom_server` | An url-encoded string that includes URLs of installed set DNS-servers, separated by _commas_.
-`dns.type`| Can be one among `Regular`, `DNSCrypt`, `DNSoverHTTPS`, `DNSoverTLS` (depands on server; not for `Other`).
+`dns.servers`| `System` OR an url-encoded string that includes URLs of set DNS-servers, separated by _commas_.
 `dns.filters_enabled`| Can be `true` or `false`.
 `dns.filters`| An url-encoded string that includes URLs (or paths to local files) of filters, separated by _commas_.
 `android.mode` | Can be `VPN` or `proxy`.
@@ -57,11 +55,11 @@ parameter | explanation
 ### Example 
 AG for Windows:
 
-`https://reports.adguard.com/new_issue.html?product_type=Win&product_version=6.2&browser=Other&browser_detail=Midori&url=http%3A%2F%2Fgoogle.com&filters=2.3.4.5&custom_filters=https%3A%2F%2Fraw.githubusercontent.com%2Fhoshsadiq%2Fadblock-nocoin-list%2Fmaster%2Fnocoin.txt%2Chttps%3A%2F%2Feasylist-downloads.adblockplus.org%2Fbitblock.txt&win.wfp=false&stealth.enabled=true&stealth.hide_search_queries=true&stealth.DNT=true&stealth.x_client=false&stealth.first_party_cookies=30&stealth.third_party_cookies=2880&stealth.disable_third_party_cache=true&stealth.webrtc=true&stealth.push=false&stealth.location=true&stealth.referrer=http%3A%2F%2Fadguard.com&stealth.user_agent=Mozilla%2F5.0%20(Linux%3B%20Android%206.0.1%3B%20SM-G920I%20Build%2FMMB29K)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F58.0.3029.83%20Mobile%20Safari%2F537.36&stealth.ip=127.0.0.1&referrer=AdGuard%20For%20Windows&userscripts=http%3A%2F%2Fadsbypasser.github.io%2Freleases%2Fadsbypasser.full.es7.user.js%2Chttps%3A%2F%2Fcdn.adguard.com%2Fpublic%2FUserscripts%2FBeta%2FAdguardPopupBlocker%2F2.1%2Fpopupblocker.user.js`
+`https://reports.adguard.com/new_issue.html?product_type=Win&product_version=6.2&browser=Other&browser_detail=Midori&url=http%3A%2F%2Fgoogle.com&filters=2.3.4.5&custom_filters=https%3A%2F%2Fraw.githubusercontent.com%2Fhoshsadiq%2Fadblock-nocoin-list%2Fmaster%2Fnocoin.txt%2Chttps%3A%2F%2Feasylist-downloads.adblockplus.org%2Fbitblock.txt&win.wfp=false&stealth.enabled=true&stealth.hide_search_queries=true&stealth.DNT=true&stealth.x_client=false&stealth.first_party_cookies=30&stealth.third_party_cookies=2880&stealth.disable_third_party_cache=true&stealth.webrtc=true&stealth.push=false&stealth.location=true&stealth.referrer=http%3A%2F%2Fadguard.com&stealth.user_agent=Mozilla%2F5.0%20(Linux%3B%20Android%206.0.1%3B%20SM-G920I%20Build%2FMMB29K)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F58.0.3029.83%20Mobile%20Safari%2F537.36&stealth.ip=127.0.0.1&dns.enabled=true&dns.servers=https%3A%2F%2Fdns-family.adguard.com%2Fdns-query&dns.filters_enabled=false&referrer=AdGuard%20For%20Windows&userscripts=http%3A%2F%2Fadsbypasser.github.io%2Freleases%2Fadsbypasser.full.es7.user.js%2Chttps%3A%2F%2Fcdn.adguard.com%2Fpublic%2FUserscripts%2FBeta%2FAdguardPopupBlocker%2F2.1%2Fpopupblocker.user.js`
 
 AG for Android:
 
-`https://reports.adguard.com/new_issue.html?product_type=And&product_version=2.9.1&browser=Chrome&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.espn.score_center&filters=1.2.3.4.5.6&android.mode=VPN&android.method=High-quality`
+`https://reports.adguard.com/new_issue.html?product_type=And&product_version=2.9.1&browser=Chrome&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.espn.score_center&filters=1.2.3.4.5.6&dns.enabled=true&dns.servers=tls%3A%2F%2Fdns.adguard.com&dns.filters_enabled=true&dns.filters=https%3A%2F%2Ffilters.adtidy.org%2Fandroid%2Ffilters%2F15_optimized.txt&android.mode=VPN&android.method=High-quality`
 
 AG for iOS:
 
