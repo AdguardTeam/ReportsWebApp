@@ -44,7 +44,10 @@ parameter | explanation
 `dns.servers`| `System` OR an url-encoded string that includes URLs of set DNS-servers, separated by _commas_.
 `dns.filters_enabled`| Can be `true` or `false`.
 `dns.filters`| An url-encoded string that includes URLs (or paths to local files) of filters, separated by _commas_.
+`android.system_root` | Can be `true` or `false`.
 `android.mode` | Can be `VPN` or `proxy`.
+`android.proxy_mode` | Can be `auto` or `manual`.
+`android.proxy_port` | Local proxy port number value.
 `android.method` | Can be `High-quality`, `High-speed`, or `Simplified`.
 `ios.systemwide` | Can be `true` or `false`, indicates whether system-wide filtering is enabled on Adguard iOS or not.
 `ios.simplified` | Can be `true` or `false`, indicates whether simplified filtering is enabled on Adguard iOS or not. 
