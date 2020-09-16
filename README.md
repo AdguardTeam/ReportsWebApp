@@ -49,6 +49,7 @@ parameter | explanation
 `android.proxy_mode` | Can be `auto` or `manual`.
 `android.proxy_port` | Local proxy port number value.
 `android.method` | Can be `High-quality`, `High-speed`, or `Simplified`.
+`android.apps_filtering`| Can be `true` or `false`.
 `ios.systemwide` | Can be `true` or `false`, indicates whether system-wide filtering is enabled on Adguard iOS or not.
 `ios.simplified` | Can be `true` or `false`, indicates whether simplified filtering is enabled on Adguard iOS or not. 
 `ios.DNS` | Can be  `Default`, `Family`, `None`.
