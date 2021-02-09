@@ -44,8 +44,8 @@ parameter | explanation
 `dns.servers`| `System` OR an url-encoded string that includes URLs of set DNS-servers, separated by _commas_.
 `dns.filters_enabled`| Can be `true` or `false`.
 `dns.filters`| An url-encoded string that includes URLs (or paths to local files) of filters, separated by _commas_.
-`dns.timeout` | Timeout number value.
-`dns.fallback_disabled`| Can be `true` or `false`.
+`dns.timeout` | Timeout number value in milliseconds.
+`dns.fallback_enabled`| Can be `true` or `false`.
 `android.system_root` | Can be `true` or `false`.
 `android.mode` | Can be `VPN` or `proxy`.
 `android.proxy_mode` | Can be `auto` or `manual`.
