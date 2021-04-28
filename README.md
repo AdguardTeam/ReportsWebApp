@@ -43,9 +43,9 @@ parameter | explanation
 `dns.enabled`| Can be `true` or `false`.
 `dns.servers`| `System` OR an url-encoded string that includes URLs of set DNS-servers, separated by _commas_.
 `dns.filters_enabled`| Can be `true` or `false`.
-`dns.filters`| An url-encoded string that includes URLs (or paths to local files) of filters, separated by _commas_.
-`dns.timeout` | Timeout number value.
-`dns.fallback_disabled`| Can be `true` or `false`.
+`dns.filters`| An url-encoded string that includes filters' URLs or paths to local files, separated by _commas_. `DnsUserRules` should be included if DNS User Rules enabled.
+`dns.timeout` | Timeout number value in milliseconds.
+`dns.fallback_enabled`| Can be `true` or `false`.
 `android.system_root` | Can be `true` or `false`.
 `android.mode` | Can be `VPN` or `proxy`.
 `android.proxy_mode` | Can be `auto` or `manual`.
@@ -65,7 +65,7 @@ AG for Windows:
 
 AG for Android:
 
-`https://reports.adguard.com/new_issue.html?product_type=And&product_version=2.9.1&browser=Chrome&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.espn.score_center&filters=1.2.3.4.5.6&dns.enabled=true&dns.servers=tls%3A%2F%2Fdns.adguard.com&dns.filters_enabled=true&dns.filters=https%3A%2F%2Ffilters.adtidy.org%2Fandroid%2Ffilters%2F15_optimized.txt&android.mode=VPN&android.method=High-quality`
+`https://reports.adguard.com/new_issue.html?product_type=And&product_version=2.9.1&browser=Chrome&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.espn.score_center&filters=1.2.3.4.5.6&dns.enabled=true&dns.servers=tls%3A%2F%2Fdns.adguard.com&dns.filters_enabled=true&dns.filters=https%3A%2F%2Ffilters.adtidy.org%2Fandroid%2Ffilters%2F15_optimized.txt,DnsUserRules&android.mode=VPN&android.method=High-quality`
 
 AG for iOS:
 
