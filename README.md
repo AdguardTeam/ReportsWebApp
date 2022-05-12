@@ -40,6 +40,7 @@ parameter | explanation
 `stealth.referrer` |  A string representing a URL that is used by the stealth module as a referrer value. If this query parameter does not exist, it is treated as not enabled.
 `stealth.user_agent` |  A string representing a user agent that is used by the stealth module as a user agent value. It can be an empty string. If this query parameter does not exist, it is treated as not enabled.
 `stealth.ip` |  A string representing a IP address that is used by the stealth module as a ip address. If this query parameter does not exist, it is treated as not enabled.
+`stealth.dpi` | Can be `true` or `false`.
 `dns.enabled`| Can be `true` or `false`.
 `dns.servers`| `System` OR an url-encoded string that includes URLs of set DNS-servers, separated by _commas_.
 `dns.filters_enabled`| Can be `true` or `false`.
@@ -53,12 +54,12 @@ parameter | explanation
 `android.method` | Can be `High-quality`, `High-speed`, or `Simplified`.
 `android.apps_filtering`| Can be `true` or `false`.
 `ios.systemwide` | Can be `true` or `false`, indicates whether system-wide filtering is enabled on Adguard iOS or not.
-`ios.simplified` | Can be `true` or `false`, indicates whether simplified filtering is enabled on Adguard iOS or not. 
+`ios.simplified` | Can be `true` or `false`, indicates whether simplified filtering is enabled on Adguard iOS or not.
 `ios.DNS` | Can be  `Default`, `Family`, `None`.
 `ios.CustomDNS` | Can be any url-encoded string that indicates the custom DNS setting that is being used. If this value is set, the value of `ios.DNS` will be `Other` regardless of the value of `ios.DNS`.
 `referrer` | An url-encoded string containing referrer value with which the page was visited.
 
-### Example 
+### Example
 AG for Windows:
 
 `https://reports.adguard.com/new_issue.html?product_type=Win&product_version=6.2&browser=Other&browser_detail=Midori&url=http%3A%2F%2Fgoogle.com&filters=2.3.4.5&custom_filters=https%3A%2F%2Fraw.githubusercontent.com%2Fhoshsadiq%2Fadblock-nocoin-list%2Fmaster%2Fnocoin.txt%2Chttps%3A%2F%2Feasylist-downloads.adblockplus.org%2Fbitblock.txt&win.wfp=false&stealth.enabled=true&stealth.hide_search_queries=true&stealth.DNT=true&stealth.x_client=false&stealth.first_party_cookies=30&stealth.third_party_cookies=2880&stealth.disable_third_party_cache=true&stealth.webrtc=true&stealth.push=false&stealth.location=true&stealth.referrer=http%3A%2F%2Fadguard.com&stealth.user_agent=Mozilla%2F5.0%20(Linux%3B%20Android%206.0.1%3B%20SM-G920I%20Build%2FMMB29K)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F58.0.3029.83%20Mobile%20Safari%2F537.36&stealth.ip=127.0.0.1&dns.enabled=true&dns.servers=https%3A%2F%2Fdns-family.adguard.com%2Fdns-query&dns.filters_enabled=false&referrer=AdGuard%20For%20Windows&userscripts=http%3A%2F%2Fadsbypasser.github.io%2Freleases%2Fadsbypasser.full.es7.user.js%2Chttps%3A%2F%2Fcdn.adguard.com%2Fpublic%2FUserscripts%2FBeta%2FAdguardPopupBlocker%2F2.1%2Fpopupblocker.user.js`
