@@ -49,6 +49,7 @@ Parameter | Explanation
 `stealth.disable_windows_defender` | Can be `true` of `false`.
 `stealth.disable_windows_telemetry` | Can be `true` of `false`.
 `stealth.turn_off_advertising_id` | Can be `true` of `false`.
+`stealth.ext_hide_referrer` | Can be `true` of `false`. Only for AdGuard Browser Extension.
 `dns.enabled`| Can be `true` or `false`.
 `dns.servers`| `System` OR an url-encoded string that includes URLs of set DNS-servers, separated by _commas_.
 `dns.filters_enabled`| Can be `true` or `false`.
