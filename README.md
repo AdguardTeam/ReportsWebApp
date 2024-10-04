@@ -88,4 +88,4 @@ Parameter | Explanation
 
 #### AdGuard for iOS
 
-`https://reports.adguard.com/new_issue.html?product_type=iOS&product_version=4.1.1&system_version=iOS%2016.6&browser=Safari&filters=1.2.3.4.11.14&dns.enabled=true&dns.servers=https:%2F%2Fdns.google%2Fdns-query&dns.filters_enabled=true&dns.filters=https:%2F%2Fraw.githubusercontent.com%2FAdguardTeam%2FFiltersRegistry%2Fmaster%2Ffilters%2Ffilter_15_DnsFilter%2Ffilter.txt`
+`https://reports.adguard.com/new_issue.html?product_type=iOS&product_version=4.1.1&license_type=paid&system_version=iOS%2016.6&browser=Safari&filters=1.2.3.4.11.14&dns.enabled=true&dns.servers=https:%2F%2Fdns.google%2Fdns-query&dns.filters_enabled=true&dns.filters=https:%2F%2Fraw.githubusercontent.com%2FAdguardTeam%2FFiltersRegistry%2Fmaster%2Ffilters%2Ffilter_15_DnsFilter%2Ffilter.txt&advanced_protection_enabled=false`
