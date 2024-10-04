@@ -10,6 +10,7 @@ Parameter | Explanation
 --------- | -----------
 `product_type` | One among `Win`, `Mac`, `And`, `iOS`, `Ext`, `Saf`, `Con`.
 `product_version` | A string representing the version number. _Example_: 6.2
+`license_type` | Can be `free` and `paid`.
 `system_version` | A string representing the system version. _Example_: macOS 13.5
 `browser` | Can be one among `Chrome`, `Safari`, `Firefox`, `Opera`, `Edge`, `IE`, `Other`. If the browser does not fall into this categories, the value should be set as `Other` and the string representing the browser name should be attached as a value of a `browser_detail` parameter.
 `browser_detail` | A string representing a browser's name. When this parameter value is specified, the value of `browser` parameter should be `Other`.
