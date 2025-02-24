@@ -2,7 +2,7 @@
 
 Allows users to report a problem with AdGuard filters.
 
-https://reports.adguard.com/new_issue.html
+<https://reports.adguard.com/new_issue.html>
 
 ## Pre-filling the app with query parameters
 
@@ -18,8 +18,7 @@ Parameter | Explanation
 `user_agent` | A url-encoded string containing user agent information. If this value is set, `browser` and `browser_detail` query parameters will be ignored and set to `Other` and the value of `user_agent` parameter, respectively.
 `url` | A string representing a url where the problem in which the report is trying to report takes place.
 `filters`| A _period_-separated list of filterIds, as specified in `https://filters.adtidy.org/windows/filters.json`.
-`filters_last_update` | A string representing the last **diff** update time for the `filters` due to UTC+0 time zone. _Example_: 2024-11-25-13-30-00. <br/> ⚠️ **Please note:** If diff updates are not supported, do not use it, pass only `filters_last_full_update`.
-`filters_last_full_update` | A string representing the last **full** update time for the `filters` due to UTC+0 time zone. _Example_: 2024-11-24-17-30-00
+`filters_last_update` | A string representing the last update time for the `filters` due to UTC+0 time zone. _Example_: 2024-11-25-13-30-00.
 `custom_filters` | An url-encoded string that includes URLs (or paths to local files) of custom filters, separated by _commas_.
 `userscripts` | An url-encoded string that includes URLs (or paths to local files) of installed userscripts, separated by _commas_.
 `https.filtering` | Can be `true` or `false`.
