@@ -6,8 +6,6 @@ Receives structured query parameters from AdGuard products (Windows, macOS, Andr
 
 https://reports.adguard.com/new_issue.html
 
----
-
 ## Parameters table
 
 | Parameter | Type | Format / Example | Description | Platform | Notes |
@@ -18,10 +16,10 @@ https://reports.adguard.com/new_issue.html
 | `system_version` | string | `11.0.1` | OS version string | All |  |
 | `url` | string | `https%3A%2F%2Fexample.com` | Target page being reported | All | |
 | `filters` | string | `2.3.4.224` | Dot-separated list of filter IDs | All | Divider `.` used across all platforms |
-| `filters_last_update` | string | `2025-10-31-18-00-00` | Timestamp in UTC | All | Consistent across products |
-| `custom_filters` | string | Comma-separated list | User-added filters | All | Divider `,` uniform |
-| `userscripts` | string | Comma-separated list | Enabled userscripts or Android extensions equivalent | All | Divider `,` uniform |
-| `dns.enabled` | bool | `true` / `false` | Whether DNS protection or proxy module is enabled | All | Always present, replaces older optional behavior |
+| `filters_last_update` | string | `2025-10-31-18-00-00` | Timestamp in UTC | All |  |
+| `custom_filters` | string | Comma-separated list | User-added filters | All | Divider `,` |
+| `userscripts` | string | Comma-separated list | Enabled userscripts or Android extensions equivalent | All | Divider `,` |
+| `dns.enabled` | bool | `true` / `false` | Whether DNS protection or proxy module is enabled | All |  |
 | `dns.filters` | string | Desktop: `2.3.4` (IDs), Mobile: URLs | DNS filters applied | All | Platform-dependent format |
 | `dns.servers` | string | Desktop: IPs/System, Mobile: URLs | Active DNS servers | All | Platform-dependent format |
 | `dns.bootstrap` | string | `1.1.1.1,8.8.8.8` | Bootstrap servers | All | Divider `,` |
@@ -32,7 +30,7 @@ https://reports.adguard.com/new_issue.html
 | `dns.custom_filters` | string | `[Name] (url: [URL])` | Custom DNS filters | Win, Mac | Divider `,` |
 | `dns.fallback_mode` | string | `System` / `Custom` / `None` | DNS fallback behavior | Win, Mac |  |
 | `extensions` | string | `[Name] ([type]; url: [URL])` | List of enabled extensions | Win, Mac | Divider `,` |
-| `extensions.enabled` | bool | `true` / `false` | Whether extensions are enabled | Win, Mac | Always present, may be empty |
+| `extensions.enabled` | bool | `true` / `false` | Whether extensions are enabled | Win, Mac |  |
 | `adblocking.enabled` | bool | `true` / `false` | Ad blocking feature state | Win, Mac |  |
 | `parental_control.enabled` | bool | `true` / `false` | Parental control enabled | Win, Mac |  |
 | `parental_control.block_exe` | bool | `true` / `false` | Block executable downloads | Win, Mac |  |
@@ -75,8 +73,6 @@ https://reports.adguard.com/new_issue.html
 | `android.https_filtering` | bool | `true` / `false` | HTTPS filtering active | And |  |
 | `android.root` | bool | `true` / `false` | Root status | And |  |
 
----
-
 ## Browser Extension Specific Parameters
 
 These parameters are not used by the report backend but may appear in the URL as part of internal tracking or URL shortener mechanisms:
@@ -86,13 +82,9 @@ These parameters are not used by the report backend but may appear in the URL as
 | `action`  | string | `report`               | Marks the context of the action, used for analytics. |
 | `from`    | string | `popup` / `background` | Indicates request origin for tracking.               |
 
----
-
 ## Scheme Versioning
 
 All products must include `scheme_version`. The current version (`3`) defines unified DNS data inclusion (from meta information) and consistent Stealth naming. The format and dividers are standardized across all platforms.
-
----
 
 ## Validation Rules
 
@@ -101,38 +93,29 @@ All products must include `scheme_version`. The current version (`3`) defines un
 - `user_agent` has precedence over `browser` and `browser_detail`.
 - For `manifest_version=3`, `browsing_security.*` parameters are omitted.
 
----
-
-## Deprecated Parameters
-
-| Deprecated | Replaced By | Notes |
-|-------------|--------------|-------|
-
----
-
 ## Examples
 
-### **Windows example**
+### Windows example
 ```
 https://reports.adguard.com/en/new_issue.html?scheme_version=3&product_type=Win&product_version=7.15.2&system_version=Microsoft%20Windows%2011&url=https%3A%2F%2Fexample.com&filters=2.3.4.224&filters_last_update=2025-10-31-12-00-00&custom_filters=User%20rules%20(url%3A%20none)&userscripts=DarkMode&dns.enabled=true&dns.filters=adguard-dns&dns.servers=System&dns.custom_bootstrap=1.1.1.1%2C8.8.8.8&dns.fallback=8.8.4.4%2C1.0.0.1&dns.timeout=5000&adblocking.enabled=true&browsing_security.enabled=true&browsing_security.statistics_enabled=true&extensions.enabled=true&extensions=AdGuard%20Assistant%20(script%3B%20url%3A%20https%3A%2F%2Fexample.com)&license_type=paid&win.wfp=true&parental_control.enabled=true&parental_control.block_exe=false&parental_control.safe_search=true&stealth.enabled=true&stealth.block_trackers=true&stealth.strip_url=true&stealth.block_third_party_auth=true&stealth.disable_windows_defender=true&stealth.disable_windows_recall=true&stealth.disable_windows_telemetry=true&stealth.turn_off_advertising_id=true&stealth.hide_search_queries=true&stealth.x_client=true&stealth.flash=true&stealth.java=true&stealth.push=true&stealth.block_webrtc=true&stealth.dpi=true&stealth.send_dnt=true&stealth.first_party_cookies=15&stealth.third_party_cookies=30
 ```
 
-### **macOS example**
+### macOS example
 ```
 https://reports.adguard.com/en/new_issue.html?scheme_version=3&product_type=Mac&product_version=2.14.0&system_version=macOS%2015.0&url=https%3A%2F%2Fads.example.com&filters=2.4.5.50&filters_last_update=2025-10-31-10-00-00&custom_filters=Custom%20List%20(url%3A%20https%3A%2F%2Fexample.org%2Ffilter.txt)&dns.enabled=true&dns.filters=adguard-dns&dns.servers=System&dns.timeout=3000&browsing_security.enabled=true&browsing_security.statistics_enabled=true&stealth.enabled=true&stealth.block_trackers=true&stealth.strip_url=true&stealth.hide_search_queries=true&stealth.send_dnt=true&stealth.block_webrtc=true&stealth.self_destruct_cookies=10
 ```
 
-### **Android example**
+### Android example
 ```
 https://reports.adguard.com/en/new_issue.html?scheme_version=3&product_type=And&product_version=4.3&system_version=Android%2015&url=https%3A%2F%2Fexample.org&filters=2.3.4.200&filters_last_update=2025-10-31-11-00-00&custom_filters=Mobile%20Rules%20(url%3A%20none)&dns.enabled=true&dns.filters=adguard-dns&dns.servers=System&dns.timeout=4000&browsing_security.enabled=true&stealth.enabled=true&stealth.block_trackers=true&stealth.strip_url=true&stealth.block_webrtc=true&stealth.send_dnt=true&android.mode=VPN&android.method=Full&android.https_filtering=true&android.root=false
 ```
 
-### **iOS example**
+### iOS example
 ```
 https://reports.adguard.com/en/new_issue.html?scheme_version=3&product_type=iOS&product_version=4.5.1&system_version=iOS%2018.0&url=https%3A%2F%2Fnews.example.com&filters=2.3.4.205&filters_last_update=2025-10-31-09-00-00&dns.enabled=true&dns.filters=adguard-dns&browsing_security.enabled=true&stealth.enabled=true&stealth.block_trackers=true&stealth.strip_url=true&stealth.send_dnt=true
 ```
 
-### **Browser Extension example (Manifest V3)**
+### Browser Extension example (Manifest V3)
 ```
 https://reports.adguard.com/en/new_issue.html?scheme_version=3&product_type=Ext&product_version=5.0.1&manifest_version=3&system_version=Chrome%20128.0.6613.114&browser=chrome&url=https%3A%2F%2Fexample.net&filters=2.3.4.300&filters_last_update=2025-10-31-14-00-00&stealth.enabled=true&stealth.block_trackers=true&stealth.strip_url=true&stealth.hide_search_queries=true&stealth.send_dnt=true&stealth.block_webrtc=true
 ```
