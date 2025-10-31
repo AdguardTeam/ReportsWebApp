@@ -19,52 +19,52 @@ https://reports.adguard.com/new_issue.html
 | `url` | string | `https%3A%2F%2Fexample.com` | Target page being reported | All | |
 | `filters` | string | `2.3.4.224` | Dot-separated list of filter IDs | All | Divider `.` used across all platforms |
 | `filters_last_update` | string | `2025-10-31-18-00-00` | Timestamp in UTC | All | Consistent across products |
-| `custom_filters` | string | Comma-separated list | User-added filters | All | Divider `,` |
-| `userscripts` | string | Comma-separated list | Enabled userscripts | All | Divider `,` |
-| `dns.enabled` | bool | `true` / `false` | DNS protection state | All | Present for scheme ≥ 3 |
-| `dns.filters` | string | `adguard-dns` | DNS filter metadata from product | All | Comes from meta data in scheme 3 |
-| `dns.servers` | string | `System` / custom DNS names | Active DNS servers | All | Divider `,` |
+| `custom_filters` | string | Comma-separated list | User-added filters | All | Divider `,` uniform |
+| `userscripts` | string | Comma-separated list | Enabled userscripts or Android extensions equivalent | All | Divider `,` uniform |
+| `dns.enabled` | bool | `true` / `false` | Whether DNS protection or proxy module is enabled | All | Always present, replaces older optional behavior |
+| `dns.filters` | string | Varies by platform:<br>Windows/macOS: `2.3.4` (dot-separated IDs)<br>Android/iOS: `https://filters.adtidy.org/android/filters/15_optimized.txt,DnsUserRules` (comma-separated URLs) | DNS filters applied by the product | All | ID-based for desktop; URL-based for mobile (Android, iOS) |
+| `dns.servers` | string | Varies by platform:<br>Windows/macOS: `System` or `1.1.1.1,8.8.8.8` (comma or newline-separated IPs)<br>Android/iOS: `https://dns.adguard.com/dns-query,System` (comma-separated URLs) | Active DNS servers used by the product | All | IP-based for desktop; URL-based for mobile (Android, iOS) |
 | `dns.bootstrap` | string | `1.1.1.1,8.8.8.8` | Bootstrap servers | All | Divider `,` |
 | `dns.fallback` | string | `8.8.4.4,1.0.0.1` | Fallback servers | All | Divider `,` |
 | `dns.timeout` | int | `5000` | Timeout in ms | All |  |
-| `dns.custom_bootstrap` | string | `1.1.1.1` | Custom bootstrap DNS servers list | Win | Divider `,` or `\n` |
-| `dns.custom_fallback` | string | `8.8.8.8` | Custom fallback DNS servers list | Win | Divider `,` or `\n` |
-| `dns.custom_filters` | string | `[Name] (url: [URL])` | Custom DNS filters | Win | Divider `,` |
-| `dns.fallback_mode` | string | `System` / `Custom` / `None` | DNS fallback behavior | Win |  |
-| `extensions` | string | `[Name] ([type]; url: [URL])` | List of enabled extensions | Win | Divider `,` |
-| `extensions.enabled` | bool | `true` / `false` | Whether extensions are enabled | Win |  |
-| `adblocking.enabled` | bool | `true` / `false` | Ad blocking feature state | Win |  |
-| `parental_control.enabled` | bool | `true` / `false` | Parental control enabled | Win |  |
-| `parental_control.block_exe` | bool | `true` / `false` | Block executable downloads | Win |  |
-| `parental_control.safe_search` | bool | `true` / `false` | Enforce Safe Search | Win |  |
+| `dns.custom_bootstrap` | string | `1.1.1.1` | Custom bootstrap DNS servers list | Win, Mac | Divider `,` or `\n` |
+| `dns.custom_fallback` | string | `8.8.8.8` | Custom fallback DNS servers list | Win, Mac | Divider `,` or `\n` |
+| `dns.custom_filters` | string | `[Name] (url: [URL])` | Custom DNS filters | Win, Mac | Divider `,` |
+| `dns.fallback_mode` | string | `System` / `Custom` / `None` | DNS fallback behavior | Win, Mac |  |
+| `extensions` | string | `[Name] ([type]; url: [URL])` | List of enabled extensions | Win, Mac | Divider `,` |
+| `extensions.enabled` | bool | `true` / `false` | Whether extensions are enabled | Win, Mac | Always present, may be empty |
+| `adblocking.enabled` | bool | `true` / `false` | Ad blocking feature state | Win, Mac |  |
+| `parental_control.enabled` | bool | `true` / `false` | Parental control enabled | Win, Mac |  |
+| `parental_control.block_exe` | bool | `true` / `false` | Block executable downloads | Win, Mac |  |
+| `parental_control.safe_search` | bool | `true` / `false` | Enforce Safe Search | Win, Mac |  |
 | `license_type` | string | `paid` / `free` | License kind | All |  |
 | `user_agent` | string | Browser UA string | Client identification | All | Overrides browser fields |
-| `browser` | string | `chrome` | Browser name | Ext | |
-| `browser_detail` | string | `128.0.6613.114` | Browser build details | Ext | |
+| `browser` | string | `chrome` | Browser name | Ext | Optional |
+| `browser_detail` | string | `128.0.6613.114` | Browser build details | Ext | Optional |
 | `manifest_version` | int | `2` or `3` | Chrome manifest version | Ext | Browsing security excluded for MV3 |
 | `win.wfp` | bool | `true` / `false` | Windows Filtering Platform | Win |  |
 | `browsing_security.enabled` | bool | `true` / `false` | Safe browsing enabled | Win, Mac, And, iOS | Excluded for MV3 |
 | `browsing_security.statistics_enabled` | bool | `true` / `false` | Collect usage statistics | Win, Mac |  |
 | `stealth.enabled` | bool | `true` / `false` | Stealth mode status | All |  |
 | `stealth.block_trackers` | bool | `true` / `false` | Block trackers | All |  |
-| `stealth.block_third_party_auth` | bool | `true` / `false` | Block third-party auth | Win |  |
-| `stealth.disable_third_party_cache` | bool | `true` / `false` | Disable 3rd party cache | Win |  |
-| `stealth.disable_wap_push_message_routing_service` | bool | `true` / `false` | Disable WAP Push Routing | Win |  |
+| `stealth.block_third_party_auth` | bool | `true` / `false` | Block third-party auth | Win, Mac |  |
+| `stealth.disable_third_party_cache` | bool | `true` / `false` | Disable 3rd party cache | Win, Mac |  |
+| `stealth.disable_wap_push_message_routing_service` | bool | `true` / `false` | Disable WAP Push Routing | Win | Windows-specific service |
 | `stealth.disable_windows_defender` | bool | `true` / `false` | Disable Windows Defender | Win |  |
 | `stealth.disable_windows_telemetry` | bool | `true` / `false` | Disable Windows telemetry | Win |  |
 | `stealth.disable_windows_recall` | bool | `true` / `false` | Disable Windows Recall | Win |  |
-| `stealth.flash` | bool | `true` / `false` | Block Flash | Win |  |
-| `stealth.java` | bool | `true` / `false` | Block Java | Win |  |
-| `stealth.location` | bool | `true` / `false` | Block Location API | Win |  |
-| `stealth.push` | bool | `true` / `false` | Block Push API | Win |  |
+| `stealth.flash` | bool | `true` / `false` | Block Flash | Win, Mac |  |
+| `stealth.java` | bool | `true` / `false` | Block Java | Win, Mac |  |
+| `stealth.location` | bool | `true` / `false` | Block Location API | Win, Mac |  |
+| `stealth.push` | bool | `true` / `false` | Block Push API | Win, Mac |  |
 | `stealth.turn_off_advertising_id` | bool | `true` / `false` | Turn off Advertising ID | Win |  |
-| `stealth.x_client` | bool | `true` / `false` | Remove X-Client-Data header | Win |  |
-| `stealth.dpi` | bool | `true` / `false` | Hide TLS SNI | Win |  |
+| `stealth.x_client` | bool | `true` / `false` | Remove X-Client-Data header | Win, Mac |  |
+| `stealth.dpi` | bool | `true` / `false` | Hide TLS SNI | Win, Mac |  |
 | `stealth.ip` | string | Custom IP address | IP spoofing value | Win | Optional |
-| `stealth.referrer` | string | Custom Referer header | Set custom Referer | Win | Optional |
-| `stealth.user_agent` | string | Custom UA string | Spoofed user agent | Win | Optional |
-| `stealth.first_party_cookies` | int | TTL (minutes) | First-party cookie TTL | Win | Optional |
-| `stealth.third_party_cookies` | int | TTL (minutes) | Third-party cookie TTL | Win | Optional |
+| `stealth.referrer` | string | Custom Referer header | Set custom Referer | Win, Mac | Optional |
+| `stealth.user_agent` | string | Custom UA string | Spoofed user agent | Win, Mac | Optional |
+| `stealth.first_party_cookies` | int | TTL (minutes) | First-party cookie TTL | Win, Mac | Optional |
+| `stealth.third_party_cookies` | int | TTL (minutes) | Third-party cookie TTL | Win, Mac | Optional |
 | `stealth.block_webrtc` | bool | `true` / `false` | Block WebRTC | All |  |
 | `stealth.strip_url` | bool | `true` / `false` | Remove URL parameters | All |  |
 | `stealth.hide_search_queries` | bool | `true` / `false` | Hide search queries | All |  |
