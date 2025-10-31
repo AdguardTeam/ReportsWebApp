@@ -39,9 +39,9 @@ https://reports.adguard.com/new_issue.html
 | `parental_control.safe_search` | bool | `true` / `false` | Enforce Safe Search | Win, Mac |  |
 | `license_type` | string | `paid` / `free` | License kind | All |  |
 | `user_agent` | string | Browser UA string | Client identification | All | Overrides browser fields |
-| `browser` | string | `chrome` | Browser name | Ext | Optional |
-| `browser_detail` | string | `128.0.6613.114` | Browser build details | Ext | Optional |
-| `manifest_version` | int | `2` or `3` | Chrome manifest version | Ext | Browsing security excluded for MV3 |
+| `browser` | string | `chrome` / `edge` / `firefox` / `opera` / `safari` / `yandex` / `other` / `firefox mobile` / `firefox preview` / `uc browser` / `yandex lite` / `samsung browser` / `duckduckgo` / `vivaldi` / `brave` | Browser name | All | |
+| `browser_detail` | string | `Midori/1.0` | Other browser details | All | |
+| `manifest_version` | int | `2` or `3` | Chrome manifest version | Ext |  |
 | `win.wfp` | bool | `true` / `false` | Windows Filtering Platform | Win |  |
 | `browsing_security.enabled` | bool | `true` / `false` | Safe browsing enabled | Win, Mac, And, iOS | Excluded for MV3 |
 | `browsing_security.statistics_enabled` | bool | `true` / `false` | Collect usage statistics | Win, Mac |  |
@@ -49,7 +49,7 @@ https://reports.adguard.com/new_issue.html
 | `stealth.block_trackers` | bool | `true` / `false` | Block trackers | All |  |
 | `stealth.block_third_party_auth` | bool | `true` / `false` | Block third-party auth | Win, Mac |  |
 | `stealth.disable_third_party_cache` | bool | `true` / `false` | Disable 3rd party cache | Win, Mac |  |
-| `stealth.disable_wap_push_message_routing_service` | bool | `true` / `false` | Disable WAP Push Routing | Win | Windows-specific service |
+| `stealth.disable_wap_push_message_routing_service` | bool | `true` / `false` | Disable WAP Push Routing | Win |  |
 | `stealth.disable_windows_defender` | bool | `true` / `false` | Disable Windows Defender | Win |  |
 | `stealth.disable_windows_telemetry` | bool | `true` / `false` | Disable Windows telemetry | Win |  |
 | `stealth.disable_windows_recall` | bool | `true` / `false` | Disable Windows Recall | Win |  |
@@ -60,11 +60,11 @@ https://reports.adguard.com/new_issue.html
 | `stealth.turn_off_advertising_id` | bool | `true` / `false` | Turn off Advertising ID | Win |  |
 | `stealth.x_client` | bool | `true` / `false` | Remove X-Client-Data header | Win, Mac |  |
 | `stealth.dpi` | bool | `true` / `false` | Hide TLS SNI | Win, Mac |  |
-| `stealth.ip` | string | Custom IP address | IP spoofing value | Win | Optional |
-| `stealth.referrer` | string | Custom Referer header | Set custom Referer | Win, Mac | Optional |
-| `stealth.user_agent` | string | Custom UA string | Spoofed user agent | Win, Mac | Optional |
-| `stealth.first_party_cookies` | int | TTL (minutes) | First-party cookie TTL | Win, Mac | Optional |
-| `stealth.third_party_cookies` | int | TTL (minutes) | Third-party cookie TTL | Win, Mac | Optional |
+| `stealth.ip` | string | Custom IP address | IP spoofing value | Win | |
+| `stealth.referrer` | string | Custom Referer header | Set custom Referer | Win, Mac | |
+| `stealth.user_agent` | string | Custom UA string | Spoofed user agent | Win, Mac | |
+| `stealth.first_party_cookies` | int | TTL (minutes) | First-party cookie TTL | Win, Mac | |
+| `stealth.third_party_cookies` | int | TTL (minutes) | Third-party cookie TTL | Win, Mac | |
 | `stealth.block_webrtc` | bool | `true` / `false` | Block WebRTC | All |  |
 | `stealth.strip_url` | bool | `true` / `false` | Remove URL parameters | All |  |
 | `stealth.hide_search_queries` | bool | `true` / `false` | Hide search queries | All |  |
