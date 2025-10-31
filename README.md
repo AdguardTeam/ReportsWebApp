@@ -22,8 +22,8 @@ https://reports.adguard.com/new_issue.html
 | `custom_filters` | string | Comma-separated list | User-added filters | All | Divider `,` uniform |
 | `userscripts` | string | Comma-separated list | Enabled userscripts or Android extensions equivalent | All | Divider `,` uniform |
 | `dns.enabled` | bool | `true` / `false` | Whether DNS protection or proxy module is enabled | All | Always present, replaces older optional behavior |
-| `dns.filters` | string | Varies by platform:<br>Windows/macOS: `2.3.4` (dot-separated IDs)<br>Android/iOS: `https://filters.adtidy.org/android/filters/15_optimized.txt,DnsUserRules` (comma-separated URLs) | DNS filters applied by the product | All | ID-based for desktop; URL-based for mobile (Android, iOS) |
-| `dns.servers` | string | Varies by platform:<br>Windows/macOS: `System` or `1.1.1.1,8.8.8.8` (comma or newline-separated IPs)<br>Android/iOS: `https://dns.adguard.com/dns-query,System` (comma-separated URLs) | Active DNS servers used by the product | All | IP-based for desktop; URL-based for mobile (Android, iOS) |
+| `dns.filters` | string | Desktop: `2.3.4` (IDs), Mobile: URLs | DNS filters applied | All | Platform-dependent format |
+| `dns.servers` | string | Desktop: IPs/System, Mobile: URLs | Active DNS servers | All | Platform-dependent format |
 | `dns.bootstrap` | string | `1.1.1.1,8.8.8.8` | Bootstrap servers | All | Divider `,` |
 | `dns.fallback` | string | `8.8.4.4,1.0.0.1` | Fallback servers | All | Divider `,` |
 | `dns.timeout` | int | `5000` | Timeout in ms | All |  |
