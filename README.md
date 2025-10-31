@@ -12,8 +12,8 @@ https://reports.adguard.com/new_issue.html
 
 | Parameter | Type | Format / Example | Description | Platform | Notes |
 |------------|------|------------------|--------------|-----------|--------|
-| `scheme_version` | int | `3` | Defines schema version for parameters | All | Required. Current version: 3 |
-| `product_type` | string | `Win`, `Mac`, `And`, `iOS`, `Ext` | Product identifier | All | Required |
+| `scheme_version` | int | `3` | Defines schema version for parameters | All | |
+| `product_type` | string | `Win`, `Mac`, `And`, `iOS`, `Ext` | Product identifier | All | |
 | `product_version` | string | `7.15.2` | Product version string | All |  |
 | `system_version` | string | `11.0.1` | OS version string | All |  |
 | `url` | string | `https%3A%2F%2Fexample.com` | Target page being reported | All | |
