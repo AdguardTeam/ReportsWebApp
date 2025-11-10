@@ -21,7 +21,7 @@ https://reports.adguard.com/new_issue.html
 | `userscripts` | string | Comma-separated list | Enabled userscripts or Android extensions equivalent | All | Divider `,` |
 | `dns.enabled` | bool | `true` / `false` | Whether DNS protection or proxy module is enabled | All | |
 | `dns.filters` | string | Desktop: `2.3.4` (IDs), Mobile: URLs | DNS filters applied | All | Platform-dependent format |
-| `dns.servers` | string | Desktop: IPs/System, Mobile: URLs | Active DNS servers | All | Platform-dependent format |
+| `dns.servers` | string | Desktop: IPs/System, Mobile: URLs | Active DNS servers | All | Divider `,` |
 | `dns.bootstrap` | string | `1.1.1.1,8.8.8.8` | Bootstrap servers | All | Divider `,` |
 | `dns.fallback` | string | `8.8.4.4,1.0.0.1` | Fallback servers | All | Divider `,` |
 | `dns.timeout` | int | `5000` | Timeout in ms | All | |
