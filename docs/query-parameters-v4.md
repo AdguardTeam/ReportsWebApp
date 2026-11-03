@@ -342,6 +342,13 @@ Parameters marked as `(outside schema)` are additional query parameters used dur
 - Description: Block WebRTC
 - Example: `1`
 
+#### `stealth.block_fingerprinting`
+
+- Type: boolean (`1` or `0`)
+- Platform: Ext
+- Description: Block fingerprinting
+- Example: `1`
+
 #### `stealth.strip_url`
 
 - Type: boolean (`1` or `0`)
@@ -531,7 +538,7 @@ https://reports.adguard.com/new_issue.html?scheme_version=4&product_type=ios&pro
 ### Browser extension example
 
 ```text
-https://reports.adguard.com/new_issue.html?scheme_version=4&product_type=ext&product_version=5.0.1&system_version=Chrome%20128.0.6613.114&browser=chrome&browser_detail=Chrome%20128.0.6613.114&url=https%3A%2F%2Fexample.net&regular_filters=2,3,4,300&filters_last_update=2024-01-15T14%3A00%3A00Z&ext.manifest_version=3&stealth.enabled=1&stealth.block_trackers=1&stealth.strip_url=1&stealth.hide_search_queries=1&stealth.send_dnt=1&stealth.block_webrtc=1
+https://reports.adguard.com/new_issue.html?scheme_version=4&product_type=ext&product_version=5.0.1&system_version=Chrome%20128.0.6613.114&browser=chrome&browser_detail=Chrome%20128.0.6613.114&url=https%3A%2F%2Fexample.net&regular_filters=2,3,4,300&filters_last_update=2024-01-15T14%3A00%3A00Z&ext.manifest_version=3&stealth.enabled=1&stealth.block_trackers=1&stealth.strip_url=1&stealth.hide_search_queries=1&stealth.send_dnt=1&stealth.block_webrtc=1&stealth.block_fingerprinting=1
 ```
 
 ## Adding new parameters
