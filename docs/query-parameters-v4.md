@@ -224,6 +224,14 @@ Parameters marked as `(outside schema)` are additional query parameters used dur
 - Description: Ad blocking enabled
 - Example: `1`
 
+#### `adblocking.language_specific_enabled`
+
+- Type: boolean (`1` or `0`)
+- Platform: Win, Mac Mini, Mac (planned)
+- Description: Language-specific ad blocking state
+- Example: `1`
+- Notes: Optional. Accepted from any product; when the parameter is absent, the report row is omitted.
+
 #### `browsing_security.enabled`
 
 - Type: boolean (`1` or `0`)
@@ -514,7 +522,7 @@ These examples show complete `v4` URLs for the most common product families. The
 ### Windows example
 
 ```text
-https://reports.adguard.com/new_issue.html?scheme_version=4&product_type=win&product_version=7.15.0&system_version=Windows%2011&url=https%3A%2F%2Fexample.com&regular_filters=1,2,3,14&filters_last_update=2024-01-15T10%3A30%3A00Z&dns.enabled=1&dns.regular_filters=1,2,3&dns.servers=8.8.8.8,8.8.4.4&dns.timeout=5000&adblocking.enabled=1&browsing_security.enabled=1&browsing_security.statistics_enabled=1&extensions.enabled=1&extensions.value=AdGuard%20Assistant%20(script%3B%20url%3A%20none)&license_type=paid&win.driver_type=wfp&win.disable_windows_defender=1&win.disable_windows_recall=1&stealth.enabled=1&stealth.block_trackers=1&stealth.block_third_party_auth=1&stealth.hide_search_queries=1&stealth.block_webrtc=1&stealth.send_dnt=1&stealth.first_party_cookies_min=15&stealth.third_party_cookies_min=30
+https://reports.adguard.com/new_issue.html?scheme_version=4&product_type=win&product_version=7.15.0&system_version=Windows%2011&url=https%3A%2F%2Fexample.com&regular_filters=1,2,3,14&filters_last_update=2024-01-15T10%3A30%3A00Z&dns.enabled=1&dns.regular_filters=1,2,3&dns.servers=8.8.8.8,8.8.4.4&dns.timeout=5000&adblocking.enabled=1&adblocking.language_specific_enabled=1&browsing_security.enabled=1&browsing_security.statistics_enabled=1&extensions.enabled=1&extensions.value=AdGuard%20Assistant%20(script%3B%20url%3A%20none)&license_type=paid&win.driver_type=wfp&win.disable_windows_defender=1&win.disable_windows_recall=1&stealth.enabled=1&stealth.block_trackers=1&stealth.block_third_party_auth=1&stealth.hide_search_queries=1&stealth.block_webrtc=1&stealth.send_dnt=1&stealth.first_party_cookies_min=15&stealth.third_party_cookies_min=30
 ```
 
 ### macOS example
